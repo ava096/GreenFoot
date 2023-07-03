@@ -3,7 +3,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import Form from "react-bootstrap/Form";
 
-function TreeDropdown({ label, dataKey }) {
+function TreeDropdown({ label, dataKey, onSelect }) {
   async function getTrees() {
     const response = await axios.get("http://localhost:8000/api/trees");
     return response.data;
@@ -17,7 +17,10 @@ function TreeDropdown({ label, dataKey }) {
   const uniqueOptions = [...new Set(data.map((tree) => tree[dataKey]))];
 
   return (
-    <Form.Select aria-label="Tree Selector">
+    <Form.Select
+      aria-label="Tree Selector"
+      onChange={(e) => onSelect(e.target.value)}
+    >
       <option>Select {label}</option>
       {uniqueOptions.map((option, index) => (
         <option value={option} key={index}>

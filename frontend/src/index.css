@@ -83,11 +83,29 @@
 */
 .selectorRow {
     margin: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .selectFilter h5 {
     display: flex;
     justify-content: center;
+}
+
+.customButton {
+    color: rgb(68, 34, 19);
+    width: 100px;
+    border: none;
+    outline: none;
+    height: 45px;
+    border-radius: 5px;
+    background: antiquewhite;
+    transition: .4s;
+}
+
+.customButton:hover {
+    background: rgb(255, 246, 233);
+    color: rgb(68, 34, 19);
 }
 
 /**
@@ -96,6 +114,7 @@
 .treeTable {
     width: 100%;
     border-collapse: collapse;
+    margin: 10px 0 30px 0;
 }
 
 .treeTable th,
@@ -111,6 +130,10 @@
 
 .treeTable tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.noDataMessage {
+    text-align: center;
 }
 
 /**

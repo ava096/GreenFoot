@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import TreeDataTable from "../components/TreeDataTable";
 import TreeDataSelector from "../components/TreeDataSelector";
 import { Link } from "react-router-dom";
 import { FaSeedling } from "react-icons/fa";
 
 function DatabaseTableView() {
+  const [filters, setFilters] = useState({});
+
+  const onFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+  };
+
   return (
     <>
       <div className="container">
@@ -25,10 +31,10 @@ function DatabaseTableView() {
         </div>
         <div className="selectFilter">
           <h5>Filter results by...</h5>
-          <TreeDataSelector />
+          <TreeDataSelector onFiltersChange={onFiltersChange} />
         </div>
         <div>
-          <TreeDataTable />
+          <TreeDataTable filters={filters} />
         </div>
       </div>
     </>

@@ -1,17 +1,34 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
-async function getTrees() {
-  const response = await axios.get("http://localhost:8000/api/trees");
-  return response.data;
-}
+function TreeDataTable({ filters }) {
+  const getTrees = async () => {
+    const response = await axios.get("http://localhost:8000/api/trees", {
+      params: filters,
+    });
+    return response.data;
+  };
 
-function TreeDataTable() {
-  const { isLoading, error, data } = useQuery("trees", getTrees);
+  const { isLoading, error, data } = useQuery(
+    JSON.stringify(filters) === "{}" ? "trees" : JSON.stringify(filters),
+    getTrees
+  );
 
   if (isLoading) return "Loading...";
   if (error) return `An error occurred: ${error.message}`;
+
+  if (data && data.length === 0) {
+    return (
+      <Row className="selectorRow">
+        <h5 className="noDataMessage">
+          Sorry, but we couldn't find any matches...
+        </h5>
+      </Row>
+    );
+  }
 
   return (
     <table className="treeTable">

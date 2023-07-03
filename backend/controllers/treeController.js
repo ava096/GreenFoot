@@ -6,6 +6,10 @@ const Tree = require("../models/treeModel");
 // @access  Public
 const getAllTrees = asyncHandler(async (req, res) => {
   try {
+    if (Object.keys(req.query).length > 0) {
+      return next();
+    }
+
     const trees = await Tree.find();
     res.status(200).json(trees);
   } catch (error) {
@@ -21,6 +25,76 @@ const getTree = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const tree = await Tree.findById(id);
     res.status(200).json(tree);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+const getTreeSearch = asyncHandler(async (req, res) => {
+  try {
+    if (Object.keys(req.query).length === 0) {
+      return res.status(200).json([]);
+    }
+
+    const {
+      treeType,
+      species,
+      speciesType,
+      age,
+      treeSurround,
+      vigour,
+      condition,
+      diameterCentimetres,
+      radiusMetres,
+      treeHeightMetres,
+    } = req.query;
+
+    //store search results in array
+    const filter = {};
+
+    if (treeType) {
+      filter.treeType = treeType;
+    }
+
+    if (speciesType) {
+      filter.speciesType = speciesType;
+    }
+
+    if (species) {
+      filter.species = species;
+    }
+
+    if (age) {
+      filter.age = age;
+    }
+
+    if (treeSurround) {
+      filter.treeSurround = treeSurround;
+    }
+
+    if (vigour) {
+      filter.vigour = vigour;
+    }
+
+    if (condition) {
+      filter.condition = condition;
+    }
+
+    if (diameterCentimetres) {
+      filter.diameterCentimetres = diameterCentimetres;
+    }
+
+    if (radiusMetres) {
+      filter.radiusMetres = radiusMetres;
+    }
+
+    if (treeHeightMetres) {
+      filter.treeHeightMetres = treeHeightMetres;
+    }
+
+    //apply filters and search database
+    const trees = await Tree.find(filter);
+    res.status(200).json(trees);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -45,17 +119,18 @@ const setTree = asyncHandler(async (req, res) => {
 const updateTree = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const tree = await Tree.findByIdAndUpdate(id, req.body);
+    const updatedTree = await Tree.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
 
     //if ID does not exist
-    if (!tree) {
+    if (!updatedTree) {
       return res
         .status(404)
         .json({ message: `Cannot find any records with ID ${id}` });
     }
 
     //if record is successfully updated
-    const updatedTree = await Tree.findById(id);
     res.status(200).json(updatedTree);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -87,6 +162,7 @@ const deleteTree = asyncHandler(async (req, res) => {
 module.exports = {
   getAllTrees,
   getTree,
+  getTreeSearch,
   setTree,
   updateTree,
   deleteTree,
