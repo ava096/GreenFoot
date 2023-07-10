@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import UploadImage from "./UploadImage";
 
 function NewRecordForm() {
   const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ function NewRecordForm() {
     diameter: "",
     radius: "",
     height: "",
+    imageUrl: "",
   });
 
   const {
@@ -28,6 +31,7 @@ function NewRecordForm() {
     diameter,
     radius,
     height,
+    imageUrl,
   } = formData;
 
   const onChange = (e) => {
@@ -41,154 +45,178 @@ function NewRecordForm() {
     e.preventDefault();
   };
 
+  const onImageUpload = (url) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      imageUrl: url,
+    }));
+  };
+
   return (
     <>
       <section className="form">
-        <form onSubmit={onSubmit}>
-          <div className="formGroup">
-            <label for="treeType">Where is this tree located?</label>
-            <input
-              type="text"
-              className="form-control"
-              id="treeType"
-              name="treeType"
-              value={treeType}
-              placeholder="Eg. Park tree, street tree"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="speciesType">What species of tree is it?</label>
-            <input
-              type="text"
-              className="form-control"
-              id="speciesType"
-              name="speciesType"
-              value={speciesType}
-              placeholder="Eg. English Oak"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="species">
-              What is the scientific name for the species?
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="species"
-              name="species"
-              value={species}
-              placeholder="Eg. Quercus robur"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="age">How old is this tree?</label>
-            <input
-              type="text"
-              className="form-control"
-              id="age"
-              name="age"
-              value={age}
-              placeholder="Eg. Juvenile, Mature, Snag"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="description">Please give a visual description.</label>
-            <textarea
-              type="text"
-              className="form-control"
-              id="description"
-              name="description"
-              value={description}
-              placeholder="Is there any damage to the tree? Is it flowering?"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="surrounding">
-              Describe the environmental context of the tree.
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="surrounding"
-              name="surrounding"
-              value={surrounding}
-              placeholder="Eg. Grass, concrete, bare ground"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="vigour">Describe the vigour of the tree.</label>
-            <input
-              type="text"
-              className="form-control"
-              id="vigour"
-              name="vigour"
-              value={vigour}
-              placeholder="Eg. High, fair, low"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="condition">How is the condition of the tree?</label>
-            <input
-              type="text"
-              className="form-control"
-              id="condition"
-              name="condition"
-              value={condition}
-              placeholder="Eg. Good, bad"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="diameter">
-              Estimate the diameter of the tree (cm).
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="diameter"
-              name="diameter"
-              value={diameter}
-              placeholder="Eg. 80"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="radius">Estimate the radius of the tree (m).</label>
-            <input
-              type="text"
-              className="form-control"
-              id="radius"
-              name="radius"
-              value={radius}
-              placeholder="Eg. 0.4"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <label for="height">Estimate the height of the tree (m).</label>
-            <input
-              type="text"
-              className="form-control"
-              id="height"
-              name="height"
-              value={height}
-              placeholder="Eg. 1.5"
-              onChange={onChange}
-            />
-          </div>
-          <div className="formGroup">
-            <button type="submit" className="btn">
+        <Form onSubmit={onSubmit}>
+          <Row>
+            <Col>
+              <Form.Group controlId="formTreeType">
+                <Form.Label>Where is this tree located?</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="treeType"
+                  value={treeType}
+                  placeholder="Eg. Park tree, street tree"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formSpeciesType">
+                <Form.Label>What species of tree is it?</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="speciesType"
+                  value={speciesType}
+                  placeholder="Eg. English Oak"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="formSpecies">
+                <Form.Label>
+                  What is the scientific name for the species?
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="species"
+                  value={species}
+                  placeholder="Eg. Quercus robur"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formAge">
+                <Form.Label>How old is this tree?</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="age"
+                  value={age}
+                  placeholder="Eg. Juvenile, Mature, Snag"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="formDescription">
+                <Form.Label>Please give a visual description.</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  style={{ height: "100px" }}
+                  name="description"
+                  value={description}
+                  placeholder="Is there any damage to the tree? Is it flowering?"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="formSurrounding">
+                <Form.Label>
+                  Describe the environmental context of the tree.
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="surrounding"
+                  value={surrounding}
+                  placeholder="Eg. Grass, concrete, bare ground"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formVigour">
+                <Form.Label>Describe the vigour of the tree.</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="vigour"
+                  value={vigour}
+                  placeholder="Eg. High, fair, low"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="formCondition">
+                <Form.Label>How is the condition of the tree?</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="condition"
+                  value={condition}
+                  placeholder="Eg. Good, bad"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formDiameter">
+                <Form.Label>Estimate the diameter of the tree (cm).</Form.Label>
+                <Form.Control
+                  type="text"
+                  className="form-control"
+                  name="diameter"
+                  value={diameter}
+                  placeholder="Eg. 80"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="formRadius">
+                <Form.Label>Estimate the radius of the tree (m).</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="radius"
+                  value={radius}
+                  placeholder="Eg. 0.4"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="formHeight">
+                <Form.Label>Estimate the height of the tree (m).</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="height"
+                  value={height}
+                  placeholder="Eg. 1.5"
+                  onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <UploadImage onUpload={onImageUpload} />
+            </Col>
+          </Row>
+          <Row className="selectorRow">
+            <Button type="submit" className="customButton">
               Submit
-            </button>
-          </div>
-        </form>
+            </Button>
+          </Row>
+        </Form>
       </section>
     </>
   );

@@ -16,11 +16,12 @@ function TreeDropdown({ label, dataKey, onSelect }) {
 
   const uniqueOptions = [...new Set(data.map((tree) => tree[dataKey]))];
 
+  const handleSelect = (e) => {
+    onSelect(e.target.value);
+  };
+
   return (
-    <Form.Select
-      aria-label="Tree Selector"
-      onChange={(e) => onSelect(e.target.value)}
-    >
+    <Form.Select aria-label="Tree Selector" onChange={handleSelect}>
       <option>Select {label}</option>
       {uniqueOptions.map((option, index) => (
         <option value={option} key={index}>

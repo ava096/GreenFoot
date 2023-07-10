@@ -139,6 +139,7 @@
 /**
 *   New record form styling
 */
+
 .formGroup{
     display: flex;
     flex-direction: column;
@@ -147,12 +148,8 @@
 }
 
 .form-control {
-    height: 45px;
     width: 100%;
     background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    outline: none;
     margin-bottom: 20px;
     color: #40414a;
 }

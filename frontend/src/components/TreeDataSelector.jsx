@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import TreeDropdown from "./TreeDropdown";
-import axios from "axios";
 
 function TreeDataSelector({ onFiltersChange }) {
   //state setters for filters
