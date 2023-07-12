@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Tree = require("../models/treeModel");
+const User = require("../models/userModel");
 
 // @desc    Get all trees
 // @route   GET /api/trees
@@ -25,18 +26,6 @@ const getTree = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const tree = await Tree.findById(id);
     res.status(200).json(tree);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// @desc    GET reports associated with logged in user
-// @route   GET/api/trees
-// @access  Private
-const getUserTree = asyncHandler(async (req, res) => {
-  try {
-    const trees = await Tree.find({ user: req.user.id });
-    res.status(200).json(trees);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -157,15 +146,21 @@ const updateTree = asyncHandler(async (req, res) => {
 // @access  Private
 const deleteTree = asyncHandler(async (req, res) => {
   try {
-    const { id } = req.params;
-    const tree = await Tree.findByIdAndDelete(id);
+    const tree = await Tree.findById(req.params.id);
 
     //if record does not exist
     if (!tree) {
-      return res
-        .status(404)
-        .json({ message: `Cannot find any records with ID ${id}` });
+      res.status(400);
+      throw new Error("Tree not found");
     }
+
+    //check for user
+    if (!req.user) {
+      res.status(401);
+      throw new Error("User not found");
+    }
+
+    await tree.deleteOne();
 
     //if sucessfully deleted
     res.status(200).json(tree);
@@ -177,7 +172,6 @@ const deleteTree = asyncHandler(async (req, res) => {
 module.exports = {
   getAllTrees,
   getTree,
-  getUserTree,
   getTreeSearch,
   setTree,
   updateTree,

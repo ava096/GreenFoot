@@ -3,7 +3,6 @@ const router = express.Router();
 const {
   getAllTrees,
   getTree,
-  getUserTree,
   getTreeSearch,
   setTree,
   updateTree,
@@ -29,7 +28,5 @@ router
   .get(getTree)
   .put(protect, updateTree)
   .delete(protect, deleteTree);
-
-router.route("/userTrees").get(protect, getUserTree);
 
 module.exports = router;

@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
-const treeSchema = mongoose.Schema(
+const reportSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     treeLocationType: {
       type: String,
       required: [true, "Please include a tree location type"],
@@ -60,6 +65,6 @@ const treeSchema = mongoose.Schema(
   }
 );
 
-const Tree = mongoose.model("Tree", treeSchema);
+const Report = mongoose.model("Report", reportSchema);
 
-module.exports = Tree;
+module.exports = Report;
