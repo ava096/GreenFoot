@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const treeSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     treeType: {
       type: String,
       required: [true, "Please include a tree type"],

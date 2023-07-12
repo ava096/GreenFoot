@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/trees", require("./routes/treeRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 app.use("/uploadImage", require("./routes/imageRoutes"));
 
 app.use(errorHandler);
