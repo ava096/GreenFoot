@@ -3,11 +3,13 @@ const router = express.Router();
 const {
   getAllTrees,
   getTree,
+  getUserTree,
   getTreeSearch,
   setTree,
   updateTree,
   deleteTree,
 } = require("../controllers/treeController");
+const { protect } = require("../middleware/authMiddleware");
 
 // GET all trees, or apply search filters
 router
@@ -19,9 +21,15 @@ router
       return getAllTrees(req, res, next);
     }
   })
-  .post(setTree);
+  .post(protect, setTree);
 
 // GET tree by ID, PUT update tree, DELETE tree
-router.route("/:id").get(getTree).put(updateTree).delete(deleteTree);
+router
+  .route("/:id")
+  .get(getTree)
+  .put(protect, updateTree)
+  .delete(protect, deleteTree);
+
+router.route("/userTrees").get(protect, getUserTree);
 
 module.exports = router;

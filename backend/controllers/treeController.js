@@ -30,6 +30,21 @@ const getTree = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    GET reports associated with logged in user
+// @route   GET/api/trees
+// @access  Private
+const getUserTree = asyncHandler(async (req, res) => {
+  try {
+    const trees = await Tree.find({ user: req.user.id });
+    res.status(200).json(trees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// @desc    GET tree filtered by search params
+// @route   GET/api/trees
+// @access  Public
 const getTreeSearch = asyncHandler(async (req, res) => {
   try {
     if (Object.keys(req.query).length === 0) {
@@ -162,6 +177,7 @@ const deleteTree = asyncHandler(async (req, res) => {
 module.exports = {
   getAllTrees,
   getTree,
+  getUserTree,
   getTreeSearch,
   setTree,
   updateTree,
