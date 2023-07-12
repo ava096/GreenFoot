@@ -8,32 +8,32 @@ import TreeDropdown from "./TreeDropdown";
 
 function TreeDataSelector({ onFiltersChange }) {
   //state setters for filters
+  const [treeLocationType, setTreeLocationType] = useState(null);
   const [treeType, setTreeType] = useState(null);
-  const [speciesType, setSpeciesType] = useState(null);
-  const [species, setSpecies] = useState(null);
-  const [age, setAge] = useState(null);
-  const [treeSurround, setTreeSurround] = useState(null);
-  const [vigour, setVigour] = useState(null);
-  const [condition, setCondition] = useState(null);
-  const [diameter, setDiameter] = useState(null);
-  const [radius, setRadius] = useState(null);
-  const [height, setHeight] = useState(null);
+  const [treeScientificName, setTreeScientificName] = useState(null);
+  const [treeAge, setTreeAge] = useState(null);
+  const [treeSurroundings, setTreeSurroundings] = useState(null);
+  const [treeVigour, setTreeVigour] = useState(null);
+  const [treeCondition, setTreeCondition] = useState(null);
+  const [treeDiameterCentimetres, setTreeDiameterCentimetres] = useState(null);
+  const [treeRadiusMetres, setTreeRadiusMetres] = useState(null);
+  const [treeHeightMetres, setTreeHeightMetres] = useState(null);
   //state setter for storing results
   const [results, setResults] = useState([]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     onFiltersChange({
+      treeLocationType: treeLocationType,
       treeType: treeType,
-      speciesType: speciesType,
-      species: species,
-      age: age,
-      treeSurround: treeSurround,
-      vigour: vigour,
-      condition: condition,
-      diameterCentimetres: diameter,
-      radiusMetres: radius,
-      treeHeightMetres: height,
+      treeScientificName: treeScientificName,
+      treeAge: treeAge,
+      treeSurroundings: treeSurroundings,
+      treeVigour: treeVigour,
+      treeCondition: treeCondition,
+      treeDiameterCentimetres: treeDiameterCentimetres,
+      treeRadiusMetres: treeRadiusMetres,
+      treeHeightMetres: treeHeightMetres,
     });
   };
 
@@ -44,16 +44,16 @@ function TreeDataSelector({ onFiltersChange }) {
           <Row className="selectorRow">
             <Col>
               <TreeDropdown
-                label="Location"
-                dataKey="treeType"
-                onSelect={setTreeType}
+                label="Location Type"
+                dataKey="treeLocationType"
+                onSelect={setTreeLocationType}
               />
             </Col>
             <Col>
               <TreeDropdown
-                label="Species"
-                dataKey="speciesType"
-                onSelect={setSpeciesType}
+                label="Tree Ty[e"
+                dataKey="treeType"
+                onSelect={setTreeType}
               />
             </Col>
           </Row>
@@ -61,27 +61,31 @@ function TreeDataSelector({ onFiltersChange }) {
             <Col>
               <TreeDropdown
                 label="Scientific Name"
-                dataKey="species"
-                onSelect={setSpecies}
+                dataKey="treeScientificName"
+                onSelect={setTreeScientificName}
               />
             </Col>
             <Col>
-              <TreeDropdown label="Age" dataKey="age" onSelect={setAge} />
+              <TreeDropdown
+                label="Age"
+                dataKey="treeAge"
+                onSelect={setTreeAge}
+              />
             </Col>
           </Row>
           <Row className="selectorRow">
             <Col>
               <TreeDropdown
                 label="Surroundings"
-                dataKey="treeSurround"
-                onSelect={setTreeSurround}
+                dataKey="treeSurroundings"
+                onSelect={setTreeSurroundings}
               />
             </Col>
             <Col>
               <TreeDropdown
                 label="Vigour"
-                dataKey="vigour"
-                onSelect={setVigour}
+                dataKey="treeVigour"
+                onSelect={setTreeVigour}
               />
             </Col>
           </Row>
@@ -89,15 +93,15 @@ function TreeDataSelector({ onFiltersChange }) {
             <Col>
               <TreeDropdown
                 label="Condition"
-                dataKey="condition"
-                onSelect={setCondition}
+                dataKey="treeCondition"
+                onSelect={setTreeCondition}
               />
             </Col>
             <Col>
               <TreeDropdown
                 label="Diameter (cm)"
-                dataKey="diameterCentimetres"
-                onSelect={setDiameter}
+                dataKey="treeDiameterCentimetres"
+                onSelect={setTreeDiameterCentimetres}
               />
             </Col>
           </Row>
@@ -105,15 +109,15 @@ function TreeDataSelector({ onFiltersChange }) {
             <Col>
               <TreeDropdown
                 label="Radius (m)"
-                dataKey="radiusMetres"
-                onSelect={setRadius}
+                dataKey="treeRadiusMetres"
+                onSelect={setTreeRadiusMetres}
               />
             </Col>
             <Col>
               <TreeDropdown
                 label="Height (m)"
                 dataKey="treeHeightMetres"
-                onSelect={setHeight}
+                onSelect={setTreeHeightMetres}
               />
             </Col>
           </Row>

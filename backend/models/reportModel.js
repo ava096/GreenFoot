@@ -7,56 +7,60 @@ const reportSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    treeLocationType: {
+    reportTreeLocationType: {
       type: String,
       required: [true, "Please include a tree location type"],
     },
-    treeType: {
+    reportTreeType: {
       type: String,
       required: [true, "Please include what type of tree this is"],
     },
-    treeScientificName: {
+    reportTreeScientificName: {
       type: String,
       required: [true, "Please include a scientific name"],
     },
-    treeAge: {
+    reportTreeAge: {
       type: String,
       required: [true, "Please include an age"],
     },
-    treeDescription: {
+    reportTreeDescription: {
       type: String,
       required: [true, "Please include a description"],
     },
-    treeSurroundings: {
+    reportTreeSurroundings: {
       type: String,
       required: [true, "Please include the tree's surroundings"],
     },
-    treeVigour: {
+    reportTreeVigour: {
       type: String,
       required: [true, "Please include the tree's vigour"],
     },
-    treeCondition: {
+    reportTreeCondition: {
       type: String,
       required: [true, "Please include the tree's condition"],
     },
-    treeDiameterCentimetres: {
+    reportTreeDiameterCentimetres: {
       type: Number,
       required: true,
     },
-    treeRadiusMetres: {
+    reportTreeRadiusMetres: {
       type: Number,
       required: true,
     },
-    longitude: {
+    reportLongitude: {
       type: Number,
       required: true,
     },
-    latitude: {
+    reportLatitude: {
       type: Number,
       required: true,
     },
-    treeHeightMetres: {
+    reportTreeHeightMetres: {
       type: Number,
+      required: true,
+    },
+    reportImageUrl: {
+      type: String,
       required: true,
     },
   },

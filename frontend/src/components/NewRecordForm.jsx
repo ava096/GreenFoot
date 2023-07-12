@@ -5,33 +5,33 @@ import UploadImage from "./UploadImage";
 
 function NewRecordForm() {
   const [formData, setFormData] = useState({
-    treeType: "",
-    speciesType: "",
-    species: "",
-    age: "",
-    description: "",
-    surrounding: "",
-    vigour: "",
-    condition: "",
-    diameter: "",
-    radius: "",
-    height: "",
-    imageUrl: "",
+    reportTreeLocationType: "",
+    reportTreeType: "",
+    reportTreeScientificName: "",
+    reportTreeAge: "",
+    reportTreeDescription: "",
+    reportTreeSurroundings: "",
+    reportTreeVigour: "",
+    reportTreeCondition: "",
+    reportTreeDiameterCentimetres: "",
+    reportTreeRadiusMetres: "",
+    reportTreeHeightMetres: "",
+    reportImageUrl: "",
   });
 
   const {
-    treeType,
-    speciesType,
-    species,
-    age,
-    description,
-    surrounding,
-    vigour,
-    condition,
-    diameter,
-    radius,
-    height,
-    imageUrl,
+    reportTreeLocationType,
+    reportTreeType,
+    reportTreeScientificName,
+    reportTreeAge,
+    reportTreeDescription,
+    reportTreeSurroundings,
+    reportTreeVigour,
+    reportTreeCondition,
+    reportTreeDiameterCentimetres,
+    reportTreeRadiusMetres,
+    reportTreeHeightMetres,
+    reportImageUrl,
   } = formData;
 
   const onChange = (e) => {
@@ -48,7 +48,7 @@ function NewRecordForm() {
   const onImageUpload = (url) => {
     setFormData((prevState) => ({
       ...prevState,
-      imageUrl: url,
+      reportImageUrl: url,
     }));
   };
 
@@ -62,8 +62,8 @@ function NewRecordForm() {
                 <Form.Label>Where is this tree located?</Form.Label>
                 <Form.Control
                   type="text"
-                  name="treeType"
-                  value={treeType}
+                  name="reportTreeLocationType"
+                  value={reportTreeLocationType}
                   placeholder="Eg. Park tree, street tree"
                   onChange={onChange}
                 />
@@ -71,11 +71,11 @@ function NewRecordForm() {
             </Col>
             <Col>
               <Form.Group controlId="formSpeciesType">
-                <Form.Label>What species of tree is it?</Form.Label>
+                <Form.Label>What type of tree is it?</Form.Label>
                 <Form.Control
                   type="text"
-                  name="speciesType"
-                  value={speciesType}
+                  name="reportTreeType"
+                  value={reportTreeType}
                   placeholder="Eg. English Oak"
                   onChange={onChange}
                 />
@@ -90,8 +90,8 @@ function NewRecordForm() {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  name="species"
-                  value={species}
+                  name="reportTreeScientificName"
+                  value={reportTreeScientificName}
                   placeholder="Eg. Quercus robur"
                   onChange={onChange}
                 />
@@ -102,8 +102,8 @@ function NewRecordForm() {
                 <Form.Label>How old is this tree?</Form.Label>
                 <Form.Control
                   type="text"
-                  name="age"
-                  value={age}
+                  name="reportTreeAge"
+                  value={reportTreeAge}
                   placeholder="Eg. Juvenile, Mature, Snag"
                   onChange={onChange}
                 />
@@ -117,8 +117,8 @@ function NewRecordForm() {
                 <Form.Control
                   as="textarea"
                   style={{ height: "100px" }}
-                  name="description"
-                  value={description}
+                  name="reportTreeDescription"
+                  value={reportTreeDescription}
                   placeholder="Is there any damage to the tree? Is it flowering?"
                   onChange={onChange}
                 />
@@ -133,8 +133,8 @@ function NewRecordForm() {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  name="surrounding"
-                  value={surrounding}
+                  name="reportTreeSurroundings"
+                  value={reportTreeSurroundings}
                   placeholder="Eg. Grass, concrete, bare ground"
                   onChange={onChange}
                 />
@@ -145,8 +145,8 @@ function NewRecordForm() {
                 <Form.Label>Describe the vigour of the tree.</Form.Label>
                 <Form.Control
                   type="text"
-                  name="vigour"
-                  value={vigour}
+                  name="reportTreeVigour"
+                  value={reportTreeVigour}
                   placeholder="Eg. High, fair, low"
                   onChange={onChange}
                 />
@@ -159,8 +159,8 @@ function NewRecordForm() {
                 <Form.Label>How is the condition of the tree?</Form.Label>
                 <Form.Control
                   type="text"
-                  name="condition"
-                  value={condition}
+                  name="reportTreeCondition"
+                  value={reportTreeCondition}
                   placeholder="Eg. Good, bad"
                   onChange={onChange}
                 />
@@ -172,8 +172,8 @@ function NewRecordForm() {
                 <Form.Control
                   type="text"
                   className="form-control"
-                  name="diameter"
-                  value={diameter}
+                  name="reportTreeDiameterCentimetres"
+                  value={reportTreeDiameterCentimetres}
                   placeholder="Eg. 80"
                   onChange={onChange}
                 />
@@ -186,8 +186,8 @@ function NewRecordForm() {
                 <Form.Label>Estimate the radius of the tree (m).</Form.Label>
                 <Form.Control
                   type="text"
-                  name="radius"
-                  value={radius}
+                  name="reportTreeRadiusMetres"
+                  value={reportTreeRadiusMetres}
                   placeholder="Eg. 0.4"
                   onChange={onChange}
                 />
@@ -198,8 +198,8 @@ function NewRecordForm() {
                 <Form.Label>Estimate the height of the tree (m).</Form.Label>
                 <Form.Control
                   type="text"
-                  name="height"
-                  value={height}
+                  name="reportTreeHeightMetres"
+                  value={reportTreeHeightMetres}
                   placeholder="Eg. 1.5"
                   onChange={onChange}
                 />

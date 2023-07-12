@@ -51,16 +51,16 @@ function TreeDataTable({ filters }) {
         {data &&
           data.map((tree) => (
             <tr key={tree._id}>
+              <td>{tree.treeLocationType}</td>
               <td>{tree.treeType}</td>
-              <td>{tree.speciesType}</td>
-              <td>{tree.species}</td>
-              <td>{tree.age}</td>
-              <td>{tree.description}</td>
-              <td>{tree.treeSurround}</td>
-              <td>{tree.vigour}</td>
-              <td>{tree.condition}</td>
-              <td>{tree.diameterCentimetres}</td>
-              <td>{tree.radiusMetres}</td>
+              <td>{tree.treeScientificName}</td>
+              <td>{tree.treeAge}</td>
+              <td>{tree.treeDescription}</td>
+              <td>{tree.treeSurroundings}</td>
+              <td>{tree.treeVigour}</td>
+              <td>{tree.treeCondition}</td>
+              <td>{tree.treeDiameterCentimetres}</td>
+              <td>{tree.treeRadiusMetres}</td>
               <td>{tree.treeHeightMetres}</td>
             </tr>
           ))}

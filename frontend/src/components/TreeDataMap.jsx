@@ -33,7 +33,7 @@ function TreeDataMap() {
         {trees.map((tree) => (
           <MarkerF
             key={tree._id}
-            position={{ lat: tree.latitude, lng: tree.longitude }}
+            position={{ lat: tree.treeLatitude, lng: tree.treeLongitude }}
           />
         ))}
       </GoogleMap>

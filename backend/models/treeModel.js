@@ -42,11 +42,11 @@ const treeSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    longitude: {
+    treeLongitude: {
       type: Number,
       required: true,
     },
-    latitude: {
+    treeLatitude: {
       type: Number,
       required: true,
     },
