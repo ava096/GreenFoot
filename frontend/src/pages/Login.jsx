@@ -1,6 +1,6 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -24,57 +24,55 @@ function Login() {
   return (
     <>
       <div className="wrapper">
-        <div className="container-login">
-          <div className="row" id="login-row">
-            <div className="col-md-6 side-image">
-              <div className="login-text">
-                <p>Branch Out.</p>
+        <Container className="loginBox">
+          <Row className="loginRow">
+            <Col md={6} className="sideImage">
+              <div className="imageText">
+                <p>Care For Your Community.</p>
               </div>
-            </div>
-            <div className="col-md-6 right">
-              <div className="input-box">
-                <header id="login-header">Login</header>
-                <form onSubmit={onSubmit}>
-                  <div className="input-field">
-                    <input
-                      type="text"
+            </Col>
+            <Col md={6} className="loginContents">
+              <div className="inputBox">
+                <header className="loginHeader">Login</header>
+                <Form onSubmit={onSubmit}>
+                  <Form.Group controlId="email" className="inputField">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
                       className="input"
-                      id="email"
+                      type="email"
                       name="email"
                       value={email}
-                      required
-                      autocomplete="off"
+                      placeholder="Enter email"
                       onChange={onChange}
                     />
-                    <label htmlFor="email">Email</label>
-                  </div>
-                  <div className="input-field">
-                    <input
-                      type="password"
+                  </Form.Group>
+                  <Form.Group controlId="password" className="inputField">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
                       className="input"
-                      id="password"
+                      type="password"
                       name="password"
-                      required
                       value={password}
+                      placeholder="Enter password"
+                      required
                       onChange={onChange}
                     />
-                    <label htmlFor="password">Password</label>
-                  </div>
-                  <div className="input-field">
-                    <button type="submit" className="btn" id="login-button">
+                  </Form.Group>
+                  <div className="centreButton">
+                    <Button type="submit" className="customButton">
                       Sign In
-                    </button>
+                    </Button>
                   </div>
-                </form>
-                <div className="signup">
-                  <span>
-                    Don't have an account? <Link to="/register">Sign Up</Link>
-                  </span>
-                </div>
+                  <div className="signUp">
+                    <span>
+                      Don't have an account? <Link to="/register">Sign Up</Link>
+                    </span>
+                  </div>
+                </Form>
               </div>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -27,91 +28,91 @@ function Register() {
   return (
     <>
       <div className="wrapper">
-        <div className="container-login">
-          <div className="row" id="login-row">
-            <div className="col-md-6 side-image">
-              <div className="login-text">
-                <p>Branch Out.</p>
+        <Container className="registerBox">
+          <Row className="registerRow">
+            <Col md={6} className="sideImage">
+              <div className="imageText">
+                <p>Grow With Us.</p>
               </div>
-            </div>
-            <div className="col-md-6 right">
-              <div className="input-box">
-                <header id="login-header">Create an account.</header>
-                <form onSubmit={onSubmit}>
-                  <div className="input-field">
-                    <input
+            </Col>
+            <Col md={6} className="registerContents">
+              <div className="inputBox">
+                <header className="registerHeader">Register</header>
+                <Form onSubmit={onSubmit}>
+                  <Form.Group controlId="name" className="registerField">
+                    <Form.Label className="labelText">Name</Form.Label>
+                    <Form.Control
+                      className="registerInput"
                       type="text"
-                      className="input"
-                      id="name"
                       name="name"
                       value={name}
+                      placeholder="Enter name"
                       onChange={onChange}
                     />
-                    <label htmlFor="name">Name</label>
-                  </div>
-                  <div className="input-field">
-                    <input
+                  </Form.Group>
+                  <Form.Group controlId="username" className="registerField">
+                    <Form.Label className="labelText">Username</Form.Label>
+                    <Form.Control
+                      className="registerInput"
                       type="text"
-                      className="input"
-                      id="username"
                       name="username"
                       value={username}
+                      placeholder="Enter username"
                       onChange={onChange}
                     />
-                    <label htmlFor="username">Choose a username</label>
-                  </div>
-                  <div className="input-field">
-                    <input
-                      type="text"
-                      className="input"
-                      id="email"
+                  </Form.Group>
+                  <Form.Group controlId="email" className="registerField">
+                    <Form.Label className="labelText">Email</Form.Label>
+                    <Form.Control
+                      className="registerInput"
+                      type="email"
                       name="email"
                       value={email}
-                      required
-                      autocomplete="off"
+                      placeholder="Enter email"
                       onChange={onChange}
                     />
-                    <label htmlFor="email">Email</label>
-                  </div>
-                  <div className="input-field">
-                    <input
+                  </Form.Group>
+                  <Form.Group controlId="password" className="registerField">
+                    <Form.Label className="labelText">Password</Form.Label>
+                    <Form.Control
+                      className="registerInput"
                       type="password"
-                      className="input"
-                      id="password"
                       name="password"
-                      required
                       value={password}
-                      onChange={onChange}
-                    />
-                    <label htmlFor="password">Choose a password</label>
-                  </div>
-                  <div className="input-field">
-                    <input
-                      type="password"
-                      className="input"
-                      id="password2"
-                      name="password2"
+                      placeholder="Enter password"
                       required
-                      value={password2}
                       onChange={onChange}
                     />
-                    <label htmlFor="password2">Re-enter password</label>
-                  </div>
-                  <div className="input-field">
-                    <button type="submit" className="btn" id="login-button">
+                  </Form.Group>
+                  <Form.Group controlId="password2" className="registerField">
+                    <Form.Label className="labelText">
+                      Re-enter Your Password
+                    </Form.Label>
+                    <Form.Control
+                      className="registerInput"
+                      type="password"
+                      name="password2"
+                      value={password2}
+                      placeholder="Must match entry above"
+                      required
+                      onChange={onChange}
+                    />
+                  </Form.Group>
+                  <div className="centreButton">
+                    <Button type="submit" className="customButton">
                       Sign Up
-                    </button>
+                    </Button>
                   </div>
-                </form>
-                <div className="signup">
-                  <span>
-                    Already have an account? <Link to="/login">Login</Link>
-                  </span>
-                </div>
+                  <div className="signIn">
+                    <span>
+                      Already have an account? <Link to="/login">Sign In</Link>
+                    </span>
+                  </div>
+                </Form>
               </div>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );

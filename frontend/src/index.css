@@ -162,14 +162,14 @@
     padding: 0px 20px 0px 20px;
 }
 
-.container-login {
+.loginBox {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-.side-image {
+.sideImage {
     background-image: url(https://images.unsplash.com/photo-1599940824399-b87987ceb72a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=627&q=80);
     background-position: center;
     background-size: cover;
@@ -178,7 +178,7 @@
     border-radius: 10px 0 0 10px;
 }
 
-#login-row {
+.loginRow {
     width: 900px;
     height: 550px;
     border-radius: 10px;
@@ -186,37 +186,37 @@
     box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
-.login-text {
+.imageText {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.login-text p {
+.imageText p {
     color: antiquewhite;
     font-size:xx-large;
 }
 
-.right {
+.loginContents {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.input-box {
+.inputBox {
     width: 330px;
     box-sizing: border-box;
 }
 
-#login-header {
+.loginHeader {
     font-weight: 700;
     text-align: center;
     margin-bottom: 45px;
 }
 
-.input-field{
+.inputField{
     display: flex;
     flex-direction: column;
     position: relative;
@@ -234,43 +234,97 @@
     color: #40414a;
 }
 
-.input-box .input-field label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    top: -10px;
-    font-size: 13px;
-    color: rgb(68, 34, 19);
+.centreButton {
+    display: flex;
+    justify-content: center;
 }
 
-#login-button {
-    border: none;
-    outline: none;
-    height: 45px;
-    border-radius: 5px;
-    background: antiquewhite;
-    transition: .4s;
-}
-
-#login-button:hover {
-    background: rgb(255, 246, 233);
-    color: rgb(68, 34, 19);
-}
-
-.signup {
+.signUp {
     text-align: center;
     font-size: small;
     margin-top: 25px;
 }
 
-.signup a {
+.signUp a {
     text-decoration: none;
     font-weight: 700;
     color: rgb(68, 34, 19);
     transition: .5s;
 }
 
-.signup a:hover {
+.signUp a:hover {
+    text-decoration: underline;
+    color: rgb(68, 34, 19);
+}
+
+/**
+*   Register styling
+*/
+
+.registerBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.registerRow {
+    width: 900px;
+    height: 600px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.registerContents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.registerHeader {
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.registerField{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 2px 0 2px;
+}
+
+.registerInput {
+    height: 38px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    margin-bottom: 12px;
+    color: #40414a;
+}
+
+.labelText {
+    font-size: 15px;
+}
+
+.signIn {
+    text-align: center;
+    font-size: small;
+    margin-top: 15px;
+}
+
+.signIn a {
+    text-decoration: none;
+    font-weight: 700;
+    color: rgb(68, 34, 19);
+    transition: .5s;
+}
+
+.signIn a:hover {
     text-decoration: underline;
     color: rgb(68, 34, 19);
 }
@@ -281,4 +335,36 @@
 .map-container {
     width: 100%;
     height: 100vh;
+}
+
+@media only screen and (max-width: 769px) {
+    /**
+    *   Login styling mobile view
+    */
+    .sideImage {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .imageText {
+        position: absolute;
+        top: 70%;
+        text-align: center;
+    }
+
+    .imageText p {
+        font-size: 21px;
+    }
+
+    .loginRow {
+        max-width: 420px;
+        width: 100%;
+    }
+
+    /**
+    *   Register styling mobile view
+    */
+    .registerRow {
+        max-width: 420px;
+        width: 100%;
+    }
 }
