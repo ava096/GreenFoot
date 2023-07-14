@@ -14,9 +14,9 @@ const generateToken = (id) => {
 // @route   POST /api/users
 //@access   Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, userName, email, password } = req.body;
+  const { name, userName, email, password, userRole } = req.body;
 
-  if (!name || !userName || !email || !password) {
+  if (!name || !userName || !email || !password || !userRole) {
     res.status(400);
     throw new Error("Please add all fields");
   }
@@ -39,6 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
     userName,
     email,
     password: hashedPassword,
+    userRole,
   });
 
   if (user) {
@@ -47,6 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       userName: user.userName,
       email: user.email,
+      userRole: user.userRole,
       token: generateToken(user._id),
     });
   } else {
