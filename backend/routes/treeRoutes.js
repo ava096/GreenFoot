@@ -8,7 +8,6 @@ const {
   updateTree,
   deleteTree,
 } = require("../controllers/treeController");
-const { protect } = require("../middleware/authMiddleware");
 
 // GET all trees, or apply search filters
 router
@@ -20,13 +19,9 @@ router
       return getAllTrees(req, res, next);
     }
   })
-  .post(protect, setTree);
+  .post(setTree);
 
 // GET tree by ID, PUT update tree, DELETE tree
-router
-  .route("/:id")
-  .get(getTree)
-  .put(protect, updateTree)
-  .delete(protect, deleteTree);
+router.route("/:id").get(getTree).put(updateTree).delete(deleteTree);
 
 module.exports = router;

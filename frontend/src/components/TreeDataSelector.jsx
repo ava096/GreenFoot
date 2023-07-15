@@ -51,7 +51,7 @@ function TreeDataSelector({ onFiltersChange }) {
             </Col>
             <Col>
               <TreeDropdown
-                label="Tree Ty[e"
+                label="Tree Type"
                 dataKey="treeType"
                 onSelect={setTreeType}
               />
