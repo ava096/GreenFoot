@@ -43,7 +43,7 @@ function TreeDataTable({ filters }) {
           <th>Vigour</th>
           <th>Condition</th>
           <th>Diameter (cm)</th>
-          <th>Radius (m)</th>
+          <th>Spread Radius (m)</th>
           <th>Height (m)</th>
         </tr>
       </thead>
@@ -60,7 +60,7 @@ function TreeDataTable({ filters }) {
               <td>{tree.treeVigour}</td>
               <td>{tree.treeCondition}</td>
               <td>{tree.treeDiameterCentimetres}</td>
-              <td>{tree.treeRadiusMetres}</td>
+              <td>{tree.treeSpreadRadiusMetres}</td>
               <td>{tree.treeHeightMetres}</td>
             </tr>
           ))}

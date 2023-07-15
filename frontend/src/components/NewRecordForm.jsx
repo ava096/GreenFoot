@@ -14,7 +14,7 @@ function NewRecordForm() {
     reportTreeVigour: "",
     reportTreeCondition: "",
     reportTreeDiameterCentimetres: "",
-    reportTreeRadiusMetres: "",
+    reportTreeSpreadRadiusMetres: "",
     reportTreeHeightMetres: "",
     reportImageUrl: "",
   });
@@ -29,7 +29,7 @@ function NewRecordForm() {
     reportTreeVigour,
     reportTreeCondition,
     reportTreeDiameterCentimetres,
-    reportTreeRadiusMetres,
+    reportTreeSpreadRadiusMetres,
     reportTreeHeightMetres,
     reportImageUrl,
   } = formData;
@@ -183,11 +183,13 @@ function NewRecordForm() {
           <Row>
             <Col>
               <Form.Group controlId="formRadius">
-                <Form.Label>Estimate the radius of the tree (m).</Form.Label>
+                <Form.Label>
+                  Estimate the spread radius of the tree (m).
+                </Form.Label>
                 <Form.Control
                   type="text"
-                  name="reportTreeRadiusMetres"
-                  value={reportTreeRadiusMetres}
+                  name="reportTreeSpreadRadiusMetres"
+                  value={reportTreeSpreadRadiusMetres}
                   placeholder="Eg. 0.4"
                   onChange={onChange}
                 />

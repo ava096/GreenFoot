@@ -38,7 +38,7 @@ const treeSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    treeRadiusMetres: {
+    treeSpreadRadiusMetres: {
       type: Number,
       required: true,
     },

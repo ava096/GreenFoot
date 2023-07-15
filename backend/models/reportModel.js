@@ -43,7 +43,7 @@ const reportSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    reportTreeRadiusMetres: {
+    reportTreeSpreadRadiusMetres: {
       type: Number,
       required: true,
     },

@@ -16,7 +16,7 @@ function TreeDataSelector({ onFiltersChange }) {
   const [treeVigour, setTreeVigour] = useState(null);
   const [treeCondition, setTreeCondition] = useState(null);
   const [treeDiameterCentimetres, setTreeDiameterCentimetres] = useState(null);
-  const [treeRadiusMetres, setTreeRadiusMetres] = useState(null);
+  const [treeSpreadRadiusMetres, setTreeSpreadRadiusMetres] = useState(null);
   const [treeHeightMetres, setTreeHeightMetres] = useState(null);
   //state setter for storing results
   const [results, setResults] = useState([]);
@@ -32,7 +32,7 @@ function TreeDataSelector({ onFiltersChange }) {
       treeVigour: treeVigour,
       treeCondition: treeCondition,
       treeDiameterCentimetres: treeDiameterCentimetres,
-      treeRadiusMetres: treeRadiusMetres,
+      treeSpreadRadiusMetres: treeSpreadRadiusMetres,
       treeHeightMetres: treeHeightMetres,
     });
   };
@@ -109,8 +109,8 @@ function TreeDataSelector({ onFiltersChange }) {
             <Col>
               <TreeDropdown
                 label="Radius (m)"
-                dataKey="treeRadiusMetres"
-                onSelect={setTreeRadiusMetres}
+                dataKey="treeSpreadRadiusMetres"
+                onSelect={setTreeSpreadRadiusMetres}
               />
             </Col>
             <Col>
