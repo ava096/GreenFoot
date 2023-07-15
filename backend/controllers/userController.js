@@ -39,7 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
     userName,
     email,
     password: hashedPassword,
-    userRole,
+    userRole: "user",
   });
 
   if (user) {
