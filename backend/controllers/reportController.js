@@ -54,16 +54,14 @@ const updateReport = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: "Cannot find this report" });
     }
 
-    const user = await User.findById(req.user.id);
-
     // Check for user
-    if (!user) {
+    if (!req.user) {
       res.status(401);
       throw new Error("User not found");
     }
 
     // Ensure the logged in user matches user associated with report
-    if (report.user.toString() !== user.id) {
+    if (report.user.toString() !== req.user.id) {
       res.status(401);
       throw new Error("User not authorised");
     }
@@ -92,16 +90,14 @@ const deleteReport = asyncHandler(async (req, res) => {
       throw new Error("Report not found");
     }
 
-    const user = await User.findById(req.user.id);
-
     // Check for user
-    if (!user) {
+    if (!req.user) {
       res.status(401);
       throw new Error("User not found");
     }
 
     // Ensure the logged in user matches user associated with report
-    if (report.user.toString() !== user.id) {
+    if (report.user.toString() !== req.user.id) {
       res.status(401);
       throw new Error("User not authorised");
     }
