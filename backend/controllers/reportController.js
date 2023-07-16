@@ -31,9 +31,12 @@ const getUserReports = asyncHandler(async (req, res) => {
 // @access  Private
 const newReport = asyncHandler(async (req, res) => {
   try {
+    console.log(req.user); // Log the req.user object
     const reportData = {
       ...req.body,
       user: req.user.id,
+      reportLongitude: 123.456, // Set the desired longitude value
+      reportLatitude: 78.91, // Set the desired latitude value
     };
     const report = await Report.create(reportData);
     res.status(201).json(report);

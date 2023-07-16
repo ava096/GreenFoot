@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { createReport } from "../features/reports/reportSlice";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import UploadImage from "./UploadImage";
 
@@ -16,7 +18,6 @@ function NewRecordForm() {
     reportTreeDiameterCentimetres: "",
     reportTreeSpreadRadiusMetres: "",
     reportTreeHeightMetres: "",
-    reportImageUrl: "",
   });
 
   const {
@@ -31,8 +32,9 @@ function NewRecordForm() {
     reportTreeDiameterCentimetres,
     reportTreeSpreadRadiusMetres,
     reportTreeHeightMetres,
-    reportImageUrl,
   } = formData;
+
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -43,6 +45,21 @@ function NewRecordForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(createReport(formData));
+    setFormData({
+      reportTreeLocationType: "",
+      reportTreeType: "",
+      reportTreeScientificName: "",
+      reportTreeAge: "",
+      reportTreeDescription: "",
+      reportTreeSurroundings: "",
+      reportTreeVigour: "",
+      reportTreeCondition: "",
+      reportTreeDiameterCentimetres: "",
+      reportTreeSpreadRadiusMetres: "",
+      reportTreeHeightMetres: "",
+    });
   };
 
   const onImageUpload = (url) => {
@@ -209,9 +226,7 @@ function NewRecordForm() {
             </Col>
           </Row>
           <Row>
-            <Col>
-              <UploadImage onUpload={onImageUpload} />
-            </Col>
+            <Col></Col>
           </Row>
           <Row className="selectorRow">
             <Button type="submit" className="customButton">

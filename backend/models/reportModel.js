@@ -59,10 +59,6 @@ const reportSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    reportImageUrl: {
-      type: String,
-      required: true,
-    },
   },
   {
     timestamps: true,

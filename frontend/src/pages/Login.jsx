@@ -22,15 +22,15 @@ function Login() {
   );
 
   useEffect(() => {
+    console.log(isSuccess); // Add this line
     if (isError) {
       toast.error(message);
+      dispatch(reset());
     }
 
     if (isSuccess || user) {
       navigate("/dash");
     }
-
-    dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
@@ -42,6 +42,8 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(reset()); // Reset the state before attempting to log in.
 
     const userData = {
       email,

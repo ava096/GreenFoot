@@ -28,7 +28,7 @@ function UserDash() {
         <Row>
           <Col>
             <div className="welcome-message">
-              <h1>Welcome back, Username</h1>
+              <h1>Welcome back, {user && user.userName}</h1>
             </div>
             <div className="page-divider">
               <FaSeedling /> <FaSeedling /> <FaSeedling />
