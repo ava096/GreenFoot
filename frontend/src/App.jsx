@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DatabaseTableView from "./pages/DatabaseTableView";
 import SubmitRecordForm from "./pages/SubmitRecordForm";
+import SubmitReportLocation from "./pages/SubmitReportLocation";
 import DatabaseMapView from "./pages/DatabaseMapView";
 import UserDash from "./pages/UserDash";
 import NavgBar from "./components/NavgBar";
@@ -31,7 +32,7 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/dbtable" element={<DatabaseTableView />}></Route>
             <Route path="/dbmap" element={<DatabaseMapView />}></Route>
-            <Route path="/submit" element={<SubmitRecordForm />}></Route>
+            <Route path="/submit" element={<SubmitReportLocation />}></Route>
             <Route path="/dash" element={<UserDash />}></Route>
           </Routes>
         </Router>
