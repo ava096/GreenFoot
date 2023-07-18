@@ -1,26 +1,38 @@
 import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { getReports, reset } from "../features/reports/reportSlice";
+import { Container, Row, Col } from "react-bootstrap";
 import { FaSeedling } from "react-icons/fa";
+import UserReportCard from "../components/UserReportCard";
 import "../index.css";
 
 function UserDash() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.auth);
+  const { report, isLoading, isError, message } = useSelector(
+    (state) => state.report
+  );
 
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
-  }, [user, navigate]);
 
-  // We will use dummyData for now
-  const dummyData = [
-    { title: "Report 1", content: "Some content" },
-    { title: "Report 2", content: "Some other content" },
-  ];
+    dispatch(getReports());
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
@@ -40,17 +52,14 @@ function UserDash() {
             <div className="reports-header">
               <h2>My Reports</h2>
             </div>
-            {dummyData.length ? (
-              dummyData.map((report, index) => (
-                <Card className="report-card" key={index}>
-                  <Card.Body>
-                    <Card.Title>{report.title}</Card.Title>
-                    <Card.Text>{report.content}</Card.Text>
-                  </Card.Body>
-                </Card>
-              ))
+            {report.length > 0 ? (
+              <div className="cardDiv">
+                {report.map((report) => (
+                  <UserReportCard key={report._id} report={report} />
+                ))}
+              </div>
             ) : (
-              <p>You haven't created any reports yet.</p>
+              <h3>You haven't created any reports yet.</h3>
             )}
           </Col>
         </Row>

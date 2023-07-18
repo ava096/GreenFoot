@@ -16,8 +16,34 @@ const createReport = async (reportData, token) => {
   return response.data;
 };
 
+// Get user reports
+const getReports = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(API_URL + "userReports", config);
+
+  return response.data;
+};
+
+// Delete user report
+const deleteReport = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(API_URL + `deleteReport/${id}`, config);
+
+  return response.data;
+};
+
 const reportService = {
   createReport,
+  getReports,
+  deleteReport,
 };
 
 export default reportService;
