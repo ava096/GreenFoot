@@ -4,10 +4,12 @@ const {
   getAllTrees,
   getTree,
   getTreeSearch,
+  getClosestTrees,
   setTree,
   updateTree,
   deleteTree,
 } = require("../controllers/treeController");
+const { protect } = require("../middleware/authMiddleware");
 
 // GET all trees, or apply search filters
 router
@@ -20,6 +22,8 @@ router
     }
   })
   .post(setTree);
+
+router.route("/nearby").get(protect, getClosestTrees);
 
 // GET tree by ID, PUT update tree, DELETE tree
 router.route("/:id").get(getTree).put(updateTree).delete(deleteTree);

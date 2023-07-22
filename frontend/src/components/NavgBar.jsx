@@ -42,7 +42,7 @@ function NavgBar() {
                   Map View
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/submit">
+              <Nav.Link as={Link} to="/submitLocation">
                 Submit a Report
               </Nav.Link>
               {user ? (

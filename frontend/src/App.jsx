@@ -8,6 +8,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DatabaseTableView from "./pages/DatabaseTableView";
+import SelectTreeForReport from "./pages/SelectTreeForReport";
 import SubmitRecordForm from "./pages/SubmitRecordForm";
 import SubmitReportLocation from "./pages/SubmitReportLocation";
 import DatabaseMapView from "./pages/DatabaseMapView";
@@ -32,7 +33,12 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/dbtable" element={<DatabaseTableView />}></Route>
             <Route path="/dbmap" element={<DatabaseMapView />}></Route>
-            <Route path="/submit" element={<SubmitReportLocation />}></Route>
+            <Route
+              path="/submitLocation"
+              element={<SubmitReportLocation />}
+            ></Route>
+            <Route path="/selectTree" element={<SelectTreeForReport />}></Route>
+            <Route path="/submitForm" element={<SubmitRecordForm />}></Route>
             <Route path="/dash" element={<UserDash />}></Route>
           </Routes>
         </Router>

@@ -54,11 +54,25 @@ const treeSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    location: {
+      type: { type: String },
+      coordinates: [Number], // treeLongitude and treeLatitude mapped onto here with pre-save func
+    },
   },
   {
     timestamps: true,
   }
 );
+
+treeSchema.pre("save", function (next) {
+  this.location = {
+    type: "Point",
+    coordinates: [this.treeLongitude, this.treeLatitude],
+  };
+  next();
+});
+
+treeSchema.index({ location: "2dsphere" });
 
 const Tree = mongoose.model("Tree", treeSchema);
 

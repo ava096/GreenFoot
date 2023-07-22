@@ -104,6 +104,32 @@ const getTreeSearch = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get 10 closest trees to current co-ordinates
+// @route   GET /api/trees
+// @access  Private
+const getClosestTrees = asyncHandler(async (req, res) => {
+  try {
+    const maxDistance = 1000;
+
+    const { long, lat } = req.query;
+    const trees = await Tree.find({
+      location: {
+        $near: {
+          $maxDistance: maxDistance,
+          $geometry: {
+            type: "Point",
+            coordinates: [long, lat],
+          },
+        },
+      },
+    }).limit(10);
+
+    res.status(200).json(trees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc    Create new entry
 // @route   POST /api/trees
 // @access  Private
@@ -173,6 +199,7 @@ module.exports = {
   getAllTrees,
   getTree,
   getTreeSearch,
+  getClosestTrees,
   setTree,
   updateTree,
   deleteTree,

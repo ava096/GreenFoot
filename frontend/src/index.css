@@ -78,6 +78,19 @@
     margin: 10px 0 20px 0;
 }
 
+.titleRow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px 0 0 20px;
+}
+
+.textDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /**
 *   Dashboard Styling
 */
