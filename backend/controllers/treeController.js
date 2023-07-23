@@ -41,55 +41,55 @@ const getTreeSearch = asyncHandler(async (req, res) => {
     }
 
     const {
+      treeLocationType,
       treeType,
-      species,
-      speciesType,
-      age,
-      treeSurround,
-      vigour,
-      condition,
-      diameterCentimetres,
-      radiusMetres,
+      treeScientificName,
+      treeAge,
+      treeSurroundings,
+      treeVigour,
+      treeCondition,
+      treeDiameterCentimetres,
+      treeSpreadRadiusMetres,
       treeHeightMetres,
     } = req.query;
 
     //store search results in array
     const filter = {};
 
+    if (treeLocationType) {
+      filter.treeLocationType = treeLocationType;
+    }
+
     if (treeType) {
       filter.treeType = treeType;
     }
 
-    if (speciesType) {
-      filter.speciesType = speciesType;
+    if (treeScientificName) {
+      filter.treeScientificName = treeScientificName;
     }
 
-    if (species) {
-      filter.species = species;
+    if (treeAge) {
+      filter.treeAge = treeAge;
     }
 
-    if (age) {
-      filter.age = age;
+    if (treeSurroundings) {
+      filter.treeSurroundings = treeSurroundings;
     }
 
-    if (treeSurround) {
-      filter.treeSurround = treeSurround;
+    if (treeVigour) {
+      filter.treeVigour = treeVigour;
     }
 
-    if (vigour) {
-      filter.vigour = vigour;
+    if (treeCondition) {
+      filter.treeCondition = treeCondition;
     }
 
-    if (condition) {
-      filter.condition = condition;
+    if (treeDiameterCentimetres) {
+      filter.treeDiameterCentimetres = treeDiameterCentimetres;
     }
 
-    if (diameterCentimetres) {
-      filter.diameterCentimetres = diameterCentimetres;
-    }
-
-    if (radiusMetres) {
-      filter.radiusMetres = radiusMetres;
+    if (treeSpreadRadiusMetres) {
+      filter.treeSpreadRadiusMetres = treeSpreadRadiusMetres;
     }
 
     if (treeHeightMetres) {
