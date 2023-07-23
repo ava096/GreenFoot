@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Tree = require("../models/treeModel");
 const User = require("../models/userModel");
 
-// @desc    Get all trees
+// @desc    Get all trees and return in alphabetical order
 // @route   GET /api/trees
 // @access  Public
 const getAllTrees = asyncHandler(async (req, res) => {
@@ -11,7 +11,7 @@ const getAllTrees = asyncHandler(async (req, res) => {
       return next();
     }
 
-    const trees = await Tree.find();
+    const trees = await Tree.find().sort({ treeType: 1 });
     res.status(200).json(trees);
   } catch (error) {
     res.status(500).json({ message: error.message });

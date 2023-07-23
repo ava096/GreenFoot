@@ -14,6 +14,8 @@ import SubmitReportLocation from "./pages/SubmitReportLocation";
 import DatabaseMapView from "./pages/DatabaseMapView";
 import UserDash from "./pages/UserDash";
 import NavgBar from "./components/NavgBar";
+import ViewAllTrees from "./pages/ViewAllTrees";
+import ViewTree from "./pages/ViewTree";
 
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -40,6 +42,8 @@ function App() {
             <Route path="/selectTree" element={<SelectTreeForReport />}></Route>
             <Route path="/submitForm" element={<SubmitRecordForm />}></Route>
             <Route path="/dash" element={<UserDash />}></Route>
+            <Route path="/viewAll" element={<ViewAllTrees />}></Route>
+            <Route path="/view" element={<ViewTree />}></Route>
           </Routes>
         </Router>
         <ToastContainer />
