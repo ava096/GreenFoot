@@ -70,6 +70,7 @@
 .pageText {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .pageDivider {
@@ -89,6 +90,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.paddedRow {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 0 40px;
+    padding-bottom: 40px;
 }
 
 /**
@@ -182,14 +190,22 @@
 *   New record form styling
 */
 
-.formGroup{
+.reportAccordion {
+    width: 100%
+}
+
+.reportAccordionHeader {
+    font-size: 12px !important;
+}
+
+.reportSubmissionGroup{
     display: flex;
     flex-direction: column;
     position: relative;
     padding: 0 10px 0 10px;
 }
 
-.form-control {
+.reportSubmissionControl {
     width: 100%;
     background: transparent;
     margin-bottom: 20px;
@@ -408,5 +424,19 @@
     .registerRow {
         max-width: 420px;
         width: 100%;
+    }
+
+    /**
+    *   Report submission mobile view
+    */
+    .reportSubmissionRow {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .reportSubmissionGroup{
+        
+        align-items: center;
     }
 }

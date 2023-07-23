@@ -47,6 +47,9 @@ function NavgBar() {
               </Nav.Link>
               {user ? (
                 <>
+                  <Nav.Link as={Link} to="/dash">
+                    Dashboard
+                  </Nav.Link>
                   <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
                 </>
               ) : (

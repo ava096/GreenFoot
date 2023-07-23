@@ -56,7 +56,7 @@ export const treeSlice = createSlice({
       })
       .addCase(findTrees.rejected, (state, action) => {
         state.isLoading = false;
-        state.isError = false;
+        state.isError = true;
         state.message = action.payload;
       });
   },
