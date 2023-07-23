@@ -3,6 +3,7 @@ import TreeDataTable from "../components/TreeDataTable";
 import TreeDataSelector from "../components/TreeDataSelector";
 import { Link } from "react-router-dom";
 import { FaSeedling } from "react-icons/fa";
+import { Accordion } from "react-bootstrap";
 
 function DatabaseTableView() {
   const [filters, setFilters] = useState({});
@@ -30,8 +31,14 @@ function DatabaseTableView() {
           <FaSeedling /> <FaSeedling /> <FaSeedling />
         </div>
         <div className="selectFilter">
-          <h5>Filter results by...</h5>
-          <TreeDataSelector onFiltersChange={onFiltersChange} />
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Filter results by...</Accordion.Header>
+              <Accordion.Body>
+                <TreeDataSelector onFiltersChange={onFiltersChange} />
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </div>
         <div>
           <TreeDataTable filters={filters} />

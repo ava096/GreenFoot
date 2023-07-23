@@ -42,14 +42,14 @@ function TreeDataSelector({ onFiltersChange }) {
       <Form onSubmit={onSubmit}>
         <Container>
           <Row className="selectorRow">
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Location Type"
                 dataKey="treeLocationType"
                 onSelect={setTreeLocationType}
               />
             </Col>
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Tree Type"
                 dataKey="treeType"
@@ -58,14 +58,14 @@ function TreeDataSelector({ onFiltersChange }) {
             </Col>
           </Row>
           <Row className="selectorRow">
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Scientific Name"
                 dataKey="treeScientificName"
                 onSelect={setTreeScientificName}
               />
             </Col>
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Age"
                 dataKey="treeAge"
@@ -74,14 +74,14 @@ function TreeDataSelector({ onFiltersChange }) {
             </Col>
           </Row>
           <Row className="selectorRow">
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Surroundings"
                 dataKey="treeSurroundings"
                 onSelect={setTreeSurroundings}
               />
             </Col>
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Vigour"
                 dataKey="treeVigour"
@@ -90,14 +90,14 @@ function TreeDataSelector({ onFiltersChange }) {
             </Col>
           </Row>
           <Row className="selectorRow">
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Condition"
                 dataKey="treeCondition"
                 onSelect={setTreeCondition}
               />
             </Col>
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Diameter (cm)"
                 dataKey="treeDiameterCentimetres"
@@ -106,14 +106,14 @@ function TreeDataSelector({ onFiltersChange }) {
             </Col>
           </Row>
           <Row className="selectorRow">
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Radius (m)"
                 dataKey="treeSpreadRadiusMetres"
                 onSelect={setTreeSpreadRadiusMetres}
               />
             </Col>
-            <Col>
+            <Col className="selectorCol">
               <TreeDropdown
                 label="Height (m)"
                 dataKey="treeHeightMetres"
@@ -122,9 +122,11 @@ function TreeDataSelector({ onFiltersChange }) {
             </Col>
           </Row>
           <Row className="selectorRow">
-            <Button type="submit" className="customButton">
-              Search
-            </Button>
+            <Col className="selectorCol">
+              <Button type="submit" className="customButton">
+                Search
+              </Button>
+            </Col>
           </Row>
         </Container>
       </Form>

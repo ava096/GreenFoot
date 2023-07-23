@@ -132,7 +132,12 @@
 *   Result filtering styling
 */
 .selectorRow {
-    margin: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.selectorCol {
+    margin: 15px 0 0 15px;
     display: flex;
     justify-content: center;
 }
@@ -424,6 +429,15 @@
     .registerRow {
         max-width: 420px;
         width: 100%;
+    }
+
+    /**
+    *   Result filtering styling
+    */
+    .selectorRow {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     /**
