@@ -26,6 +26,18 @@ const getUserReports = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get reports associated with a specific tree
+// @route   GET /api/reports
+// @access  Public
+const getTreeReports = asyncHandler(async (req, res) => {
+  try {
+    const treeReports = await Report.find({ tree: req.params.id });
+    res.status(201).json(treeReports);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 // @desc    Create a new report
 // @route   POST /api/reports
 // @access  Private
@@ -116,6 +128,7 @@ const deleteReport = asyncHandler(async (req, res) => {
 module.exports = {
   getAllReports,
   getUserReports,
+  getTreeReports,
   newReport,
   updateReport,
   deleteReport,
