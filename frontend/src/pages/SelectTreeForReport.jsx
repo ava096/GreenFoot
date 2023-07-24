@@ -11,22 +11,28 @@ function SelectTreeForReport() {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { selectedLocation } = useSelector((state) => state.tree);
+  const selectedLocation = useSelector((state) => state.tree.selectedLocation);
   const { tree, isLoading, isError, message } = useSelector(
     (state) => state.tree
   );
 
+  // useEffect for user login check
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
+  }, [user, navigate]);
 
-    dispatch(findTrees(selectedLocation));
+  // useEffect for fetching trees
+  useEffect(() => {
+    if (selectedLocation) {
+      dispatch(findTrees(selectedLocation));
+    }
 
     return () => {
       dispatch(reset());
     };
-  }, [user, navigate, isError, message, dispatch, selectedLocation]);
+  }, [selectedLocation, dispatch]);
 
   if (isLoading) {
     return <LoadingSpinner />;

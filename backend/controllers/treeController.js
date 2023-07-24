@@ -18,7 +18,7 @@ const getAllTrees = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get tree
+// @desc    Get tree by ID
 // @route   GET /api/trees/:id
 // @access  Public
 const getTree = asyncHandler(async (req, res) => {

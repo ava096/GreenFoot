@@ -9,6 +9,9 @@ const findTreeLongLat = async (token, longitude, latitude) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  console.log(longitude, latitude);
+
   const response = await axios.get(
     `${API_URL}nearby?long=${longitude}&lat=${latitude}`,
     config

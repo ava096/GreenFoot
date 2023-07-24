@@ -29,7 +29,7 @@ function ViewAllTrees() {
         </Row>
         <Row>
           <Col className="textDisplay">
-            <p>
+            <p className="italicsLocation">
               Below are all trees currently existing in our database. Click an
               individual record to view its current information and report
               history.

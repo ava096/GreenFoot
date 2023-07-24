@@ -6,7 +6,7 @@ function TreeCard({ tree }) {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate(`/${tree._id}`);
+    navigate(`/view/${tree._id}`);
   };
 
   return (

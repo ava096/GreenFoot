@@ -15,11 +15,12 @@ export const findTrees = createAsyncThunk(
   "tree/find",
   async (location, thunkAPI) => {
     try {
+      console.log(location);
       const token = thunkAPI.getState().auth.user.token;
       return await treeService.findTreeLongLat(
         token,
-        location.longitude,
-        location.latitude
+        location.lng,
+        location.lat
       );
     } catch (error) {
       const message =
@@ -39,6 +40,7 @@ export const treeSlice = createSlice({
   reducers: {
     reset: (state) => initialState,
     setLocation: (state, action) => {
+      console.log("setLocation payload:", action.payload);
       state.selectedLocation = action.payload;
     },
   },
