@@ -11,7 +11,11 @@ const createReport = async (reportData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.post(API_URL + "newReport", reportData, config);
+  const response = await axios.post(
+    API_URL + "newReport/" + reportData.id,
+    reportData,
+    config
+  );
 
   return response.data;
 };

@@ -7,10 +7,14 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { Row, Col, Container } from "react-bootstrap";
 
 function SelectTreeForReport() {
+  //navigate and dispatch for Redux state management
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //for accessing user token
   const { user } = useSelector((state) => state.auth);
+
+  //access the location data from previous page, stored in state
   const selectedLocation = useSelector((state) => state.tree.selectedLocation);
   const { tree, isLoading, isError, message } = useSelector(
     (state) => state.tree
@@ -37,6 +41,8 @@ function SelectTreeForReport() {
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  if (isError) return `An error occurred: ${message}`;
 
   return (
     <>

@@ -7,6 +7,11 @@ const reportSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
+    tree: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Tree",
+    },
     reportTreeLocationType: {
       type: String,
       required: [true, "Please include a tree location type"],
@@ -44,14 +49,6 @@ const reportSchema = mongoose.Schema(
       required: true,
     },
     reportTreeSpreadRadiusMetres: {
-      type: Number,
-      required: true,
-    },
-    reportLongitude: {
-      type: Number,
-      required: true,
-    },
-    reportLatitude: {
       type: Number,
       required: true,
     },

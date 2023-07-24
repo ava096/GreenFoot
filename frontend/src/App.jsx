@@ -40,7 +40,10 @@ function App() {
               element={<SubmitReportLocation />}
             ></Route>
             <Route path="/selectTree" element={<SelectTreeForReport />}></Route>
-            <Route path="/submitForm" element={<SubmitRecordForm />}></Route>
+            <Route
+              path="/submitForm/:id"
+              element={<SubmitRecordForm />}
+            ></Route>
             <Route path="/dash" element={<UserDash />}></Route>
             <Route path="/viewAll" element={<ViewAllTrees />}></Route>
             <Route path="/view/:id" element={<ViewTree />}></Route>

@@ -5,7 +5,7 @@ import { createReport } from "../features/reports/reportSlice";
 import { Form, Button, Row, Col, Accordion } from "react-bootstrap";
 import UploadImage from "./UploadImage";
 
-function NewRecordForm() {
+function NewRecordForm({ treeID }) {
   const [formData, setFormData] = useState({
     reportTreeLocationType: "",
     reportTreeType: "",
@@ -46,7 +46,13 @@ function NewRecordForm() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createReport(formData));
+    // Make sure tree ID is included with form data
+    let completeFormData = {
+      ...formData,
+      id: treeID,
+    };
+
+    dispatch(createReport(completeFormData));
     setFormData({
       reportTreeLocationType: "",
       reportTreeType: "",

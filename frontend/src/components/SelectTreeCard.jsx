@@ -1,9 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 
 function SelectTreeCard({ tree }) {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/submitForm/${tree._id}`);
+  };
 
   return (
     <>
@@ -11,7 +15,9 @@ function SelectTreeCard({ tree }) {
         <Card.Body>
           <Card.Title>{tree.treeType}</Card.Title>
           <Card.Text>{tree.treeDescription}</Card.Text>
-          <Button variant="success">Create Report</Button>
+          <Button variant="success" onClick={onClick}>
+            Create Report
+          </Button>
         </Card.Body>
       </Card>
     </>

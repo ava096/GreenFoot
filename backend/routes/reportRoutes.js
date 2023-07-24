@@ -11,7 +11,7 @@ const { protect } = require("../middleware/authMiddleware");
 
 router.get("/allReports", getAllReports);
 router.get("/userReports", protect, getUserReports);
-router.post("/newReport", protect, newReport);
+router.post("/newReport/:id", protect, newReport);
 router.put("/updateReport/:id", updateReport);
 router.delete("/deleteReport/:id", protect, deleteReport);
 

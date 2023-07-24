@@ -35,8 +35,7 @@ const newReport = asyncHandler(async (req, res) => {
     const reportData = {
       ...req.body,
       user: req.user.id,
-      reportLongitude: 123.456, // Set the desired longitude value
-      reportLatitude: 78.91, // Set the desired latitude value
+      tree: req.params.id,
     };
     const report = await Report.create(reportData);
     res.status(201).json(report);

@@ -1,8 +1,11 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import NewRecordForm from "../components/NewRecordForm";
 
 function SubmitRecordForm() {
+  const { id } = useParams();
+
   return (
     <Container>
       <Row>
@@ -18,7 +21,7 @@ function SubmitRecordForm() {
               for contributing to this project!
             </p>
           </div>
-          <NewRecordForm />
+          <NewRecordForm treeID={id} />
         </Col>
       </Row>
     </Container>
