@@ -51,7 +51,7 @@ function NavgBar() {
                   Graph Breakdowns
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/submitLocation">
+              <Nav.Link as={Link} to="/suggestTree">
                 Submit a Report
               </Nav.Link>
               {user ? (

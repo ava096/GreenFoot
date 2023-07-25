@@ -109,9 +109,14 @@ const getTreeSearch = asyncHandler(async (req, res) => {
 // @access  Private
 const getClosestTrees = asyncHandler(async (req, res) => {
   try {
-    const maxDistance = 1000;
+    const maxDistance = 10000;
 
-    const { long, lat } = req.query;
+    const long = Number(req.query.longitude);
+    const lat = Number(req.query.latitude);
+
+    console.log(`Longitude received: ${long}`);
+    console.log(`Latitude received: ${lat}`);
+
     const trees = await Tree.find({
       location: {
         $near: {
@@ -124,8 +129,11 @@ const getClosestTrees = asyncHandler(async (req, res) => {
       },
     }).limit(10);
 
+    console.log(`${trees.length} trees found`);
+
     res.status(200).json(trees);
   } catch (error) {
+    console.error(`Error getting closest trees: ${error}`);
     res.status(500).json({ message: error.message });
   }
 });
