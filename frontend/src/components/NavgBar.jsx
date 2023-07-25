@@ -41,6 +41,15 @@ function NavgBar() {
                 <NavDropdown.Item as={Link} to="/dbmap">
                   Map View
                 </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/viewAll">
+                  View All Trees
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/viewAll">
+                  View Reports
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/">
+                  Graph Breakdowns
+                </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link as={Link} to="/submitLocation">
                 Submit a Report

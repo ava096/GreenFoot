@@ -63,7 +63,7 @@ function ViewTree() {
             <h2>{data.treeType}</h2>
           </Col>
           <Col className="textDisplay">
-            <p>
+            <p style={{ textAlign: "center" }}>
               <i>Located at {data.locationName}</i>
             </p>
           </Col>
@@ -81,8 +81,8 @@ function ViewTree() {
             </p>
           </Col>
         </Row>
-        <Row>
-          <Col>
+        <Row className="titleRow">
+          <Col className="textDisplay">
             <h2>Reports for this tree</h2>
           </Col>
           <Col>

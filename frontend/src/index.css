@@ -76,7 +76,9 @@
 .pageDivider {
     display: flex;
     justify-content: center;
-    margin: 10px 0 20px 0;
+    align-items: center;
+    padding: 10px 0;
+    color: #228b22;
 }
 
 .titleRow {
@@ -90,43 +92,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .paddedRow {
     display: flex;
     justify-content: center;
-    margin: 20px 0 0 40px;
+    margin: 20px 0 40px 0;
     padding-bottom: 40px;
 }
 
 /**
 *   Dashboard Styling
 */
-.welcome-message {
-    font-size: 24px;
-    font-weight: bold;
-    padding: 20px 0;
-  }
-  
-  .page-divider {
+.imageDiv {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
-    color: #228b22;
-  }
-  
-  .reports-header {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 20px 0;
-  }
-  
-  .report-card {
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  }
+    width: 300px;
+    margin-top: 50px;
+}
 
 /**
 *   Result filtering styling

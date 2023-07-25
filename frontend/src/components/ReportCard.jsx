@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 function ReportCard({ report }) {
   return (
@@ -10,6 +10,7 @@ function ReportCard({ report }) {
             {new Date(report.createdAt).toLocaleString("en-US")}
           </Card.Title>
           <Card.Text>{report.reportTreeDescription}</Card.Text>
+          <Button variant="success">View Report</Button>
         </Card.Body>
       </Card>
     </>
