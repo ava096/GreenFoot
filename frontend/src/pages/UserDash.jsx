@@ -35,7 +35,7 @@ function UserDash() {
   }
 
   const onClick = () => {
-    navigate("/submitLocation");
+    navigate("/suggestTree");
   };
 
   return (

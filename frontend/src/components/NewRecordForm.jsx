@@ -1,11 +1,16 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { createReport } from "../features/reports/reportSlice";
 import { Form, Button, Row, Col, Accordion } from "react-bootstrap";
-import UploadImage from "./UploadImage";
 
 function NewRecordForm({ treeID }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  //state setters for form data to be provided by user
   const [formData, setFormData] = useState({
     reportTreeLocationType: "",
     reportTreeType: "",
@@ -19,6 +24,9 @@ function NewRecordForm({ treeID }) {
     reportTreeSpreadRadiusMetres: "",
     reportTreeHeightMetres: "",
   });
+
+  //state setter for URI provided by cloudinary
+  const [uri, setUri] = useState(null);
 
   const {
     reportTreeLocationType,
@@ -34,8 +42,6 @@ function NewRecordForm({ treeID }) {
     reportTreeHeightMetres,
   } = formData;
 
-  const dispatch = useDispatch();
-
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -49,8 +55,11 @@ function NewRecordForm({ treeID }) {
     // Make sure tree ID is included with form data
     let completeFormData = {
       ...formData,
+      reportImage: uri,
       id: treeID,
     };
+
+    console.log(completeFormData);
 
     dispatch(createReport(completeFormData));
     setFormData({
@@ -66,13 +75,39 @@ function NewRecordForm({ treeID }) {
       reportTreeSpreadRadiusMetres: "",
       reportTreeHeightMetres: "",
     });
+
+    //set uri state back to null
+    setUri(null);
+    //navigate to dash to see submitted report
+    navigate("/dash");
   };
 
-  const onImageUpload = (url) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      reportImageUrl: url,
-    }));
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+
+    axios
+      .post("http://localhost:8000/uploadImage/upload", { image: base64 })
+      .then((res) => {
+        setUri(res.data);
+        console.log(uri);
+      })
+      .catch(console.log);
   };
 
   return (
@@ -392,6 +427,22 @@ function NewRecordForm({ treeID }) {
                   value={reportTreeHeightMetres}
                   placeholder="1.5"
                   onChange={onChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="reportSubmissionRow">
+            <Col className="reportSubmissionCol">
+              <Form.Group
+                controlId="formImage"
+                className="reportSubmissionGroup"
+              >
+                <Form.Label>Please Upload an Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  className="reportSubmissionControl"
+                  name="reportImage"
+                  onChange={uploadImage}
                 />
               </Form.Group>
             </Col>

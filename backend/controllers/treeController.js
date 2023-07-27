@@ -114,9 +114,6 @@ const getClosestTrees = asyncHandler(async (req, res) => {
     const long = Number(req.query.longitude);
     const lat = Number(req.query.latitude);
 
-    console.log(`Longitude received: ${long}`);
-    console.log(`Latitude received: ${lat}`);
-
     const trees = await Tree.find({
       location: {
         $near: {

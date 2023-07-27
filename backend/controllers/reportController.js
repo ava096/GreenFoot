@@ -43,12 +43,12 @@ const getTreeReports = asyncHandler(async (req, res) => {
 // @access  Private
 const newReport = asyncHandler(async (req, res) => {
   try {
-    console.log(req.user); // Log the req.user object
     const reportData = {
       ...req.body,
       user: req.user.id,
       tree: req.params.id,
     };
+
     const report = await Report.create(reportData);
     res.status(201).json(report);
   } catch (error) {
