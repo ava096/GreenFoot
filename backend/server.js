@@ -12,8 +12,8 @@ const app = express();
 
 //middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: false }));
 
 app.use("/api/trees", require("./routes/treeRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));

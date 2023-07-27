@@ -28,6 +28,9 @@ function NewRecordForm({ treeID }) {
   //state setter for URI provided by cloudinary
   const [uri, setUri] = useState(null);
 
+  //state setters for image upload status to prevent form from being submitted with incomplete form data
+  const [uploadingImage, setUploadingImage] = useState(false);
+
   const {
     reportTreeLocationType,
     reportTreeType,
@@ -58,8 +61,6 @@ function NewRecordForm({ treeID }) {
       reportImage: uri,
       id: treeID,
     };
-
-    console.log(completeFormData);
 
     dispatch(createReport(completeFormData));
     setFormData({
@@ -98,14 +99,15 @@ function NewRecordForm({ treeID }) {
   };
 
   const uploadImage = async (e) => {
+    setUploadingImage(true);
     const file = e.target.files[0];
     const base64 = await convertToBase64(file);
 
     axios
       .post("http://localhost:8000/uploadImage/upload", { image: base64 })
       .then((res) => {
-        setUri(res.data);
-        console.log(uri);
+        setUri({ url: res.data.url, public_id: res.data.public_id });
+        setUploadingImage(false);
       })
       .catch(console.log);
   };
@@ -448,7 +450,11 @@ function NewRecordForm({ treeID }) {
             </Col>
           </Row>
           <Row className="paddedRow">
-            <Button type="submit" className="customButton">
+            <Button
+              type="submit"
+              className="customButton"
+              disabled={uploadingImage}
+            >
               Submit
             </Button>
           </Row>

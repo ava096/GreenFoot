@@ -48,7 +48,6 @@ const newReport = asyncHandler(async (req, res) => {
       user: req.user.id,
       tree: req.params.id,
     };
-
     const report = await Report.create(reportData);
     res.status(201).json(report);
   } catch (error) {
