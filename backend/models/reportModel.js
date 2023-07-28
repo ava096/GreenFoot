@@ -66,6 +66,10 @@ const reportSchema = mongoose.Schema(
         required: true,
       },
     },
+    isModerated: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: true,

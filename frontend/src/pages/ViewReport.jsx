@@ -74,7 +74,15 @@ function ViewReport() {
           </Col>
         </Row>
         <Row>
-          <img src={reportData.reportImage.url} />
+          <img
+            src={reportData.reportImage.url}
+            alt={`Image of ${treeData.treeType}`}
+          />
+        </Row>
+        <Row>
+          <Col className="textDisplay">
+            <p>{reportData.reportTreeDescription}</p>
+          </Col>
         </Row>
       </Container>
     </>

@@ -60,6 +60,7 @@ const newReport = asyncHandler(async (req, res) => {
       ...req.body,
       user: req.user.id,
       tree: req.params.id,
+      isModerated: false,
     };
     const report = await Report.create(reportData);
     res.status(201).json(report);
