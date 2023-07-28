@@ -1,11 +1,23 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { updateReport } from "../features/reports/reportSlice";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { FaTriangleExclamation, FaCheck } from "react-icons/fa6";
 
 function ViewReport() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //state setter to re-render page when admin approves record
+  const [updateKey, setUpdateKey] = useState(0);
+
+  //Get logged in user info
+  const { user } = useSelector((state) => state.auth);
+
   //report id
   const { id } = useParams();
 
@@ -39,7 +51,7 @@ function ViewReport() {
     isLoading: reportLoading,
     error: reportError,
     data: reportData,
-  } = useQuery(["report", id], getReport);
+  } = useQuery(["report", id, updateKey], getReport);
 
   //useQuery for tree
   //reportData?.tree passed to ensure the tree is unique
@@ -48,17 +60,35 @@ function ViewReport() {
     isLoading: treeLoading,
     error: treeError,
     data: treeData,
-  } = useQuery(["tree", reportData?.tree], () => getTree(reportData.tree), {
-    enabled: !!reportData,
-  });
+  } = useQuery(
+    ["tree", reportData?.tree, updateKey],
+    () => getTree(reportData.tree),
+    {
+      enabled: !!reportData,
+    }
+  );
 
   if (reportLoading || treeLoading) {
     return <LoadingSpinner />;
   }
 
-  if (reportError || treeError) {
-    return <h3>An error occured: {error.message}</h3>;
+  if (reportError) {
+    return <h3>An error occured: {reportError.message}</h3>;
   }
+
+  if (treeError) {
+    return <h3>An error occured: {treeError.message}</h3>;
+  }
+
+  //will set a report's moderated status to true
+  const onClick = () => {
+    dispatch(
+      updateReport({
+        id: reportData._id,
+        reportData: { isModerated: true },
+      })
+    ).then(() => setUpdateKey((prevKey) => prevKey + 1));
+  };
 
   return (
     <>
@@ -69,7 +99,7 @@ function ViewReport() {
           </Col>
           <Col className="textDisplay">
             <p>
-              <i>{treeData.treeScientificName}</i>
+              <em>{treeData.treeScientificName}</em>
             </p>
           </Col>
         </Row>
@@ -81,9 +111,64 @@ function ViewReport() {
         </Row>
         <Row>
           <Col className="textDisplay">
-            <p>{reportData.reportTreeDescription}</p>
+            <div>
+              {reportData.isModerated === false ? (
+                <p>
+                  <FaTriangleExclamation /> Please note that this report is
+                  unmoderated and therefore information may be inaccurate.
+                </p>
+              ) : (
+                <p>
+                  <FaCheck /> This report has been approved by an admin
+                </p>
+              )}
+              <p>
+                <strong>Description</strong>
+              </p>
+              <p>{reportData.reportTreeDescription}</p>
+            </div>
           </Col>
         </Row>
+        <Row>
+          <Col>
+            <div>
+              <p>
+                <strong>Age:</strong> {reportData.reportTreeAge}
+              </p>
+              <p>
+                <strong>Surroundings:</strong>{" "}
+                {reportData.reportTreeSurroundings}
+              </p>
+              <p>
+                <strong>Condition:</strong> {reportData.reportTreeCondition}
+              </p>
+            </div>
+          </Col>
+          <Col>
+            <div>
+              <p>
+                <strong>Diameter:</strong>{" "}
+                {reportData.reportTreeDiameterCentimetres}cm
+              </p>
+              <p>
+                <strong>Spread Radius:</strong>{" "}
+                {reportData.reportTreeSpreadRadiusMetres}m
+              </p>
+              <p>
+                <strong>Height:</strong> {reportData.reportTreeHeightMetres}m
+              </p>
+            </div>
+          </Col>
+        </Row>
+        {user.userRole === "admin" && reportData.isModerated === false ? (
+          <Row>
+            <Col>
+              <Button variant="success" onClick={onClick}>
+                Approve Report
+              </Button>
+            </Col>
+          </Row>
+        ) : null}
       </Container>
     </>
   );

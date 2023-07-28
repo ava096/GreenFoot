@@ -16,7 +16,7 @@ router.get("/userReports", protect, getUserReports);
 router.get("/treeReports/:id", getTreeReports);
 router.get("/report/:id", getReportById);
 router.post("/newReport/:id", protect, newReport);
-router.put("/updateReport/:id", updateReport);
+router.put("/updateReport/:id", protect, updateReport);
 router.delete("/deleteReport/:id", protect, deleteReport);
 
 module.exports = router;

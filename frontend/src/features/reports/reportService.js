@@ -44,10 +44,28 @@ const deleteReport = async (id, token) => {
   return response.data;
 };
 
+// Update a report
+const updateReport = async (id, reportData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(
+    API_URL + `updateReport/${id}`,
+    reportData,
+    config
+  );
+
+  return response.data;
+};
+
 const reportService = {
   createReport,
   getUserReports,
   deleteReport,
+  updateReport,
 };
 
 export default reportService;

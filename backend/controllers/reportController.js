@@ -73,8 +73,10 @@ const newReport = asyncHandler(async (req, res) => {
 // @route   PUT /api/reports
 // @access  Private
 const updateReport = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+
   try {
-    const report = await Report.findById(req.params.id);
+    const report = await Report.findById(id);
 
     // if report doesn't exist
     if (!report) {
@@ -88,7 +90,11 @@ const updateReport = asyncHandler(async (req, res) => {
     }
 
     // Ensure the logged in user matches user associated with report
-    if (report.user.toString() !== req.user.id) {
+    // or that the logged in user is an admin
+    if (
+      report.user.toString() !== req.user.id &&
+      req.user.userRole !== "admin"
+    ) {
       res.status(401);
       throw new Error("User not authorised");
     }
