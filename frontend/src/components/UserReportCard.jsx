@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteReport } from "../features/reports/reportSlice";
-import { Button, Card, SplitButton } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
 
 function UserReportCard({ report }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -14,7 +16,12 @@ function UserReportCard({ report }) {
           <Card.Text>
             Created : {new Date(report.createdAt).toLocaleString("en-US")}
           </Card.Text>
-          <Button variant="success">See Report</Button>
+          <Button
+            variant="success"
+            onClick={() => navigate(`/viewReport/${report._id}`)}
+          >
+            See Report
+          </Button>
           <button
             variant="success"
             className="close"

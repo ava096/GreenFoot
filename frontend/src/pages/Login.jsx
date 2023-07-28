@@ -22,7 +22,6 @@ function Login() {
   );
 
   useEffect(() => {
-    console.log(isSuccess); // Add this line
     if (isError) {
       toast.error(message);
       dispatch(reset());

@@ -8,6 +8,7 @@ import TreeDataTableDisplay from "../components/TreeDataTableDisplay";
 import ReportCard from "../components/ReportCard";
 
 function ViewTree() {
+  //tree id
   const { id } = useParams();
 
   //Request to get info associated with selected tree

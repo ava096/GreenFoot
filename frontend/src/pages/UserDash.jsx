@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { getReports, reset } from "../features/reports/reportSlice";
+import { getUserReports, reset } from "../features/reports/reportSlice";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaSeedling } from "react-icons/fa";
 import UserReportCard from "../components/UserReportCard";
@@ -23,7 +23,7 @@ function UserDash() {
       navigate("/login");
     }
 
-    dispatch(getReports());
+    dispatch(getUserReports());
 
     return () => {
       dispatch(reset());

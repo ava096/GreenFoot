@@ -21,7 +21,7 @@ const createReport = async (reportData, token) => {
 };
 
 // Get user reports
-const getReports = async (token) => {
+const getUserReports = async (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ const deleteReport = async (id, token) => {
 
 const reportService = {
   createReport,
-  getReports,
+  getUserReports,
   deleteReport,
 };
 

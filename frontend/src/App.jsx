@@ -17,6 +17,7 @@ import AdminDash from "./pages/AdminDash";
 import NavgBar from "./components/NavgBar";
 import ViewAllTrees from "./pages/ViewAllTrees";
 import ViewTree from "./pages/ViewTree";
+import ViewReport from "./pages/ViewReport";
 import SuggestTreeForReport from "./pages/SuggestTreeForReport";
 
 import { Provider } from "react-redux";
@@ -48,12 +49,13 @@ function App() {
             ></Route>
             <Route path="/dash" element={<UserDash />}></Route>
             <Route path="/adminDash" element={<AdminDash />}></Route>
-            <Route path="/viewAll" element={<ViewAllTrees />}></Route>
-            <Route path="/view/:id" element={<ViewTree />}></Route>
+            <Route path="/viewAllTrees" element={<ViewAllTrees />}></Route>
+            <Route path="/viewTree/:id" element={<ViewTree />}></Route>
             <Route
-              path="suggestTree"
+              path="/suggestTree"
               element={<SuggestTreeForReport />}
             ></Route>
+            <Route path="/viewReport/:id" element={<ViewReport />}></Route>
           </Routes>
         </Router>
         <ToastContainer />

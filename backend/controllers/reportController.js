@@ -38,6 +38,19 @@ const getTreeReports = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get report by ID
+// @route   GET /api/reports
+// @access  Public
+const getReportById = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const report = await Report.findById(id);
+    res.status(200).json(report);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc    Create a new report
 // @route   POST /api/reports
 // @access  Private
@@ -128,6 +141,7 @@ module.exports = {
   getAllReports,
   getUserReports,
   getTreeReports,
+  getReportById,
   newReport,
   updateReport,
   deleteReport,
