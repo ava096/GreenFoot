@@ -29,7 +29,7 @@ function Login() {
     }
 
     if (isSuccess || user) {
-      navigate("/dash");
+      user.userRole === "admin" ? navigate("/adminDash") : navigate("/dash");
     }
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 

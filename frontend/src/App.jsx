@@ -13,6 +13,7 @@ import SubmitRecordForm from "./pages/SubmitRecordForm";
 import SubmitReportLocation from "./pages/SubmitReportLocation";
 import DatabaseMapView from "./pages/DatabaseMapView";
 import UserDash from "./pages/UserDash";
+import AdminDash from "./pages/AdminDash";
 import NavgBar from "./components/NavgBar";
 import ViewAllTrees from "./pages/ViewAllTrees";
 import ViewTree from "./pages/ViewTree";
@@ -46,6 +47,7 @@ function App() {
               element={<SubmitRecordForm />}
             ></Route>
             <Route path="/dash" element={<UserDash />}></Route>
+            <Route path="/adminDash" element={<AdminDash />}></Route>
             <Route path="/viewAll" element={<ViewAllTrees />}></Route>
             <Route path="/view/:id" element={<ViewTree />}></Route>
             <Route

@@ -73,6 +73,7 @@ const loginUser = asyncHandler(async (req, res) => {
       name: user.name,
       userName: user.userName,
       email: user.email,
+      userRole: user.userRole,
       token: generateToken(user._id),
     });
   } else {
