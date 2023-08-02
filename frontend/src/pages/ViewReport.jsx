@@ -3,15 +3,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { updateReport } from "../features/reports/reportSlice";
+import { updateReport, deleteReport } from "../features/reports/reportSlice";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import LoadingSpinner from "../components/LoadingSpinner";
+import ConfirmModal from "../components/ConfirmModal";
 import { FaTriangleExclamation, FaCheck } from "react-icons/fa6";
 
 function ViewReport() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //state setter for the modal that will ask for user confirmation of actions
+  const [showModal, setShowModal] = useState(false);
   //state setter to re-render page when admin approves record
   const [updateKey, setUpdateKey] = useState(0);
 
@@ -87,7 +90,20 @@ function ViewReport() {
         id: reportData._id,
         reportData: { isModerated: true },
       })
+      //refresh to reflect change
     ).then(() => setUpdateKey((prevKey) => prevKey + 1));
+  };
+
+  //triggered when 'Delete Report' is clicked
+  const onDeleteClick = () => {
+    setShowModal(true);
+  };
+
+  //triggered when user confirms deletion through modal
+  const handleDelete = () => {
+    setShowModal(false);
+    dispatch(deleteReport(reportData._id));
+    navigate(`/viewTree/${reportData.tree}`);
   };
 
   return (
@@ -160,15 +176,27 @@ function ViewReport() {
             </div>
           </Col>
         </Row>
-        {user.userRole === "admin" && reportData.isModerated === false ? (
+        {user.userRole === "admin" ? (
           <Row>
             <Col>
-              <Button variant="success" onClick={onClick}>
-                Approve Report
+              {reportData.isModerated === false ? (
+                <Button variant="success" onClick={onClick}>
+                  Approve Report
+                </Button>
+              ) : null}
+              <Button variant="success" onClick={onDeleteClick}>
+                Delete Report
               </Button>
             </Col>
           </Row>
         ) : null}
+        <ConfirmModal
+          show={showModal}
+          title="Delete Report?"
+          message="Are you sure you want to delete this report? Once deleted, you will be unable to recover it."
+          onConfirm={handleDelete}
+          onCancel={() => setShowModal(false)}
+        />
       </Container>
     </>
   );

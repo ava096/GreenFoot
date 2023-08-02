@@ -129,8 +129,11 @@ const deleteReport = asyncHandler(async (req, res) => {
       throw new Error("User not found");
     }
 
-    // Ensure the logged in user matches user associated with report
-    if (report.user.toString() !== req.user.id) {
+    // Ensure the logged in user matches user associated with report or has the admin role
+    if (
+      report.user.toString() !== req.user.id &&
+      req.user.userRole !== "admin"
+    ) {
       res.status(401);
       throw new Error("User not authorised");
     }
