@@ -4,15 +4,13 @@ const API_URL = "http://localhost:8000/api/reports/";
 
 // Create new report
 const createReport = async (reportData, token) => {
-  console.log(reportData);
-
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.post(
-    API_URL + "newReport/" + reportData.id,
+    API_URL + "newReport/" + reportData.treeID,
     reportData,
     config
   );
@@ -51,7 +49,7 @@ const updateReport = async (id, reportData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
+  console.log("ID is: ", id);
   const response = await axios.put(
     API_URL + `updateReport/${id}`,
     reportData,

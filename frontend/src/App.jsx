@@ -19,6 +19,7 @@ import ViewAllTrees from "./pages/ViewAllTrees";
 import ViewTree from "./pages/ViewTree";
 import ViewReport from "./pages/ViewReport";
 import SuggestTreeForReport from "./pages/SuggestTreeForReport";
+import UpdateReportForm from "./pages/UpdateReportForm";
 
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -44,7 +45,7 @@ function App() {
             ></Route>
             <Route path="/selectTree" element={<SelectTreeForReport />}></Route>
             <Route
-              path="/submitForm/:id"
+              path="/submitForm/:treeID"
               element={<SubmitRecordForm />}
             ></Route>
             <Route path="/dash" element={<UserDash />}></Route>
@@ -56,6 +57,10 @@ function App() {
               element={<SuggestTreeForReport />}
             ></Route>
             <Route path="/viewReport/:id" element={<ViewReport />}></Route>
+            <Route
+              path="/updateReport/:reportID"
+              element={<UpdateReportForm />}
+            ></Route>
           </Routes>
         </Router>
         <ToastContainer />

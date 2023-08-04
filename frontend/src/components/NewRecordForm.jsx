@@ -1,12 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { createReport } from "../features/reports/reportSlice";
+import { createReport, updateReport } from "../features/reports/reportSlice";
 import { Form, Button, Row, Col, Accordion } from "react-bootstrap";
 
-function NewRecordForm({ treeID }) {
+function NewRecordForm({ id, isEditMode }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,6 +45,25 @@ function NewRecordForm({ treeID }) {
     reportTreeHeightMetres,
   } = formData;
 
+  //if in edit mode, load the pre-existing data to populate formData
+  useEffect(() => {
+    if (isEditMode && id) {
+      //Fetch existing data with axios
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8000/api/reports/report/${id}`
+          );
+
+          setFormData(response.data);
+        } catch (error) {
+          console.error("An error occured while fetching report: ", error);
+        }
+      };
+      fetchData();
+    }
+  }, [isEditMode, id]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -55,32 +74,66 @@ function NewRecordForm({ treeID }) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // Make sure tree ID is included with form data
+    // Make sure the right ID is included with form data along with image URI
     let completeFormData = {
       ...formData,
-      reportImage: uri,
-      id: treeID,
+      //decide on the ID to use depending on the mode set
+      ...(isEditMode ? { reportID: id } : { treeID: id }),
     };
 
-    dispatch(createReport(completeFormData));
-    setFormData({
-      reportTreeLocationType: "",
-      reportTreeType: "",
-      reportTreeScientificName: "",
-      reportTreeAge: "",
-      reportTreeDescription: "",
-      reportTreeSurroundings: "",
-      reportTreeVigour: "",
-      reportTreeCondition: "",
-      reportTreeDiameterCentimetres: "",
-      reportTreeSpreadRadiusMetres: "",
-      reportTreeHeightMetres: "",
-    });
+    // Only include the reportImage field if uri is not null
+    if (uri) {
+      completeFormData.reportImage = uri;
+    }
 
-    //set uri state back to null
-    setUri(null);
-    //navigate to dash to see submitted report
-    navigate("/dash");
+    if (isEditMode) {
+      console.log("ID inside NewRecordForm:", id);
+      //update report if in edit mode
+      dispatch(updateReport({ id, reportData: completeFormData }));
+
+      //reset form data
+      setFormData({
+        reportTreeLocationType: "",
+        reportTreeType: "",
+        reportTreeScientificName: "",
+        reportTreeAge: "",
+        reportTreeDescription: "",
+        reportTreeSurroundings: "",
+        reportTreeVigour: "",
+        reportTreeCondition: "",
+        reportTreeDiameterCentimetres: "",
+        reportTreeSpreadRadiusMetres: "",
+        reportTreeHeightMetres: "",
+      });
+
+      //set uri state back to null
+      setUri(null);
+      //navigate to report to see the updates
+      navigate(`/viewReport/${id}`);
+    } else {
+      //create report if not in edit mode
+      dispatch(createReport(completeFormData));
+
+      //reset form data
+      setFormData({
+        reportTreeLocationType: "",
+        reportTreeType: "",
+        reportTreeScientificName: "",
+        reportTreeAge: "",
+        reportTreeDescription: "",
+        reportTreeSurroundings: "",
+        reportTreeVigour: "",
+        reportTreeCondition: "",
+        reportTreeDiameterCentimetres: "",
+        reportTreeSpreadRadiusMetres: "",
+        reportTreeHeightMetres: "",
+      });
+
+      //set uri state back to null
+      setUri(null);
+      //navigate to dash to see submitted report
+      navigate("/dash");
+    }
   };
 
   const convertToBase64 = (file) => {

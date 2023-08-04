@@ -99,6 +99,11 @@ function ViewReport() {
     setShowModal(true);
   };
 
+  //triggered when 'Update Report' is clicked
+  const onUpdateClick = () => {
+    navigate(`/updateReport/${reportData._id}`);
+  };
+
   //triggered when user confirms deletion through modal
   const handleDelete = () => {
     setShowModal(false);
@@ -176,7 +181,7 @@ function ViewReport() {
             </div>
           </Col>
         </Row>
-        {user.userRole === "admin" ? (
+        {user.userRole === "admin" || user.id === reportData.user ? (
           <Row>
             <Col>
               {reportData.isModerated === false ? (
@@ -187,6 +192,11 @@ function ViewReport() {
               <Button variant="success" onClick={onDeleteClick}>
                 Delete Report
               </Button>
+              {user.userRole === "admin" || user.id === reportData.user ? (
+                <Button variant="success" onClick={onUpdateClick}>
+                  Update Report
+                </Button>
+              ) : null}
             </Col>
           </Row>
         ) : null}

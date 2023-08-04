@@ -4,7 +4,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import NewRecordForm from "../components/NewRecordForm";
 
 function SubmitRecordForm() {
-  const { id } = useParams();
+  //get id for tree associated with report
+  const { treeID } = useParams();
+
+  //creating a report, using create route rather than update
+  const isEditMode = false;
 
   return (
     <Container>
@@ -21,7 +25,7 @@ function SubmitRecordForm() {
               for contributing to this project!
             </p>
           </div>
-          <NewRecordForm treeID={id} />
+          <NewRecordForm id={treeID} isEditMode={isEditMode} />
         </Col>
       </Row>
     </Container>

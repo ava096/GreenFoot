@@ -99,12 +99,14 @@ const updateReport = asyncHandler(async (req, res) => {
       throw new Error("User not authorised");
     }
 
-    const updatedReport = await Report.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
+    const updatedReport = await Report.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true }
+    );
 
     // if report is sucessfully updated
-    res.status(201).json(updatedReport);
+    res.status(200).json(updatedReport);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
