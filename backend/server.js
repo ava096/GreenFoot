@@ -19,6 +19,7 @@ app.use("/api/trees", require("./routes/treeRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/reports", require("./routes/reportRoutes"));
 app.use("/uploadImage", require("./routes/imageRoutes"));
+app.use("/api/upvotes", require("./routes/upvoteRoutes"));
 
 app.use(errorHandler);
 

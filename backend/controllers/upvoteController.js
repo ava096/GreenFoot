@@ -3,12 +3,12 @@ const Upvote = require("../models/upvoteModel");
 const Report = require("../models/reportModel");
 
 // @desc    Upvote a report
-// @route   POST /api/upvotes/:id
+// @route   POST /api/upvotes/:reportID
 // @access  Private
 const addUpvote = asyncHandler(async (req, res) => {
   try {
     //IDs required to make sure entry is unique
-    const { reportID } = req.params;
+    const reportID = req.params.reportID;
     const userID = req.user.id;
 
     //Check if user has already upvoted this report
@@ -34,12 +34,12 @@ const addUpvote = asyncHandler(async (req, res) => {
 });
 
 // @desc    Remove an upvote
-// @route   DELETE /api/upvotes/:id
+// @route   DELETE /api/upvotes/:reportID
 // @access  Private
 const removeUpvote = asyncHandler(async (req, res) => {
   try {
     //IDs needed for function
-    const { reportID } = req.params;
+    const reportID = req.params.reportID;
     const userID = req.user.id;
 
     const upvote = await Upvote.findOne({ user: userID, report: reportID });
@@ -55,7 +55,7 @@ const removeUpvote = asyncHandler(async (req, res) => {
     //adjust upvote quantity in report model
     await Report.findByIdAndUpdate(reportID, { $inc: { reportUpvotes: -1 } });
 
-    res.status(204).json({ message });
+    res.status(204).json({ message: "Upvote removed" });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
