@@ -21,18 +21,6 @@ function TreeDataMap({ trees }) {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   });
 
-  //loading state for actual TreeDataMap chil is handled in the parent
-  //loading state for useLoadScript still has to be handled within child
-  if (!isLoaded) {
-    return (
-      <>
-        <div>
-          <LoadingSpinner />
-        </div>
-      </>
-    );
-  }
-
   //define the centre point for the map to automatically focus on Belfast
   const center = useMemo(() => ({ lat: 54.5973, lng: -5.9301 }), []);
 
@@ -51,13 +39,25 @@ function TreeDataMap({ trees }) {
     navigate(`/viewTree/${selectedTree._id}`);
   };
 
+  //loading state for actual TreeDataMap chil is handled in the parent
+  //loading state for useLoadScript still has to be handled within child
+  if (!isLoaded) {
+    return (
+      <>
+        <div>
+          <LoadingSpinner />
+        </div>
+      </>
+    );
+  }
+
   return (
     <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
       {trees.map((tree) => (
         <MarkerF
           key={tree._id}
           position={{ lat: tree.treeLatitude, lng: tree.treeLongitude }}
-          onClick={onOpenClick(tree)}
+          onClick={() => onOpenClick(tree)}
         />
       ))}
 

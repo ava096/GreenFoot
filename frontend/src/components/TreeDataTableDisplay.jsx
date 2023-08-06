@@ -1,14 +1,7 @@
 import React from "react";
-import { Table, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Table } from "react-bootstrap";
 
 function TreeDataTableDisplay({ tree }) {
-  const navigate = useNavigate();
-
-  const onClick = () => {
-    navigate(`/viewTree/${tree._id}`);
-  };
-
   return (
     <>
       <Table striped bordered hover>
@@ -25,7 +18,6 @@ function TreeDataTableDisplay({ tree }) {
             <th>Diameter (cm)</th>
             <th>Spread Radius (m)</th>
             <th>Height (m)</th>
-            <th>View Tree</th>
           </tr>
         </thead>
         <tbody>
@@ -41,11 +33,6 @@ function TreeDataTableDisplay({ tree }) {
             <td>{tree.treeDiameterCentimetres}</td>
             <td>{tree.treeSpreadRadiusMetres}</td>
             <td>{tree.treeHeightMetres}</td>
-            <td>
-              <Button variant="success" onClick={onClick}>
-                View Tree
-              </Button>
-            </td>
           </tr>
         </tbody>
       </Table>

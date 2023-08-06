@@ -1,10 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 function TreeDataTable({ filters }) {
+  const navigate = useNavigate();
+
   const getTrees = async () => {
     const response = await axios.get("http://localhost:8000/api/trees", {
       params: filters,
@@ -30,6 +32,11 @@ function TreeDataTable({ filters }) {
     );
   }
 
+  //link to the page for the tree detailed in the table row
+  const onClick = () => {
+    navigate(`/viewTree/${tree._id}`);
+  };
+
   return (
     <table className="treeTable">
       <thead>
@@ -45,6 +52,7 @@ function TreeDataTable({ filters }) {
           <th>Diameter (cm)</th>
           <th>Spread Radius (m)</th>
           <th>Height (m)</th>
+          <th>View Tree</th>
         </tr>
       </thead>
       <tbody>
@@ -62,6 +70,11 @@ function TreeDataTable({ filters }) {
               <td>{tree.treeDiameterCentimetres}</td>
               <td>{tree.treeSpreadRadiusMetres}</td>
               <td>{tree.treeHeightMetres}</td>
+              <td>
+                <Button variant="success" onClick={onClick}>
+                  View Tree
+                </Button>
+              </td>
             </tr>
           ))}
       </tbody>

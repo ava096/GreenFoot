@@ -70,6 +70,9 @@ const reportSchema = mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    reportUpvotes: {
+      type: Number,
+    },
   },
   {
     timestamps: true,
