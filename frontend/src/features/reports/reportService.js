@@ -59,11 +59,25 @@ const updateReport = async (id, reportData, token) => {
   return response.data;
 };
 
+// Upvote a report
+const upvoteReport = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL + `upvoteReport/${id}`, config);
+
+  return response.data;
+};
+
 const reportService = {
   createReport,
   getUserReports,
   deleteReport,
   updateReport,
+  upvoteReport,
 };
 
 export default reportService;

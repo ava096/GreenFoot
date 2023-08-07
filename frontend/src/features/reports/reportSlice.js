@@ -85,6 +85,25 @@ export const updateReport = createAsyncThunk(
   }
 );
 
+// Upvote a report
+export const upvoteReport = createAsyncThunk(
+  "report/upvote",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await reportService.upvoteReport(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const reportSlice = createSlice({
   name: "report",
   initialState,
@@ -149,6 +168,24 @@ export const reportSlice = createSlice({
         }
       })
       .addCase(updateReport.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(upvoteReport.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(upvoteReport.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        const index = state.report.findIndex(
+          (report) => report._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.report[index] = action.payload;
+        }
+      })
+      .addCase(upvoteReport.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -1,18 +1,20 @@
 import React from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { upvoteReport } from "../features/reports/reportSlice";
 import { Button } from "react-bootstrap";
 
-function UpvoteButton() {
-  //API request for upvote information
-  const addUpvotes = async () => {
-    const response = await axios.post(
-      "http://localhost:8000/api/reports/upvoteReport/:id"
-    );
-    return response.data;
+function UpvoteButton({ reportId }) {
+  //bring in dispatch for use
+  const dispatch = useDispatch();
+
+  //event handler for upvoting
+  const handleUpvote = () => {
+    dispatch(upvoteReport(reportId));
   };
+
   return (
     <>
-      <Button variant="Success" onClick={onClick}>
+      <Button variant="Success" onClick={handleUpvote}>
         Upvote
       </Button>
     </>

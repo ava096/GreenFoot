@@ -7,6 +7,7 @@ import { updateReport, deleteReport } from "../features/reports/reportSlice";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ConfirmModal from "../components/ConfirmModal";
+import UpvoteButton from "../components/UpvoteButton";
 import { FaTriangleExclamation, FaCheck } from "react-icons/fa6";
 
 function ViewReport() {
@@ -208,6 +209,19 @@ function ViewReport() {
           onCancel={() => setShowModal(false)}
         />
       </Container>
+      <Row className="titleRow">
+        <Col className="textDisplay">
+          <h5>Like This Report?</h5>
+          <p>
+            We use reports as a way to guide us in keeping our information as
+            accurate and up-to-date as possible. If you think this report
+            contains valuable information, let us know with an upvote.
+          </p>
+        </Col>
+        <Col className="textDisplay">
+          <UpvoteButton reportId={id} />
+        </Col>
+      </Row>
     </>
   );
 }
