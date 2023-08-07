@@ -49,7 +49,7 @@ const updateReport = async (id, reportData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log("ID is: ", id);
+
   const response = await axios.put(
     API_URL + `updateReport/${id}`,
     reportData,

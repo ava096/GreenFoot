@@ -7,6 +7,7 @@ const {
   getReportById,
   newReport,
   updateReport,
+  upvoteReport,
   deleteReport,
 } = require("../controllers/reportController");
 const { protect } = require("../middleware/authMiddleware");
@@ -17,6 +18,7 @@ router.get("/treeReports/:id", getTreeReports);
 router.get("/report/:id", getReportById);
 router.post("/newReport/:id", protect, newReport);
 router.put("/updateReport/:id", protect, updateReport);
+router.put("/upvoteReport/:id", protect, upvoteReport);
 router.delete("/deleteReport/:id", protect, deleteReport);
 
 module.exports = router;

@@ -15,12 +15,13 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: false }));
 
+//routes
 app.use("/api/trees", require("./routes/treeRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/reports", require("./routes/reportRoutes"));
 app.use("/uploadImage", require("./routes/imageRoutes"));
-app.use("/api/upvotes", require("./routes/upvoteRoutes"));
 
+//middleware for error handling
 app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

@@ -71,7 +71,8 @@ const reportSchema = mongoose.Schema(
       required: true,
     },
     reportUpvotes: {
-      type: Number,
+      type: Map,
+      of: Boolean,
     },
   },
   {

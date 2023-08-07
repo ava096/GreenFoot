@@ -113,9 +113,43 @@ const updateReport = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Upvote a report
+// @route   PUT /api/reports/:id
+// @access  Private
+const upvoteReport = asyncHandler(async (req, res) => {
+  try {
+    //report id
+    const { id } = req.params;
+    //user id
+    const user = req.user.id;
+
+    //Get report user wants to upvote
+    const report = await Report.findById(id);
+
+    //Check if user has already upvoted report
+    const isUpvoted = report.reportUpvotes.get(user.toString());
+
+    if (isUpvoted) {
+      //return invalid request if user has already liked report
+      return res
+        .status(400)
+        .json({ message: "You have already upvoted this report." });
+    } else {
+      report.reportUpvotes.set(user.toString(), true);
+    }
+
+    //Save the changes made
+    await report.save();
+
+    res.status(200).json(report);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc    Delete a report
 // @route   DELETE /api/reports
-// @acess   Private
+// @access  Private
 const deleteReport = asyncHandler(async (req, res) => {
   try {
     const report = await Report.findById(req.params.id);
@@ -157,5 +191,6 @@ module.exports = {
   getReportById,
   newReport,
   updateReport,
+  upvoteReport,
   deleteReport,
 };
