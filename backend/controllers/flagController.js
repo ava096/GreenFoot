@@ -43,7 +43,7 @@ const getFlaggedReports = asyncHandler(async (req, res) => {
     //flaggedReports will be array of flags
     const flaggedReports = await Flag.find()
       //this field will be populated with the corresponding report document for each flag
-      .populate("report");
+      .populate("reportFlagged");
 
     res.status(200).json(flaggedReports);
   } catch (error) {
@@ -68,7 +68,8 @@ const updateFlagStatus = asyncHandler(async (req, res) => {
 
       //hide report if signal is received
       if (hideReport) {
-        const report = await Report.findById(flag.report);
+        const report = await Report.findById(flag.reportFlagged);
+        console.log(report);
         if (report) {
           report.isHidden = true;
           await report.save();
