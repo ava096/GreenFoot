@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const flagSchema = mongoose.Schema(
   {
-    user: {
+    userFlagging: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
-    report: {
+    reportFlagged: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Report",
@@ -15,6 +15,11 @@ const flagSchema = mongoose.Schema(
     reasonForFlag: {
       type: String,
       required: true,
+    },
+    flagStatus: {
+      type: String,
+      enum: ["pendingReview", "resolved", "rejected"],
+      default: "pendingReview",
     },
   },
   {
