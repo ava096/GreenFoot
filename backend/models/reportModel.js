@@ -74,6 +74,10 @@ const reportSchema = mongoose.Schema(
       type: Map,
       of: Boolean,
     },
+    isHidden: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: true,
