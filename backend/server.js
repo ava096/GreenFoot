@@ -20,6 +20,7 @@ app.use("/api/trees", require("./routes/treeRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/reports", require("./routes/reportRoutes"));
 app.use("/uploadImage", require("./routes/imageRoutes"));
+app.use("/api/flags", require("./routes/flagRoutes"));
 
 //middleware for error handling
 app.use(errorHandler);
