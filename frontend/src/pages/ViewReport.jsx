@@ -218,8 +218,11 @@ function ViewReport() {
             contains valuable information, let us know with an upvote.
           </p>
         </Col>
-        <Col className="textDisplay">
+        <Col>
           <UpvoteButton reportId={id} />
+        </Col>
+        <Col>
+          <p>{reportData.upvoteCount || 0} Upvotes</p>
         </Col>
       </Row>
     </>

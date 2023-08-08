@@ -45,6 +45,18 @@ const getReportById = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const report = await Report.findById(id);
+
+    let upvoteCount = 0;
+
+    if (report) {
+      for (let value of report.reportUpvotes.values()) {
+        if (value === true) {
+          upvoteCount++;
+        }
+      }
+      report._doc.upvoteCount = upvoteCount;
+    }
+
     res.status(200).json(report);
   } catch (error) {
     res.status(500).json({ message: error.message });
