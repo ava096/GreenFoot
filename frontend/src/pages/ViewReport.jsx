@@ -105,6 +105,11 @@ function ViewReport() {
     navigate(`/updateReport/${reportData._id}`);
   };
 
+  //redirects user to flagging page
+  const onFlagClick = () => {
+    navigate(`/flagReport/${reportData._id}`);
+  };
+
   //triggered when user confirms deletion through modal
   const handleDelete = () => {
     setShowModal(false);
@@ -223,6 +228,20 @@ function ViewReport() {
         </Col>
         <Col>
           <p>{reportData.upvoteCount || 0} Upvotes</p>
+        </Col>
+      </Row>
+      <Row className="titleRow">
+        <Col className="textDisplay">
+          <h5>See a Problem?</h5>
+          <p>
+            If there is a problem with this report, such as any inaccuracies or
+            junk data, please let us know.
+          </p>
+        </Col>
+        <Col>
+          <Button variant="success" onClick={onFlagClick}>
+            Flag Report
+          </Button>
         </Col>
       </Row>
     </>

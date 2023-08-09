@@ -14,7 +14,7 @@ function UpvoteButton({ reportId }) {
 
   return (
     <>
-      <Button variant="Success" onClick={handleUpvote}>
+      <Button variant="success" onClick={handleUpvote}>
         Upvote
       </Button>
     </>
