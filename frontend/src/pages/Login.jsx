@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { login, reset } from "../features/auth/authSlice";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
@@ -23,7 +22,6 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
       dispatch(reset());
     }
 

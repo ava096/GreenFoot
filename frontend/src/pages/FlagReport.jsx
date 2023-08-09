@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { createFlag } from "../features/flags/flagSlice";
-import { Container, Col, Row, Form } from "react-bootstrap";
+import React from "react";
+import { Container, Col, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import FlagForm from "../components/FlagForm";
 
 function FlagReport() {
-  const dispatch = useDispatch();
+  //get the report id
+  const { id } = useParams();
 
   return (
     <>
@@ -27,7 +27,7 @@ function FlagReport() {
           </Col>
           <Col>
             <div>
-              <FlagForm />
+              <FlagForm reportID={id} />
             </div>
           </Col>
         </Row>

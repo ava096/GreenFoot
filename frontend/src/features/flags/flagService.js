@@ -10,6 +10,9 @@ const createFlag = async (id, flagData, token) => {
     },
   };
 
+  console.log(id);
+  console.log(token);
+
   const response = await axios.post(
     API_URL + `flagReport/${id}`,
     flagData,
