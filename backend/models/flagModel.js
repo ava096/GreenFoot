@@ -16,6 +16,10 @@ const flagSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    additionalInfo: {
+      type: String,
+      default: "No additional information provided",
+    },
     flagStatus: {
       type: String,
       enum: ["pendingReview", "resolved", "rejected"],
