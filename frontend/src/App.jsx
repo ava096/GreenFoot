@@ -20,6 +20,7 @@ import ViewTree from "./pages/ViewTree";
 import ViewReport from "./pages/ViewReport";
 import SuggestTreeForReport from "./pages/SuggestTreeForReport";
 import UpdateReportForm from "./pages/UpdateReportForm";
+import FlagReport from "./pages/FlagReport";
 
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -61,6 +62,7 @@ function App() {
               path="/updateReport/:reportID"
               element={<UpdateReportForm />}
             ></Route>
+            <Route path="/flagReport/:id" element={<FlagReport />}></Route>
           </Routes>
         </Router>
         <ToastContainer />

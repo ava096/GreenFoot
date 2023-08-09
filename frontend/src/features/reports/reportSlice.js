@@ -94,7 +94,6 @@ export const upvoteReport = createAsyncThunk(
       console.log("Report ID:", id);
       console.log("Token:", token);
       const response = await reportService.upvoteReport(id, token);
-      console.log("Response:", response);
     } catch (error) {
       const message =
         (error.response &&
