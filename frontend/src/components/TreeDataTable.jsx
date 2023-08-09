@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import Row from "react-bootstrap/Row";
+import { Row, Button } from "react-bootstrap";
 
 function TreeDataTable({ filters }) {
   const navigate = useNavigate();
