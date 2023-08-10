@@ -29,6 +29,19 @@ const flagSchema = mongoose.Schema(
       enum: ["pendingReview", "resolved", "rejected"],
       default: "pendingReview",
     },
+    adminResolving: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
+    adminUserName: {
+      type: String,
+      default: null,
+    },
+    adminComments: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
