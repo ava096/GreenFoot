@@ -32,7 +32,7 @@ const flagSchema = mongoose.Schema(
 );
 
 // Create a unique compound index on user and report
-flagSchema.index({ user: 1, report: 1 }, { unique: true });
+flagSchema.index({ userFlagging: 1, reportFlagged: 1 }, { unique: true });
 
 const Flag = mongoose.model("Flag", flagSchema);
 

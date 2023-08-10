@@ -24,6 +24,7 @@ const flagReport = asyncHandler(async (req, res) => {
       userFlagging: req.user.id,
       reportFlagged: req.params.id,
       reasonForFlag: req.body.reasonForFlag,
+      additionalInfo: req.body.additionalInfo,
     });
 
     //save new flag
