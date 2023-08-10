@@ -60,7 +60,10 @@ const updateFlagStatus = asyncHandler(async (req, res) => {
   try {
     //hideReport here will act as a signal for whether
     //a report needs to be set as hidden in the report schema
-    const { flagStatus, hideReport } = req.body;
+    const { flagStatus, hideReport, adminComments } = req.body;
+    //get admin info
+    const adminResolving = req.user.id;
+    const adminUserName = req.user.userName;
 
     //find flag and update status
     const flag = await Flag.findById(req.params.id);
