@@ -22,6 +22,7 @@ const flagReport = asyncHandler(async (req, res) => {
     //If user has not flagged report
     const flag = new Flag({
       userFlagging: req.user.id,
+      userName: req.user.userName,
       reportFlagged: req.params.id,
       reasonForFlag: req.body.reasonForFlag,
       additionalInfo: req.body.additionalInfo,
