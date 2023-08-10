@@ -12,6 +12,10 @@ const flagSchema = mongoose.Schema(
       required: true,
       ref: "Report",
     },
+    userName: {
+      type: String,
+      required: true,
+    },
     reasonForFlag: {
       type: String,
       required: true,
