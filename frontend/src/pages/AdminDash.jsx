@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { getUserReports, reset } from "../features/reports/reportSlice";
+import { getFlaggedReports } from "../features/flags/flagSlice";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaSeedling } from "react-icons/fa";
 import UserReportCard from "../components/UserReportCard";
+import FlaggedReportCard from "../components/FlaggedReportCard";
 import "../index.css";
 
 function AdminDash() {
@@ -17,6 +19,7 @@ function AdminDash() {
   const { report, isLoading, isError, message } = useSelector(
     (state) => state.report
   );
+  const { flag } = useSelector((state) => state.flag);
 
   useEffect(() => {
     if (!user) {
@@ -24,6 +27,7 @@ function AdminDash() {
     }
 
     dispatch(getUserReports());
+    dispatch(getFlaggedReports());
 
     return () => {
       dispatch(reset());
@@ -69,6 +73,26 @@ function AdminDash() {
                   <Button variant="success" onClick={onClick}>
                     Get started!
                   </Button>
+                </div>
+              </>
+            )}
+          </Col>
+        </Row>
+        <Row className="titleRow">
+          <Col className="textDisplay">
+            <div className="">
+              <h2>Flagged Reports</h2>
+            </div>
+            {flag.length > 0 ? (
+              <div className="cardDiv">
+                {flag.map((flag) => (
+                  <FlaggedReportCard key={flag._id} flag={flag} />
+                ))}
+              </div>
+            ) : (
+              <>
+                <div>
+                  <h3>There are no flagged reports</h3>
                 </div>
               </>
             )}
