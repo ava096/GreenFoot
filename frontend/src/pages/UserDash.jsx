@@ -8,6 +8,7 @@ import { userFlagged } from "../features/flags/flagSlice";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaSeedling } from "react-icons/fa";
 import UserReportCard from "../components/UserReportCard";
+import UserFlagCard from "../components/UserFlagCard";
 import "../index.css";
 
 function UserDash() {
@@ -85,7 +86,7 @@ function UserDash() {
             {flag.length > 0 ? (
               <div className="cardDiv">
                 {flag.map((flag) => (
-                  <UserReportCard key={flag._id} flag={flag} />
+                  <UserFlagCard key={flag._id} flag={flag} />
                 ))}
               </div>
             ) : (

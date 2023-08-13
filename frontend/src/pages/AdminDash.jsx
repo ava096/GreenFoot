@@ -9,6 +9,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaSeedling } from "react-icons/fa";
 import UserReportCard from "../components/UserReportCard";
 import FlaggedReportCard from "../components/FlaggedReportCard";
+import UserFlagCard from "../components/UserFlagCard";
 import "../index.css";
 
 function AdminDash() {
@@ -93,6 +94,33 @@ function AdminDash() {
               <>
                 <div>
                   <h3>There are no flagged reports</h3>
+                </div>
+              </>
+            )}
+          </Col>
+        </Row>
+        <Row className="titleRow">
+          <Col className="textDisplay">
+            <div>
+              <h2>My Flags</h2>
+            </div>
+            {flag.length > 0 ? (
+              <div className="cardDiv">
+                {flag.map((flag) => (
+                  <UserFlagCard key={flag._id} flag={flag} />
+                ))}
+              </div>
+            ) : (
+              <>
+                <div>
+                  <h3>You haven't flagged any reports yet.</h3>
+                </div>
+                <div>
+                  <p>
+                    If you ever see a problem with a report, please let us know.
+                    You can check back here for any updates on your flag's
+                    status.
+                  </p>
                 </div>
               </>
             )}
