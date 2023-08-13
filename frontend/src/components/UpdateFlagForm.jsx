@@ -6,7 +6,7 @@ import { Form, Button } from "react-bootstrap";
 import LoadingSpinner from "./LoadingSpinner";
 import AlertMessage from "./AlertMessage";
 
-function UpdateFlagForm({ reportID }) {
+function UpdateFlagForm({ flagID }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -72,7 +72,7 @@ function UpdateFlagForm({ reportID }) {
       return;
     }
 
-    dispatch(updateFlag({ id: reportID, flagData: formData }));
+    dispatch(updateFlag({ id: flagID, flagData: formData }));
   };
 
   //onClose for error message

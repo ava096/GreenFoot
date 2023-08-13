@@ -9,6 +9,10 @@ function FlaggedReportCard({ flag }) {
     navigate(`/viewReport/${flag.reportFlagged._id}`);
   };
 
+  const onUpdateClick = () => {
+    navigate(`updateStatus/${flag._id}`);
+  };
+
   return (
     <>
       <Card>
@@ -21,7 +25,9 @@ function FlaggedReportCard({ flag }) {
           <Button variant="success" onClick={onViewClick}>
             View Report
           </Button>
-          <Button variant="success">Update Status</Button>
+          <Button variant="success" onClick={onUpdateClick}>
+            Update Status
+          </Button>
         </Card.Body>
       </Card>
     </>
