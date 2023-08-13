@@ -17,6 +17,7 @@ function UserDash() {
   const { report, isLoading, isError, message } = useSelector(
     (state) => state.report
   );
+  const { flag } = useSelector((state) => state.flag);
 
   useEffect(() => {
     if (!user) {
@@ -51,7 +52,7 @@ function UserDash() {
         </Row>
         <Row className="titleRow">
           <Col className="textDisplay">
-            <div className="">
+            <div>
               <h2>My Reports</h2>
             </div>
             {report.length > 0 ? (
@@ -69,6 +70,33 @@ function UserDash() {
                   <Button variant="success" onClick={onClick}>
                     Get started!
                   </Button>
+                </div>
+              </>
+            )}
+          </Col>
+        </Row>
+        <Row className="titleRow">
+          <Col className="textDisplay">
+            <div>
+              <h2>My Flags</h2>
+            </div>
+            {flag.length > 0 ? (
+              <div className="cardDiv">
+                {flag.map((flag) => (
+                  <UserReportCard key={flag._id} flag={flag} />
+                ))}
+              </div>
+            ) : (
+              <>
+                <div>
+                  <h3>You haven't flagged any reports yet.</h3>
+                </div>
+                <div>
+                  <p>
+                    If you ever see a problem with a report, please let us know.
+                    You can check back here for any updates on your flag's
+                    status.
+                  </p>
                 </div>
               </>
             )}
