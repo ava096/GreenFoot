@@ -56,9 +56,6 @@ function FlagForm({ reportID }) {
       additionalInfo: formData.additionalInfo,
     };
 
-    console.log(flagData);
-    console.log(reportID);
-
     dispatch(createFlag({ id: reportID, flagData: flagData }));
   };
 
