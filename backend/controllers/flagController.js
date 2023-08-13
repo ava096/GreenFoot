@@ -58,6 +58,7 @@ const getFlaggedReports = asyncHandler(async (req, res) => {
 // @access  Private
 const getUsersFlags = asyncHandler(async (req, res) => {
   try {
+    //must be userFlagging according to model
     const userFlags = await Flag.find({ userFlagging: req.user.id });
     res.status(201).json(userFlags);
   } catch (error) {
