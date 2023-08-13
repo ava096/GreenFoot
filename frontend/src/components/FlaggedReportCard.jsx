@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 
@@ -9,8 +9,9 @@ function FlaggedReportCard({ flag }) {
     navigate(`/viewReport/${flag.reportFlagged._id}`);
   };
 
-  const onUpdateClick = () => {
-    navigate(`updateStatus/${flag._id}`);
+  const onUpdateClick = (e) => {
+    e.preventDefault();
+    navigate(`/updateStatus/${flag._id}`);
   };
 
   return (
@@ -20,6 +21,7 @@ function FlaggedReportCard({ flag }) {
           <Card.Title>Flagged by {flag.userName}</Card.Title>
           <Card.Text>
             {new Date(flag.createdAt).toLocaleString("en-US")}
+            {"\n"}
             Reason for flagging: {flag.reasonForFlag}
           </Card.Text>
           <Button variant="success" onClick={onViewClick}>

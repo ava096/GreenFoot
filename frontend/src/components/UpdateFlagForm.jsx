@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateFlag, reset } from "../features/flags/flagSlice";
+import { updateFlagStatus, reset } from "../features/flags/flagSlice";
 import { Form, Button } from "react-bootstrap";
 import LoadingSpinner from "./LoadingSpinner";
 import AlertMessage from "./AlertMessage";
@@ -72,7 +72,7 @@ function UpdateFlagForm({ flagID }) {
       return;
     }
 
-    dispatch(updateFlag({ id: flagID, flagData: formData }));
+    dispatch(updateFlagStatus({ id: flagID, flagData: formData }));
   };
 
   //onClose for error message

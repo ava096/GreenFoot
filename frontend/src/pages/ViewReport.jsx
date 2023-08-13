@@ -106,7 +106,8 @@ function ViewReport() {
   };
 
   //redirects user to flagging page
-  const onFlagClick = () => {
+  const onFlagClick = (e) => {
+    e.preventDefault();
     navigate(`/flagReport/${reportData._id}`);
   };
 
