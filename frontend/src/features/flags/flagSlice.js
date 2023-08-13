@@ -47,6 +47,25 @@ export const getFlaggedReports = createAsyncThunk(
   }
 );
 
+// Get flagged reports for a user
+export const userFlagged = createAsyncThunk(
+  "flag/getUser",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await flagService.userFlagged(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Update flag status
 export const updateFlagStatus = createAsyncThunk(
   "flag/updateStatus",
@@ -96,6 +115,19 @@ export const flagSlice = createSlice({
         state.flag = action.payload;
       })
       .addCase(getFlaggedReports.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(userFlagged.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userFlagged.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.flag = action.payload;
+      })
+      .addCase(userFlagged.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

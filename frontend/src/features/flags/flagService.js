@@ -32,6 +32,19 @@ const getFlaggedReports = async (token) => {
   return response.data;
 };
 
+// Get user's flags
+const userFlagged = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL + "userFlagged", config);
+
+  return response.data;
+};
+
 //Update flag status
 const updateFlagStatus = async (id, flagData, token) => {
   const config = {
@@ -49,6 +62,11 @@ const updateFlagStatus = async (id, flagData, token) => {
   return response.data;
 };
 
-const flagService = { createFlag, getFlaggedReports, updateFlagStatus };
+const flagService = {
+  createFlag,
+  getFlaggedReports,
+  userFlagged,
+  updateFlagStatus,
+};
 
 export default flagService;

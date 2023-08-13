@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { getUserReports, reset } from "../features/reports/reportSlice";
+import { userFlagged } from "../features/flags/flagSlice";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaSeedling } from "react-icons/fa";
 import UserReportCard from "../components/UserReportCard";
@@ -25,6 +26,7 @@ function UserDash() {
     }
 
     dispatch(getUserReports());
+    dispatch(userFlagged());
 
     return () => {
       dispatch(reset());

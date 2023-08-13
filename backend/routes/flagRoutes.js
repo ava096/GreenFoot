@@ -10,7 +10,7 @@ const { protect } = require("../middleware/authMiddleware");
 
 router.post("/flagReport/:id", protect, flagReport);
 router.get("/getFlagged", protect, getFlaggedReports);
-router.get("/userFlagged/:id", protect, getUsersFlags);
+router.get("/userFlagged", protect, getUsersFlags);
 router.put("/updateFlag/:id", protect, updateFlagStatus);
 
 module.exports = router;
