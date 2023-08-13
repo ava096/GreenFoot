@@ -108,7 +108,9 @@ function ViewReport() {
   //redirects user to flagging page
   const onFlagClick = (e) => {
     e.preventDefault();
-    navigate(`/flagReport/${reportData._id}`);
+    //not standard practice in React and can cause problems in long run,
+    //but will work as a placeholder until problem with useNavigate is fixed
+    window.location.href = `/flagReport/${reportData._id}`;
   };
 
   //triggered when user confirms deletion through modal
