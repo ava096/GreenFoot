@@ -26,6 +26,8 @@ function FlaggedReportCard({ flag }) {
             {new Date(flag.createdAt).toLocaleString("en-US")}
             {"\n"}
             Reason for flagging: {flag.reasonForFlag}
+            {"\n"}
+            User comments: {flag.additionalInfo}
           </Card.Text>
           <Button variant="success" onClick={onViewClick}>
             View Report
