@@ -11,7 +11,6 @@ function FlaggedReportCard({ flag }) {
 
   const onUpdateClick = (e) => {
     e.preventDefault();
-    console.log("Clicked!");
     //useNavigate() would not work in this instance, window.location.href
     //is here as a work around
     window.location.href = `/updateStatus/${flag._id}`;
