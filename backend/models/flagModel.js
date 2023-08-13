@@ -34,10 +34,6 @@ const flagSchema = mongoose.Schema(
       ref: "User",
       default: null,
     },
-    adminUserName: {
-      type: String,
-      default: null,
-    },
     adminComments: {
       type: String,
       default: null,

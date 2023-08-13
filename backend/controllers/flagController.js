@@ -63,13 +63,14 @@ const updateFlagStatus = asyncHandler(async (req, res) => {
     const { flagStatus, hideReport, adminComments } = req.body;
     //get admin info
     const adminResolving = req.user.id;
-    const adminUserName = req.user.userName;
 
     //find flag and update status
     const flag = await Flag.findById(req.params.id);
 
     if (flag) {
       flag.flagStatus = flagStatus;
+      flag.adminComments = adminComments;
+      flag.adminResolving = adminResolving;
 
       //hide report if signal is received
       if (hideReport) {
@@ -79,13 +80,13 @@ const updateFlagStatus = asyncHandler(async (req, res) => {
           report.isHidden = true;
           await report.save();
         }
-      } else {
-        //if flag is not found
-        res.status(404).json({ message: "Flag not found" });
       }
 
       await flag.save();
       res.status(200).json(flag);
+    } else {
+      //if flag is not found
+      res.status(404).json({ message: "Flag not found" });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
