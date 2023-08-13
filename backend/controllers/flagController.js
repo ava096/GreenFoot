@@ -53,6 +53,18 @@ const getFlaggedReports = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get flags that a user has raised
+// @route   GET api/userFlagged/:id
+// @access  Private
+const getUsersFlags = asyncHandler(async (req, res) => {
+  try {
+    const userFlags = await Flag.find({ userFlagging: req.user.id });
+    res.status(201).json(userFlags);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 // @desc    Update a flag's status
 // @route   PUT /api/flagged/:id
 // @access  Private/Admin
@@ -96,5 +108,6 @@ const updateFlagStatus = asyncHandler(async (req, res) => {
 module.exports = {
   flagReport,
   getFlaggedReports,
+  getUsersFlags,
   updateFlagStatus,
 };
