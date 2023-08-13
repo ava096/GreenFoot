@@ -15,9 +15,6 @@ export const createFlag = createAsyncThunk(
   async ({ id, flagData }, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      console.log(id);
-      console.log(flagData);
-      console.log(token);
       return await flagService.createFlag(id, flagData, token);
     } catch (error) {
       const message =
