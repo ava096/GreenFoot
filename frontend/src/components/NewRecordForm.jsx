@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { createReport, updateReport } from "../features/reports/reportSlice";
@@ -30,6 +30,9 @@ function NewRecordForm({ id, isEditMode }) {
 
   //state setters for image upload status to prevent form from being submitted with incomplete form data
   const [uploadingImage, setUploadingImage] = useState(false);
+
+  //Grab user info
+  const { user } = useSelector((state) => state.auth);
 
   const {
     reportTreeLocationType,
@@ -132,7 +135,9 @@ function NewRecordForm({ id, isEditMode }) {
       //set uri state back to null
       setUri(null);
       //navigate to dash to see submitted report
-      navigate("/dash");
+      {
+        user.userRole === "admin" ? navigate("/adminDash") : navigate("/dash");
+      }
     }
   };
 
