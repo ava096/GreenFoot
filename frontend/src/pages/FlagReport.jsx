@@ -25,6 +25,8 @@ function FlagReport() {
               </p>
             </div>
           </Col>
+        </Row>
+        <Row>
           <Col>
             <div>
               <FlagForm reportID={id} />
