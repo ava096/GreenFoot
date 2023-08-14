@@ -6,6 +6,7 @@ const {
   getTreeSearch,
   getClosestTrees,
   setTree,
+  setTreeFromCsv,
   updateTree,
   deleteTree,
 } = require("../controllers/treeController");
@@ -27,5 +28,7 @@ router.route("/nearby").get(protect, getClosestTrees);
 
 // GET tree by ID, PUT update tree, DELETE tree
 router.route("/:id").get(getTree).put(updateTree).delete(deleteTree);
+
+router.route("/import").post(setTreeFromCsv);
 
 module.exports = router;

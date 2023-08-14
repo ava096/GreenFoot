@@ -36,41 +36,25 @@ const treeSchema = mongoose.Schema(
     },
     treeDiameterCentimetres: {
       type: Number,
-      required: true,
+      required: [true, "Please include the tree's diameter in centimetres"],
     },
     treeSpreadRadiusMetres: {
       type: Number,
-      required: true,
-    },
-    treeLongitude: {
-      type: Number,
-      required: true,
-    },
-    treeLatitude: {
-      type: Number,
-      required: true,
+      required: [true, "Please include the tree's spread radius in metres"],
     },
     treeHeightMetres: {
       type: Number,
-      required: true,
+      required: [true, "Please include the tree's height in metres"],
     },
     location: {
-      type: { type: String },
-      coordinates: [Number], // treeLongitude and treeLatitude mapped onto here with pre-save func
+      type: { type: String, default: "Point", required: true },
+      coordinates: [Number],
     },
   },
   {
     timestamps: true,
   }
 );
-
-treeSchema.pre("save", function (next) {
-  this.location = {
-    type: "Point",
-    coordinates: [this.treeLongitude, this.treeLatitude],
-  };
-  next();
-});
 
 treeSchema.index({ location: "2dsphere" });
 

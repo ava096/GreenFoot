@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
+const csvtojson = require("csvtojson");
 const Tree = require("../models/treeModel");
-const User = require("../models/userModel");
+const expressAsyncHandler = require("express-async-handler");
+const path = require("path");
 
 // @desc    Get all trees and return in alphabetical order
 // @route   GET /api/trees
@@ -148,6 +150,48 @@ const setTree = asyncHandler(async (req, res) => {
   }
 });
 
+// @dessc   Import trees from CSV
+// @route   POST /api/trees/import
+// @access  Private
+const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
+  try {
+    //path to file
+    const csvFilePath = path.join(__dirname, "..", "csv", "CleanedData.csv");
+    const results = await csvtojson().fromFile(csvFilePath);
+
+    //Limit the number of records uploaded for the sake of testing
+    const testLimit = 5000;
+    const limitedResults = results.slice(0, testLimit);
+
+    const trees = limitedResults.map((record) => ({
+      treeLocationType: record.TYPEOFTREE,
+      treeType: record.SPECIESTYPE,
+      treeScientificName: record.SPECIES,
+      treeAge: record.AGE,
+      treeDescription: record.DESCRIPTION,
+      treeSurroundings: record.TREESURROUND,
+      treeVigour: record.VIGOUR,
+      treeCondition: record.CONDITION,
+      treeDiameterCentimetres: Number(record.DIAMETERinCENTIMETRES),
+      treeSpreadRadiusMetres: Number(record.SPREADRADIUSinMETRES),
+      treeHeightMetres: Number(record.TREEHEIGHTinMETRES),
+      location: {
+        type: "Point",
+        coordinates: [Number(record.LONGITUDE), Number(record.LATITUDE)],
+      },
+    }));
+
+    //insert these ten results
+    await Tree.insertMany(trees);
+    res.status(201).json({
+      message: "Data imported successfully",
+      count: trees.length,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc    Update entry
 // @route   PUT /api/trees
 // @access  Private
@@ -206,6 +250,7 @@ module.exports = {
   getTreeSearch,
   getClosestTrees,
   setTree,
+  setTreeFromCsv,
   updateTree,
   deleteTree,
 };
