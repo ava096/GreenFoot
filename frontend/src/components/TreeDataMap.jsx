@@ -37,7 +37,10 @@ function TreeDataMap({ trees }) {
   const heatmapData = isLoaded
     ? trees.map(
         (tree) =>
-          new window.google.maps.LatLng(tree.treeLatitude, tree.treeLongitude)
+          new window.google.maps.LatLng(
+            tree.location.coordinates[1],
+            tree.location.coordinates[0]
+          )
       )
     : [];
 
@@ -87,7 +90,10 @@ function TreeDataMap({ trees }) {
           trees.map((tree) => (
             <MarkerF
               key={tree._id}
-              position={{ lat: tree.treeLatitude, lng: tree.treeLongitude }}
+              position={{
+                lat: tree.location.coordinates[1],
+                lng: tree.location.coordinates[0],
+              }}
               onClick={() => onOpenClick(tree)}
             />
           ))}
