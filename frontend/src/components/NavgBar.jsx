@@ -41,7 +41,7 @@ function NavgBar() {
                 <NavDropdown.Item as={Link} to="/dbmap">
                   Map View
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/viewAll">
+                <NavDropdown.Item as={Link} to="/viewAllTrees">
                   View All Trees
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/viewAll">
