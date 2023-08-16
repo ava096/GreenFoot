@@ -155,32 +155,19 @@ const setTree = asyncHandler(async (req, res) => {
 // @access  Private
 const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
   try {
-    //path to CleanedData file
-    const cleanedDataFilePath = path.join(
+    //path to ProcessedData file
+    const processedDataFilePath = path.join(
       __dirname,
       "..",
       "csv",
-      "CleanedData.csv"
+      "ProcessedData_20230816T150513022Z.csv"
     );
-    const cleanResults = await csvtojson().fromFile(cleanedDataFilePath);
-
-    //path to ProblemData file
-    const problemDataFilePath = path.join(
-      __dirname,
-      "..",
-      "csv",
-      "ProblemData.csv"
-    );
-    const problemResults = await csvtojson().fromFile(problemDataFilePath);
+    const results = await csvtojson().fromFile(processedDataFilePath);
 
     //Limit the number of records uploaded for the sake of testing
-    const cleanSample = cleanResults.slice(0, 100);
-    const problemSample = problemResults.slice(0, 50);
+    const resultSample = results.slice(0, 100);
 
-    //combine these two arrays
-    const allSample = cleanSample.concat(problemSample);
-
-    const trees = allSample.map((record) => ({
+    const trees = resultSample.map((record) => ({
       treeLocationType: record.TYPEOFTREE,
       treeType: record.SPECIESTYPE,
       treeScientificName: record.SPECIES,
@@ -261,6 +248,29 @@ const deleteTree = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete all tree entries
+// @route   DELETE /api/trees/all
+// @access  Private
+const deleteAllTrees = asyncHandler(async (req, res) => {
+  try {
+    // No need to find the tree by ID since we're deleting all of them
+
+    //check for user (This check can be adjusted based on your needs.
+    //Maybe only admin should be allowed to delete all records, etc.)
+    if (!req.user) {
+      res.status(401);
+      throw new Error("User not authorized");
+    }
+
+    await Tree.deleteMany({}); // Empty filter to match all documents
+
+    //if successfully deleted
+    res.status(200).json({ message: "All trees deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = {
   getAllTrees,
   getTree,
@@ -270,4 +280,5 @@ module.exports = {
   setTreeFromCsv,
   updateTree,
   deleteTree,
+  deleteAllTrees,
 };

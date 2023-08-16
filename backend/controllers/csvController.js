@@ -2,66 +2,89 @@ const csvtojson = require("csvtojson");
 const { Parser } = require("json2csv");
 const fs = require("fs");
 
+// to add a date/timestamp each time script is ran, so files will not be overwritten
+const date = new Date();
+const timestamp = date.toISOString().replace(/[-:.]/g, "");
+
+// const values to be used in functions
+const CSV_INPUT_PATH = "../csv/odTrees.csv";
+const CLEANED_DATA_PATH = `../csv/ProcessedData_${timestamp}.csv`;
+const PROBLEM_DATA_PATH = `../csv/DataIssuesReport_${timestamp}.csv`;
+
+function cleanRecord(record) {
+  // Split TREETYPE
+  if (record.TYPEOFTREE === "ParkTree") {
+    record.TYPEOFTREE = "Park Tree";
+  } else if (record.TYPEOFTREE === "StreetTree") {
+    record.TYPEOFTREE = "Street Tree";
+  }
+
+  //If a record has (type) under SPECIES, replace this with (Specific Type Unknown)
+  //This is more descriptive and helpful to users who may be able to identify the specific type
+  if (record.SPECIES && record.SPECIES.includes("(type)")) {
+    record.SPECIES = record.SPECIES.replace(
+      "(type)",
+      "(Specific Type Unknown)"
+    );
+  }
+
+  //handle numerical fields
+  const numericalFields = [
+    "DIAMETERinCENTIMETRES",
+    "SPREADRADIUSinMETRES",
+    "TREETAG",
+    "TREEHEIGHTinMETRES",
+  ];
+
+  //check numerical fields for negatives or blanks
+  numericalFields.forEach((field) => {
+    if (record[field]) {
+      let value = Number(record[field]);
+      // if a value is negative, its absolute value will be used instead ie. positive
+      record[field] = value < 0 ? Math.abs(value) : value;
+    } else {
+      // if a field is empty, it will be set to null
+      record[field] = null;
+    }
+  });
+
+  // Check other fields for problematic string values
+  for (let key in record) {
+    if (
+      !numericalFields.includes(key) &&
+      ["N/A", "Not known", ""].includes(record[key])
+    ) {
+      record[key] = "Data not provided";
+    }
+  }
+
+  return record;
+}
+
+function hasProblem(record) {
+  return Object.values(record).some((value) =>
+    ["Data not provided", "N/A", "Not known", "", null].includes(value)
+  );
+}
 // Read in csv file
 csvtojson()
-  .fromFile("../csv/odTrees.csv")
+  .fromFile(CSV_INPUT_PATH)
   .then((csvData) => {
-    //array for cleaned data
-    const cleanedData = [];
-    //for dirty data
+    //array for all processed data
+    const processedData = [];
+    //for data that is particularly problematic
     const problemData = [];
 
     //loop through each record in csv and clean accordingly
-    csvData.forEach((record) => {
-      let hasProblem = false;
+    csvData.forEach((rawRecord) => {
+      const record = cleanRecord(rawRecord);
 
-      // Split TREETYPE
-      if (record.TYPEOFTREE === "ParkTree") {
-        record.TYPEOFTREE = "Park Tree";
-      } else if (record.TYPEOFTREE === "StreetTree") {
-        record.TYPEOFTREE = "Street Tree";
-      }
+      //push all data to processed array
+      processedData.push(record);
 
-      //If a record has (type) under SPECIES, replace this with (Specific Type Unknown)
-      //This is more descriptive and helpful to users who may be able to identify the specific type
-      if (record.SPECIES && record.SPECIES.includes("(type)")) {
-        record.SPECIES = record.SPECIES.replace(
-          "(type)",
-          "(Specific Type Unknown)"
-        );
-      }
-
-      //make sure any negative values in certain fields are converted to positive
-      [
-        "DIAMETERinCENTIMETRES",
-        "SPREADRADIUSinMETRES",
-        "TREEHEIGHTinMETRES",
-      ].forEach((field) => {
-        //checks the field exists and the value is negative
-        if (record[field] && Number(record[field]) < 0) {
-          //Math.abs() takes absolute value of its argument and if negative,
-          //returns the positive version
-          record[field] = Math.abs(Number(record[field]));
-        }
-      });
-
-      //Check for blank fields, "N/A" or "Not Known"
-      for (let key in record) {
-        if (
-          record[key] === "N/A" ||
-          record[key] === "Not Known" ||
-          record[key] === ""
-        ) {
-          hasProblem = true;
-          break;
-        }
-      }
-
-      //Push to correct array depending on whether hasProblem is true or false
-      if (hasProblem) {
+      //push problem data to act as a report
+      if (hasProblem(record)) {
         problemData.push(record);
-      } else {
-        cleanedData.push(record);
       }
     });
 
@@ -69,10 +92,10 @@ csvtojson()
     const parser = new Parser();
 
     //for clean data
-    const cleanedCsv = parser.parse(cleanedData);
-    fs.writeFileSync("../csv/CleanedData.csv", cleanedCsv);
+    const processedCsv = parser.parse(processedData);
+    fs.writeFileSync(CLEANED_DATA_PATH, processedCsv);
 
     //for dirty data
-    const problemCsv = parser.parse(problemData);
-    fs.writeFileSync("../csv/ProblemData.csv", problemCsv);
+    const dataReportCsv = parser.parse(problemData);
+    fs.writeFileSync(PROBLEM_DATA_PATH, dataReportCsv);
   });

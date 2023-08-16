@@ -9,6 +9,7 @@ const {
   setTreeFromCsv,
   updateTree,
   deleteTree,
+  deleteAllTrees,
 } = require("../controllers/treeController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -24,6 +25,7 @@ router
   })
   .post(setTree);
 
+router.route("/all").delete(protect, deleteAllTrees);
 router.route("/nearby").get(protect, getClosestTrees);
 
 // GET tree by ID, PUT update tree, DELETE tree
