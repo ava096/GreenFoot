@@ -155,15 +155,32 @@ const setTree = asyncHandler(async (req, res) => {
 // @access  Private
 const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
   try {
-    //path to file
-    const csvFilePath = path.join(__dirname, "..", "csv", "CleanedData.csv");
-    const results = await csvtojson().fromFile(csvFilePath);
+    //path to CleanedData file
+    const cleanedDataFilePath = path.join(
+      __dirname,
+      "..",
+      "csv",
+      "CleanedData.csv"
+    );
+    const cleanResults = await csvtojson().fromFile(cleanedDataFilePath);
+
+    //path to ProblemData file
+    const problemDataFilePath = path.join(
+      __dirname,
+      "..",
+      "csv",
+      "ProblemData.csv"
+    );
+    const problemResults = await csvtojson().fromFile(problemDataFilePath);
 
     //Limit the number of records uploaded for the sake of testing
-    const testLimit = 5000;
-    const limitedResults = results.slice(0, testLimit);
+    const cleanSample = cleanResults.slice(0, 100);
+    const problemSample = problemResults.slice(0, 50);
 
-    const trees = limitedResults.map((record) => ({
+    //combine these two arrays
+    const allSample = cleanSample.concat(problemSample);
+
+    const trees = allSample.map((record) => ({
       treeLocationType: record.TYPEOFTREE,
       treeType: record.SPECIESTYPE,
       treeScientificName: record.SPECIES,
@@ -181,7 +198,7 @@ const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
       },
     }));
 
-    //insert these ten results
+    //insert these results
     await Tree.insertMany(trees);
     res.status(201).json({
       message: "Data imported successfully",

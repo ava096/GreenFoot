@@ -4,47 +4,47 @@ const treeSchema = mongoose.Schema(
   {
     treeLocationType: {
       type: String,
-      required: [true, "Please include a tree location type"],
+      default: "No data provided",
     },
     treeType: {
       type: String,
-      required: [true, "Please include what type of tree this is"],
+      default: "No data provided",
     },
     treeScientificName: {
       type: String,
-      required: [true, "Please include a scientific name"],
+      default: "No data provided",
     },
     treeAge: {
       type: String,
-      required: [true, "Please include an age"],
+      default: "No data provided",
     },
     treeDescription: {
       type: String,
-      required: [true, "Please include a description"],
+      default: "No data provided",
     },
     treeSurroundings: {
       type: String,
-      required: [true, "Please include the tree's surroundings"],
+      default: "No data provided",
     },
     treeVigour: {
       type: String,
-      required: [true, "Please include the tree's vigour"],
+      default: "No data provided",
     },
     treeCondition: {
       type: String,
-      required: [true, "Please include the tree's condition"],
+      default: "No data provided",
     },
     treeDiameterCentimetres: {
       type: Number,
-      required: [true, "Please include the tree's diameter in centimetres"],
+      default: null,
     },
     treeSpreadRadiusMetres: {
       type: Number,
-      required: [true, "Please include the tree's spread radius in metres"],
+      default: null,
     },
     treeHeightMetres: {
       type: Number,
-      required: [true, "Please include the tree's height in metres"],
+      default: null,
     },
     location: {
       type: { type: String, default: "Point", required: true },
