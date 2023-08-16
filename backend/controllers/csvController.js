@@ -8,9 +8,9 @@ const timestamp = date.toISOString().replace(/[-:.]/g, "");
 
 // const values to be used in functions
 const CSV_INPUT_PATH = "../csv/odTrees.csv";
-const CLEANED_DATA_PATH = `../csv/ProcessedData_${timestamp}.csv`;
-const PROBLEM_DATA_PATH = `../csv/DataIssuesReport_${timestamp}.csv`;
+const PROCESSED_DATA_PATH = `../csv/ProcessedData_${timestamp}.csv`;
 
+// Goes through each record and cleans it accordingly
 function cleanRecord(record) {
   // Split TREETYPE
   if (record.TYPEOFTREE === "ParkTree") {
@@ -52,28 +52,53 @@ function cleanRecord(record) {
   for (let key in record) {
     if (
       !numericalFields.includes(key) &&
-      ["N/A", "Not known", ""].includes(record[key])
+      ["N/A", "Not known", "Not Known", ""].includes(record[key])
     ) {
       record[key] = "Data not provided";
     }
   }
 
+  // find the level of concern for the record
+  record.LEVELOFCONCERN = determineLevelOfConcern(record);
+
   return record;
 }
 
-function hasProblem(record) {
-  return Object.values(record).some((value) =>
-    ["Data not provided", "N/A", "Not known", "", null].includes(value)
-  );
+// Determine the level of concern for the data integrity of a record
+function determineLevelOfConcern(record) {
+  let countDataNotProvided = 0;
+
+  for (let key in record) {
+    if (record[key] === "Data not provided" || record[key] === null) {
+      countDataNotProvided++;
+    }
+  }
+
+  if (
+    countDataNotProvided >= 3 ||
+    record.SPECIES === "Data not provided" ||
+    record.SPECIESTYPE === "Data not provided"
+  ) {
+    return "Red";
+  } else if (
+    countDataNotProvided >= 1 ||
+    record.SPECIES === "Mixed" ||
+    record.SPECIES === "Mixed broadleaf" ||
+    record.SPECIESTYPE === "Mixed" ||
+    record.SPECIESTYPE === "Mixed broadleaf"
+  ) {
+    return "Yellow";
+  } else {
+    return "Green";
+  }
 }
+
 // Read in csv file
 csvtojson()
   .fromFile(CSV_INPUT_PATH)
   .then((csvData) => {
     //array for all processed data
     const processedData = [];
-    //for data that is particularly problematic
-    const problemData = [];
 
     //loop through each record in csv and clean accordingly
     csvData.forEach((rawRecord) => {
@@ -81,21 +106,15 @@ csvtojson()
 
       //push all data to processed array
       processedData.push(record);
-
-      //push problem data to act as a report
-      if (hasProblem(record)) {
-        problemData.push(record);
-      }
     });
 
     //Convert data back to CSV
     const parser = new Parser();
 
-    //for clean data
-    const processedCsv = parser.parse(processedData);
-    fs.writeFileSync(CLEANED_DATA_PATH, processedCsv);
-
-    //for dirty data
-    const dataReportCsv = parser.parse(problemData);
-    fs.writeFileSync(PROBLEM_DATA_PATH, dataReportCsv);
+    try {
+      const processedCsv = parser.parse(processedData);
+      fs.writeFileSync(PROCESSED_DATA_PATH, processedCsv);
+    } catch (error) {
+      console.error("Error writing the cleaned data to CSV:", error);
+    }
   });

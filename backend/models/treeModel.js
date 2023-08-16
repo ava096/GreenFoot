@@ -50,6 +50,10 @@ const treeSchema = mongoose.Schema(
       type: { type: String, default: "Point", required: true },
       coordinates: [Number],
     },
+    levelOfConcern: {
+      type: String,
+      default: "No data provided",
+    },
   },
   {
     timestamps: true,

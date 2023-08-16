@@ -160,7 +160,7 @@ const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
       __dirname,
       "..",
       "csv",
-      "ProcessedData_20230816T150513022Z.csv"
+      "ProcessedData_20230816T172046974Z.csv"
     );
     const results = await csvtojson().fromFile(processedDataFilePath);
 
@@ -183,6 +183,7 @@ const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
         type: "Point",
         coordinates: [Number(record.LONGITUDE), Number(record.LATITUDE)],
       },
+      levelOfConcern: record.LEVELOFCONCERN,
     }));
 
     //insert these results
