@@ -32,11 +32,6 @@ function TreeDataTable({ filters }) {
     );
   }
 
-  //link to the page for the tree detailed in the table row
-  const onClick = () => {
-    navigate(`/viewTree/${tree._id}`);
-  };
-
   return (
     <table className="treeTable">
       <thead>
@@ -71,7 +66,10 @@ function TreeDataTable({ filters }) {
               <td>{tree.treeSpreadRadiusMetres}</td>
               <td>{tree.treeHeightMetres}</td>
               <td>
-                <Button variant="success" onClick={onClick}>
+                <Button
+                  variant="success"
+                  onClick={() => navigate(`/viewTree/${tree._id}`)}
+                >
                   View Tree
                 </Button>
               </td>
