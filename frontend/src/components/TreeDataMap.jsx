@@ -9,12 +9,12 @@ import {
 import LoadingSpinner from "./LoadingSpinner";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+//to access heatmap
+const GOOGLE_MAPS_LIBRARIES = ["visualization"];
 
 function TreeDataMap({ trees }) {
   //define navigate for use
   const navigate = useNavigate();
-  //to access heatmap
-  const GOOGLE_MAPS_LIBRARIES = ["visualization"];
 
   //set state so InfoWindow can be called when a marker is clicked
   const [selectedTree, setSelectedTree] = useState(null);
@@ -82,7 +82,7 @@ function TreeDataMap({ trees }) {
         {showHeatmap ? "Hide Heatmap" : "Show Heatmap"}
       </Button>
       <GoogleMap
-        zoom={10}
+        zoom={12}
         center={center}
         mapContainerClassName="map-container"
       >
@@ -101,8 +101,8 @@ function TreeDataMap({ trees }) {
         {selectedTree && (
           <InfoWindowF
             position={{
-              lat: selectedTree.treeLatitude,
-              lng: selectedTree.treeLongitude,
+              lat: selectedTree.location.coordinates[1],
+              lng: selectedTree.location.coordinates[0],
             }}
             onCloseClick={onCloseClick}
           >
