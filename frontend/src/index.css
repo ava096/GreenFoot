@@ -180,6 +180,15 @@
 }
 
 /**
+* Pie chart styling
+*/
+.chartContainer {
+    width: 100%; 
+    height: 600px; 
+    overflow: auto; 
+}
+
+/**
 *   View all trees page styling
 */
 .cardCol {
