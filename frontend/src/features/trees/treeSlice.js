@@ -15,13 +15,30 @@ export const findTrees = createAsyncThunk(
   "tree/find",
   async (location, thunkAPI) => {
     try {
-      console.log(location);
       const token = thunkAPI.getState().auth.user.token;
       return await treeService.findTreeLongLat(
         token,
         location.lng,
         location.lat
       );
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get all trees
+export const getAllTrees = createAsyncThunk(
+  "tree/getAll",
+  async (_, thunkAPI) => {
+    try {
+      return await treeService.getAllTrees();
     } catch (error) {
       const message =
         (error.response &&
@@ -57,6 +74,21 @@ export const treeSlice = createSlice({
         state.tree = action.payload;
       })
       .addCase(findTrees.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getAllTrees.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+      })
+      .addCase(getAllTrees.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.tree = action.payload;
+      })
+      .addCase(getAllTrees.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
