@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTrees, reset } from "../features/trees/treeSlice";
 import chroma from "chroma-js";
-import { Row, Container, Col } from "react-bootstrap";
+import { Row, Container, Col, Button } from "react-bootstrap";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
 
@@ -14,7 +14,7 @@ function ViewChart() {
     labels: [],
     datasets: [
       {
-        label: "Species found in Belfast Area",
+        label: "Number found in Belfast Area",
       },
     ],
   });
@@ -107,19 +107,23 @@ function ViewChart() {
     <>
       <Container>
         <Row className="titleRow">
-          <Col className="displayText">
+          <Col className="textDisplay">
             <div>
               <h1>Graphical View</h1>
             </div>
           </Col>
         </Row>
         <Row>
-          <Col className="displayText">
+          <Col className="textDisplay">
             <div>
               <p>
                 Here you'll find a graphical representation of our database.
+                There are multiple views to toggle through: a breakdown of
+                species data, of categories - just choose which one you want!
+                Click through to see a breakdown of a particular category.
               </p>
             </div>
+            <div></div>
           </Col>
         </Row>
         <Row>
