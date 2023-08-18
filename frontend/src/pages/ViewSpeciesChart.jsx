@@ -110,6 +110,16 @@ function ViewSpeciesChart() {
     navigate("/viewSpeciesChart");
   };
 
+  //if condition button is clicked
+  const onConditionClick = () => {
+    navigate("/viewConditionChart");
+  };
+
+  //if age button is clicked
+  const onAgeClick = () => {
+    navigate("/viewAgeChart");
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -151,6 +161,16 @@ function ViewSpeciesChart() {
                   Species Breakdown
                 </Button>
               </div>
+              <div>
+                <Button variant="success" onClick={onConditionClick}>
+                  Condition Breakdown
+                </Button>
+              </div>
+              <div>
+                <Button variant="success" onClick={onAgeClick}>
+                  Age Breakdown
+                </Button>
+              </div>
             </div>
           </Col>
         </Row>
@@ -171,7 +191,11 @@ function ViewSpeciesChart() {
         <Row>
           <Col>
             <div>
-              <GraphAccordion trees={tree} categories={categories} />
+              <GraphAccordion
+                trees={tree}
+                categories={categories}
+                filterKey="treeScientificName"
+              />
             </div>
           </Col>
         </Row>

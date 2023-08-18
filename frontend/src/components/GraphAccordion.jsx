@@ -2,7 +2,7 @@ import React from "react";
 import { Accordion } from "react-bootstrap";
 import TreeCard from "./TreeCard";
 
-function GraphAccordion({ trees, categories }) {
+function GraphAccordion({ trees, categories, filterKey }) {
   return (
     <>
       <Accordion>
@@ -11,7 +11,7 @@ function GraphAccordion({ trees, categories }) {
             <Accordion.Header>{category}</Accordion.Header>
             <Accordion.Body>
               {trees
-                .filter((tree) => tree.levelOfConcern === category)
+                .filter((tree) => tree[filterKey] === category)
                 .map((tree) => (
                   <TreeCard key={tree._id} tree={tree} />
                 ))}

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTrees, reset } from "../features/trees/treeSlice";
+import chroma from "chroma-js";
+import { Row, Container, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Row, Container, Col, Button, Accordion } from "react-bootstrap";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
 import GraphAccordion from "../components/GraphAccordion";
 import { FaSeedling } from "react-icons/fa6";
 
-function ViewConcernChart() {
+function ViewConditionChart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ function ViewConcernChart() {
     labels: [],
     datasets: [
       {
-        label: "Number found in Belfast Area:",
+        label: "Number found in Belfast Area: ",
       },
     ],
   });
@@ -41,13 +42,6 @@ function ViewConcernChart() {
     },
   };
 
-  //colours to map over concern categories
-  const graphColours = {
-    Red: "rgba(255, 99, 132, 0.2)",
-    Yellow: "rgba(255, 205, 86, 0.2)",
-    Green: "rgba(75, 192, 192, 0.2)",
-  };
-
   // Get trees from redux functions
   const { tree, isLoading, isError } = useSelector((state) => state.tree);
 
@@ -60,16 +54,17 @@ function ViewConcernChart() {
   //run countSpeciesData on the trees
   useEffect(() => {
     if (tree && tree.length > 0) {
-      const concernData = countConcernData(tree);
+      const ageData = countAgeData(tree);
       //tree species that occur in database
-      const labels = Object.keys(concernData);
+      const labels = Object.keys(ageData);
       //count for each species
-      const data = Object.values(concernData);
-
-      const colours = labels.map((label) => graphColours[label]);
+      const data = Object.values(ageData);
 
       //set labels to categories
       setCategories(labels);
+
+      // Generate color palette based on data length
+      const colours = chroma.scale("YlGnBu").colors(data.length);
 
       setTreeData((prevData) => ({
         ...prevData,
@@ -85,12 +80,12 @@ function ViewConcernChart() {
         ],
       }));
     }
-  }, [tree]);
+  }, [tree, dispatch]);
 
   // Reduce method to aggregate data ie. get a count for each individual species
-  const countConcernData = (trees) => {
+  const countAgeData = (trees) => {
     return trees.reduce((acc, tree) => {
-      const name = tree.levelOfConcern;
+      const name = tree.treeAge;
       if (!acc[name]) {
         acc[name] = 1;
       } else {
@@ -135,7 +130,7 @@ function ViewConcernChart() {
         <Row className="titleRow">
           <Col className="textDisplay">
             <div>
-              <h1>Quality Concern Breakdown</h1>
+              <h1>Age Breakdown</h1>
             </div>
           </Col>
         </Row>
@@ -143,13 +138,12 @@ function ViewConcernChart() {
           <Col className="textDisplay">
             <div>
               <p>
-                This is a representation of the data quality of the Green Foot
-                database. Whilst we have many records available, they are all of
-                varying levels of quality. Please see here for more information
-                on our quality key. This is where you come in: with your help in
-                improving the data quality and reliablity, we hope that more
-                records will be classed as 'Green', the lowest level of data
-                quality concern. Help us in achieving this goal!
+                Here you can see a graphical representation of the ages of the
+                trees contained in our database. This information will give you
+                some insight on the age of Belfast's tree population. Please see
+                below the graph to see the trees that compose each category.
+                Alternatively, select a different view to see a report on a
+                different aspect of our database.
               </p>
             </div>
             <div>
@@ -192,14 +186,11 @@ function ViewConcernChart() {
         </Row>
         <Row>
           <Col>
-            <div className="textDisplay">
-              <h3>Have a closer look at the categories...</h3>
-            </div>
             <div>
               <GraphAccordion
                 trees={tree}
                 categories={categories}
-                filterKey="levelOfConcern"
+                filterKey="treeAge"
               />
             </div>
           </Col>
@@ -216,4 +207,4 @@ function ViewConcernChart() {
   );
 }
 
-export default ViewConcernChart;
+export default ViewConditionChart;

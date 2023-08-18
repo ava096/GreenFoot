@@ -24,7 +24,8 @@ import FlagReport from "./pages/FlagReport";
 import UpdateFlag from "./pages/UpdateFlag";
 import ViewSpeciesChart from "./pages/ViewSpeciesChart";
 import ViewConcernChart from "./pages/ViewConcernChart";
-
+import ViewConditionChart from "./pages/ViewConditionChart";
+import ViewAgeChart from "./pages/ViewAgeChart";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 
@@ -75,6 +76,11 @@ function App() {
               path="/viewConcernChart"
               element={<ViewConcernChart />}
             ></Route>
+            <Route
+              path="/viewConditionChart"
+              element={<ViewConditionChart />}
+            ></Route>
+            <Route path="/viewAgeChart" element={<ViewAgeChart />}></Route>
           </Routes>
         </Router>
         <ToastContainer />
