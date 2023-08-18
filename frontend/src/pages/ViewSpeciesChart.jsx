@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
 import GraphAccordion from "../components/GraphAccordion";
+import { FaSeedling } from "react-icons/fa6";
 
 function ViewSpeciesChart() {
   const dispatch = useDispatch();
@@ -123,7 +124,7 @@ function ViewSpeciesChart() {
         <Row className="titleRow">
           <Col className="textDisplay">
             <div>
-              <h1>Graphical View</h1>
+              <h1>Species Breakdown</h1>
             </div>
           </Col>
         </Row>
@@ -131,10 +132,12 @@ function ViewSpeciesChart() {
           <Col className="textDisplay">
             <div>
               <p>
-                Here you'll find a graphical representation of our database.
-                There are multiple views to toggle through: a breakdown of
-                species data, of categories - just choose which one you want!
-                Click through to see a breakdown of a particular category.
+                Here you can see a graphical representation of the different
+                species contained in our database. This information will give
+                you some insight on the population dynamics of Belfast's tree
+                population. Please see below the graph to see the trees that
+                compose each category. Alternatively, select a different view to
+                see a report on a different aspect of our database.
               </p>
             </div>
             <div>
@@ -153,6 +156,13 @@ function ViewSpeciesChart() {
         </Row>
         <Row>
           <Col>
+            <div className="pageDividerPadding">
+              <FaSeedling /> <FaSeedling /> <FaSeedling />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <div className="chartContainer">
               <PieChart treeData={treeData} options={options} />
             </div>
@@ -162,6 +172,13 @@ function ViewSpeciesChart() {
           <Col>
             <div>
               <GraphAccordion trees={tree} categories={categories} />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="pageDividerPadding">
+              <FaSeedling /> <FaSeedling /> <FaSeedling />
             </div>
           </Col>
         </Row>

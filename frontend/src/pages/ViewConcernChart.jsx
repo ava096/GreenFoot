@@ -6,6 +6,7 @@ import { Row, Container, Col, Button, Accordion } from "react-bootstrap";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
 import GraphAccordion from "../components/GraphAccordion";
+import { FaSeedling } from "react-icons/fa6";
 
 function ViewConcernChart() {
   const dispatch = useDispatch();
@@ -124,7 +125,7 @@ function ViewConcernChart() {
         <Row className="titleRow">
           <Col className="textDisplay">
             <div>
-              <h1>Graphical View</h1>
+              <h1>Quality Concern Breakdown</h1>
             </div>
           </Col>
         </Row>
@@ -132,10 +133,13 @@ function ViewConcernChart() {
           <Col className="textDisplay">
             <div>
               <p>
-                Here you'll find a graphical representation of our database.
-                There are multiple views to toggle through: a breakdown of
-                species data, of categories - just choose which one you want!
-                Click through to see a breakdown of a particular category.
+                This is a representation of the data quality of the Green Foot
+                database. Whilst we have many records available, they are all of
+                varying levels of quality. Please see here for more information
+                on our quality key. This is where you come in: with your help in
+                improving the data quality and reliablity, we hope that more
+                records will be classed as 'Green', the lowest level of data
+                quality concern. Help us in achieving this goal!
               </p>
             </div>
             <div>
@@ -154,15 +158,32 @@ function ViewConcernChart() {
         </Row>
         <Row>
           <Col>
-            <div className="chartContainer">
+            <div className="pageDividerPadding">
+              <FaSeedling /> <FaSeedling /> <FaSeedling />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="chartContainerSmaller">
               <PieChart treeData={treeData} options={options} />
             </div>
           </Col>
         </Row>
         <Row>
           <Col>
+            <div className="textDisplay">
+              <h3>Have a closer look at the categories...</h3>
+            </div>
             <div>
               <GraphAccordion trees={tree} categories={categories} />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="pageDividerPadding">
+              <FaSeedling /> <FaSeedling /> <FaSeedling />
             </div>
           </Col>
         </Row>
