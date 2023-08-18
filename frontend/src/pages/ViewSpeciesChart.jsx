@@ -6,7 +6,7 @@ import { Row, Container, Col, Button } from "react-bootstrap";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-function ViewChart() {
+function ViewSpeciesChart() {
   const dispatch = useDispatch();
 
   // state setters for data to be used in charts
@@ -54,7 +54,7 @@ function ViewChart() {
       const data = Object.values(speciesData);
 
       // Generate color palette based on data length
-      const colors = chroma
+      const colours = chroma
         .scale("YlGn")
         .gamma(0.5)
         .mode("lch")
@@ -67,8 +67,8 @@ function ViewChart() {
           {
             ...prevData.datasets[0],
             data: data,
-            backgroundColor: colors,
-            borderColor: colors,
+            backgroundColor: colours,
+            borderColor: colours,
             hoverOffset: 10,
           },
         ],
@@ -138,4 +138,4 @@ function ViewChart() {
   );
 }
 
-export default ViewChart;
+export default ViewSpeciesChart;

@@ -22,7 +22,8 @@ import SuggestTreeForReport from "./pages/SuggestTreeForReport";
 import UpdateReportForm from "./pages/UpdateReportForm";
 import FlagReport from "./pages/FlagReport";
 import UpdateFlag from "./pages/UpdateFlag";
-import ViewChart from "./pages/ViewChart";
+import ViewSpeciesChart from "./pages/ViewSpeciesChart";
+import ViewConcernChart from "./pages/ViewConcernChart";
 
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -66,7 +67,14 @@ function App() {
             ></Route>
             <Route path="/flagReport/:id" element={<FlagReport />}></Route>
             <Route path="/updateStatus/:id" element={<UpdateFlag />}></Route>
-            <Route path="/viewChart" element={<ViewChart />}></Route>
+            <Route
+              path="/viewSpeciesChart"
+              element={<ViewSpeciesChart />}
+            ></Route>
+            <Route
+              path="/viewConcernChart"
+              element={<ViewConcernChart />}
+            ></Route>
           </Routes>
         </Router>
         <ToastContainer />
