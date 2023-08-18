@@ -47,7 +47,7 @@ function NavgBar() {
                 <NavDropdown.Item as={Link} to="/viewAll">
                   View Reports
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/">
+                <NavDropdown.Item as={Link} to="/viewConcernChart">
                   Graph Breakdowns
                 </NavDropdown.Item>
               </NavDropdown>

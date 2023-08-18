@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTrees, reset } from "../features/trees/treeSlice";
+import { useNavigate } from "react-router-dom";
 import { Row, Container, Col, Button } from "react-bootstrap";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 function ViewConcernChart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // state setters for data to be used in charts
   const [treeData, setTreeData] = useState({
@@ -96,6 +98,16 @@ function ViewConcernChart() {
     }, {});
   };
 
+  //if concern button is clicked
+  const onConcernClick = () => {
+    navigate("/viewConcernChart");
+  };
+
+  //if species button is clicked
+  const onSpeciesClick = () => {
+    navigate("/viewSpeciesChart");
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -124,7 +136,18 @@ function ViewConcernChart() {
                 Click through to see a breakdown of a particular category.
               </p>
             </div>
-            <div></div>
+            <div>
+              <div>
+                <Button variant="success" onClick={onConcernClick}>
+                  Quality Concern
+                </Button>
+              </div>
+              <div>
+                <Button variant="success" onClick={onSpeciesClick}>
+                  Species Breakdown
+                </Button>
+              </div>
+            </div>
           </Col>
         </Row>
         <Row>
