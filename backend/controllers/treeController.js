@@ -53,6 +53,7 @@ const getTreeSearch = asyncHandler(async (req, res) => {
       treeDiameterCentimetres,
       treeSpreadRadiusMetres,
       treeHeightMetres,
+      levelOfConcern,
     } = req.query;
 
     //store search results in array
@@ -96,6 +97,10 @@ const getTreeSearch = asyncHandler(async (req, res) => {
 
     if (treeHeightMetres) {
       filter.treeHeightMetres = treeHeightMetres;
+    }
+
+    if (levelOfConcern) {
+      filter.levelOfConcern = levelOfConcern;
     }
 
     //apply filters and search database
