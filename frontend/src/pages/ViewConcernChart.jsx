@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTrees, reset } from "../features/trees/treeSlice";
 import { useNavigate } from "react-router-dom";
-import { Row, Container, Col, Button } from "react-bootstrap";
+import { Row, Container, Col, Button, Accordion } from "react-bootstrap";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
+import GraphAccordion from "../components/GraphAccordion";
 
 function ViewConcernChart() {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ function ViewConcernChart() {
       },
     ],
   });
+
+  //state setters for categories to be used in pie chart and accordion elements
+  const [categories, setCategories] = useState([]);
 
   //styling for PieChart
   const options = {
@@ -63,6 +67,9 @@ function ViewConcernChart() {
 
       const colours = labels.map((label) => graphColours[label]);
 
+      //set labels to categories
+      setCategories(labels);
+
       setTreeData((prevData) => ({
         ...prevData,
         labels: labels,
@@ -77,12 +84,7 @@ function ViewConcernChart() {
         ],
       }));
     }
-
-    // reset to tie up loose ends
-    return () => {
-      dispatch(reset());
-    };
-  }, [tree, dispatch]);
+  }, [tree]);
 
   // Reduce method to aggregate data ie. get a count for each individual species
   const countConcernData = (trees) => {
@@ -154,6 +156,13 @@ function ViewConcernChart() {
           <Col>
             <div className="chartContainer">
               <PieChart treeData={treeData} options={options} />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div>
+              <GraphAccordion trees={tree} categories={categories} />
             </div>
           </Col>
         </Row>

@@ -6,6 +6,7 @@ import { Row, Container, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import PieChart from "../components/PieChart";
 import LoadingSpinner from "../components/LoadingSpinner";
+import GraphAccordion from "../components/GraphAccordion";
 
 function ViewSpeciesChart() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function ViewSpeciesChart() {
       },
     ],
   });
+
+  //state setters for categories to be used in pie chart and accordion elements
+  const [categories, setCategories] = useState([]);
 
   //styling for PieChart
   const options = {
@@ -55,6 +59,9 @@ function ViewSpeciesChart() {
       //count for each species
       const data = Object.values(speciesData);
 
+      //set labels to categories
+      setCategories(labels);
+
       // Generate color palette based on data length
       const colours = chroma
         .scale("YlGn")
@@ -76,11 +83,6 @@ function ViewSpeciesChart() {
         ],
       }));
     }
-
-    // reset to tie up loose ends
-    return () => {
-      dispatch(reset());
-    };
   }, [tree, dispatch]);
 
   // Reduce method to aggregate data ie. get a count for each individual species
@@ -153,6 +155,13 @@ function ViewSpeciesChart() {
           <Col>
             <div className="chartContainer">
               <PieChart treeData={treeData} options={options} />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div>
+              <GraphAccordion trees={tree} categories={categories} />
             </div>
           </Col>
         </Row>
