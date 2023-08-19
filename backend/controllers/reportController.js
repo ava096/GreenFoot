@@ -75,6 +75,7 @@ const newReport = asyncHandler(async (req, res) => {
       isModerated: false,
       reportUpvotes: {},
       isHidden: false,
+      usedToUpdate: false,
     };
     const report = await Report.create(reportData);
     res.status(201).json(report);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteReport } from "../features/reports/reportSlice";
 import { useNavigate } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
@@ -7,6 +7,16 @@ import { Button, Card } from "react-bootstrap";
 function UserReportCard({ report }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //Get user info
+  const { user } = useSelector((state) => state.auth);
+
+  //To decide if user should see the X button
+  let showDelete = false;
+
+  if (user && (user.userRole === "admin" || report.user === user._id)) {
+    showDelete = true;
+  }
 
   return (
     <>
@@ -22,13 +32,16 @@ function UserReportCard({ report }) {
           >
             See Report
           </Button>
-          <button
-            variant="success"
-            className="close"
-            onClick={() => dispatch(deleteReport(report._id))}
-          >
-            X
-          </button>
+
+          {showDelete && (
+            <button
+              variant="success"
+              className="close"
+              onClick={() => dispatch(deleteReport(report._id))}
+            >
+              X
+            </button>
+          )}
         </Card.Body>
       </Card>
     </>

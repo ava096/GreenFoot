@@ -26,6 +26,8 @@ import ViewSpeciesChart from "./pages/ViewSpeciesChart";
 import ViewConcernChart from "./pages/ViewConcernChart";
 import ViewConditionChart from "./pages/ViewConditionChart";
 import ViewAgeChart from "./pages/ViewAgeChart";
+import ViewAllReports from "./pages/ViewAllReports";
+
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 
@@ -81,6 +83,7 @@ function App() {
               element={<ViewConditionChart />}
             ></Route>
             <Route path="/viewAgeChart" element={<ViewAgeChart />}></Route>
+            <Route path="/viewAllReports" element={<ViewAllReports />}></Route>
           </Routes>
         </Router>
         <ToastContainer />
