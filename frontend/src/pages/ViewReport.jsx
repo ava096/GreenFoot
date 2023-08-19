@@ -25,6 +25,15 @@ function ViewReport() {
   //report id
   const { id } = useParams();
 
+  //helper function to make sure user is logged in when trying to upvote or flag
+  const checkIfUserLoggedIn = () => {
+    if (!user) {
+      navigate("/login");
+      return false;
+    }
+    return true;
+  };
+
   //axios request to get info from selected report
   const getReport = async () => {
     try {
@@ -110,7 +119,9 @@ function ViewReport() {
     e.preventDefault();
     //not standard practice in React and can cause problems in long run,
     //but will work as a placeholder until problem with useNavigate is fixed
-    window.location.href = `/flagReport/${reportData._id}`;
+    if (checkIfUserLoggedIn()) {
+      window.location.href = `/flagReport/${reportData._id}`;
+    }
   };
 
   //triggered when user confirms deletion through modal
@@ -190,7 +201,7 @@ function ViewReport() {
             </div>
           </Col>
         </Row>
-        {user.userRole === "admin" || user.id === reportData.user ? (
+        {user && (user.userRole === "admin" || user.id === reportData.user) ? (
           <Row>
             <Col>
               {reportData.isModerated === false ? (
@@ -201,7 +212,8 @@ function ViewReport() {
               <Button variant="success" onClick={onDeleteClick}>
                 Delete Report
               </Button>
-              {user.userRole === "admin" || user.id === reportData.user ? (
+              {user &&
+              (user.userRole === "admin" || user.id === reportData.user) ? (
                 <Button variant="success" onClick={onUpdateClick}>
                   Update Report
                 </Button>
@@ -227,7 +239,10 @@ function ViewReport() {
           </p>
         </Col>
         <Col>
-          <UpvoteButton reportId={id} />
+          <UpvoteButton
+            reportId={id}
+            checkIfUserLoggedIn={checkIfUserLoggedIn}
+          />
         </Col>
         <Col>
           <p>{reportData.upvoteCount || 0} Upvotes</p>

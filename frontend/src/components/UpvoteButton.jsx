@@ -3,13 +3,15 @@ import { useDispatch } from "react-redux";
 import { upvoteReport } from "../features/reports/reportSlice";
 import { Button } from "react-bootstrap";
 
-function UpvoteButton({ reportId }) {
+function UpvoteButton({ reportId, checkIfUserLoggedIn }) {
   //bring in dispatch for use
   const dispatch = useDispatch();
 
   //event handler for upvoting
   const handleUpvote = () => {
-    dispatch(upvoteReport(reportId));
+    if (checkIfUserLoggedIn()) {
+      dispatch(upvoteReport(reportId));
+    }
   };
 
   return (
