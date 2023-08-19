@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Report = require("../models/reportModel");
-const User = require("../models/userModel");
+const Tree = require("../models/treeModel");
 
 // @desc    Get all reports
 // @route   GET /api/reports
@@ -131,6 +131,9 @@ const updateReport = asyncHandler(async (req, res) => {
 // @access  Private
 const upvoteReport = asyncHandler(async (req, res) => {
   try {
+    // set flag for letting user know if report has been used to update a tree record
+    let treeUpdated = false;
+
     //report id
     const { id } = req.params;
     //user id
@@ -151,10 +154,89 @@ const upvoteReport = asyncHandler(async (req, res) => {
       report.reportUpvotes.set(user.toString(), true);
     }
 
+    // If the report has >=5 upvotes and hasn't been used to update a tree yet:
+    if (report.reportUpvotes.size >= 5 && !report.usedToUpdate) {
+      //flagging this report for a potential update
+      report.usedToUpdate = true;
+
+      // Find other reports related to the same tree
+      // only look for reports of >= 5 upvotes to reduce unnecessary data pulled
+      const relatedReports = await Report.find({
+        tree: report.tree,
+        usedToUpdate: false,
+        $expr: { $gte: [{ $size: "$reportUpvotes" }, 5] },
+      });
+
+      // Get the newest report which has at least 5 upvotes and hasn't been used yet
+      const newestValidReport = relatedReports
+        .filter((r) => r.reportUpvotes.size >= 5 && !r.usedToUpdate)
+        .sort((a, b) => b.createdAt - a.createdAt)[0];
+
+      // If the current report is the newest one, use it to update the tree
+      if (newestValidReport && newestValidReport._id.equals(report._id)) {
+        const tree = await Tree.findById(report.tree);
+
+        //make sure info supplied is valid
+        if (report.reportTreeLocationType !== "Not Provided") {
+          tree.treeLocationType = report.reportTreeLocationType;
+        }
+
+        if (report.reportTreeType !== "Not Provided") {
+          tree.treeType = report.reportTreeType;
+        }
+
+        if (report.reportTreeAge !== "Not Provided") {
+          tree.treeAge = report.reportTreeAge;
+        }
+
+        if (report.reportTreeDescription !== "Not Provided") {
+          tree.treeDescription = report.reportTreeDescription;
+        }
+
+        if (report.reportTreeSurroundings !== "Not Provided") {
+          tree.treeSurroundings = report.reportTreeSurroundings;
+        }
+
+        if (report.reportTreeVigour !== "Not Provided") {
+          tree.treeVigour = report.reportTreeVigour;
+        }
+
+        if (report.reportTreeCondition !== "Not Provided") {
+          tree.treeCondition = report.reportTreeCondition;
+        }
+
+        if (report.reportTreeDiameterCentimetres !== null) {
+          tree.treeDiameterCentimetres = report.reportTreeDiameterCentimetres;
+        }
+
+        if (report.reportTreeSpreadRadiusMetres !== null) {
+          tree.treeSpreadRadiusMetres = report.reportTreeSpreadRadiusMetres;
+        }
+
+        if (report.reportTreeHeightMetres !== null) {
+          tree.treeHeightMetres = report.reportTreeHeightMetres;
+        }
+
+        await tree.save();
+
+        // flagged as true, response can be sent to indicate an update
+        treeUpdated = true;
+      }
+    }
+
     //Save the changes made
     await report.save();
 
-    res.status(200).json(report);
+    // if an update was made to a tree record
+    if (treeUpdated) {
+      res.status(200).json({
+        message: "This report has been used to update the tree record",
+        report,
+      });
+    } else {
+      // if no update was made to a tree record
+      res.status(200).json(report);
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

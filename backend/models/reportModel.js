@@ -14,47 +14,47 @@ const reportSchema = mongoose.Schema(
     },
     reportTreeLocationType: {
       type: String,
-      required: [true, "Please include a tree location type"],
+      default: "Not Provided",
     },
     reportTreeType: {
       type: String,
-      required: [true, "Please include what type of tree this is"],
+      default: "Not Provided",
     },
     reportTreeScientificName: {
       type: String,
-      required: [true, "Please include a scientific name"],
+      default: "Not Provided",
     },
     reportTreeAge: {
       type: String,
-      required: [true, "Please include an age"],
+      default: "Not Provided",
     },
     reportTreeDescription: {
       type: String,
-      required: [true, "Please include a description"],
+      default: "Not Provided",
     },
     reportTreeSurroundings: {
       type: String,
-      required: [true, "Please include the tree's surroundings"],
+      default: "Not Provided",
     },
     reportTreeVigour: {
       type: String,
-      required: [true, "Please include the tree's vigour"],
+      default: "Not Provided",
     },
     reportTreeCondition: {
       type: String,
-      required: [true, "Please include the tree's condition"],
+      default: "Not Provided",
     },
     reportTreeDiameterCentimetres: {
       type: Number,
-      required: true,
+      default: null,
     },
     reportTreeSpreadRadiusMetres: {
       type: Number,
-      required: true,
+      default: null,
     },
     reportTreeHeightMetres: {
       type: Number,
-      required: true,
+      default: null,
     },
     reportImage: {
       public_id: {
@@ -75,6 +75,10 @@ const reportSchema = mongoose.Schema(
       of: Boolean,
     },
     isHidden: {
+      type: Boolean,
+      required: true,
+    },
+    usedToUpdate: {
       type: Boolean,
       required: true,
     },
