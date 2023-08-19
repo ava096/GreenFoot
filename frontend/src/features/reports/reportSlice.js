@@ -28,6 +28,23 @@ export const createReport = createAsyncThunk(
   }
 );
 
+export const getAllReports = createAsyncThunk(
+  "report/getAll",
+  async (_, thunkAPI) => {
+    try {
+      return await reportService.getAllReports();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Get user reports
 export const getUserReports = createAsyncThunk(
   "report/getAllUser",
@@ -123,6 +140,19 @@ export const reportSlice = createSlice({
         state.report.push(action.payload);
       })
       .addCase(createReport.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getAllReports.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllReports.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.report = action.payload;
+      })
+      .addCase(getAllReports.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

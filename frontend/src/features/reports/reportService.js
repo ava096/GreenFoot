@@ -9,11 +9,19 @@ const createReport = async (reportData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
   const response = await axios.post(
     API_URL + "newReport/" + reportData.treeID,
     reportData,
     config
   );
+
+  return response.data;
+};
+
+// Get all reports
+const getAllReports = async () => {
+  const response = await axios.get(API_URL + "allReports");
 
   return response.data;
 };
@@ -76,6 +84,7 @@ const upvoteReport = async (id, token) => {
 
 const reportService = {
   createReport,
+  getAllReports,
   getUserReports,
   deleteReport,
   updateReport,
