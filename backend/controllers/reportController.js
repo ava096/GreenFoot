@@ -160,69 +160,57 @@ const upvoteReport = asyncHandler(async (req, res) => {
       //flagging this report for a potential update
       report.usedToUpdate = true;
 
-      // Find other reports related to the same tree
-      // only look for reports of >= 5 upvotes to reduce unnecessary data pulled
-      const relatedReports = await Report.find({
-        tree: report.tree,
-        usedToUpdate: false,
-        $expr: { $gte: [{ $size: "$reportUpvotes" }, 5] },
-      });
+      const tree = await Tree.findById(report.tree);
 
-      // Get the newest report which has at least 5 upvotes and hasn't been used yet
-      const newestValidReport = relatedReports
-        .filter((r) => r.reportUpvotes.size >= 5 && !r.usedToUpdate)
-        .sort((a, b) => b.createdAt - a.createdAt)[0];
-
-      // If the current report is the newest one, use it to update the tree
-      if (newestValidReport && newestValidReport._id.equals(report._id)) {
-        const tree = await Tree.findById(report.tree);
-
-        //make sure info supplied is valid
-        if (report.reportTreeLocationType !== "Not Provided") {
-          tree.treeLocationType = report.reportTreeLocationType;
-        }
-
-        if (report.reportTreeType !== "Not Provided") {
-          tree.treeType = report.reportTreeType;
-        }
-
-        if (report.reportTreeAge !== "Not Provided") {
-          tree.treeAge = report.reportTreeAge;
-        }
-
-        if (report.reportTreeDescription !== "Not Provided") {
-          tree.treeDescription = report.reportTreeDescription;
-        }
-
-        if (report.reportTreeSurroundings !== "Not Provided") {
-          tree.treeSurroundings = report.reportTreeSurroundings;
-        }
-
-        if (report.reportTreeVigour !== "Not Provided") {
-          tree.treeVigour = report.reportTreeVigour;
-        }
-
-        if (report.reportTreeCondition !== "Not Provided") {
-          tree.treeCondition = report.reportTreeCondition;
-        }
-
-        if (report.reportTreeDiameterCentimetres !== null) {
-          tree.treeDiameterCentimetres = report.reportTreeDiameterCentimetres;
-        }
-
-        if (report.reportTreeSpreadRadiusMetres !== null) {
-          tree.treeSpreadRadiusMetres = report.reportTreeSpreadRadiusMetres;
-        }
-
-        if (report.reportTreeHeightMetres !== null) {
-          tree.treeHeightMetres = report.reportTreeHeightMetres;
-        }
-
-        await tree.save();
-
-        // flagged as true, response can be sent to indicate an update
-        treeUpdated = true;
+      //make sure info supplied is valid
+      if (report.reportTreeLocationType !== "Not Provided") {
+        tree.treeLocationType = report.reportTreeLocationType;
       }
+
+      if (report.reportTreeType !== "Not Provided") {
+        tree.treeType = report.reportTreeType;
+      }
+
+      if (report.reportTreeScientificName != "Not Provided") {
+        tree.treeScientificName = report.reportTreeScientificName;
+      }
+
+      if (report.reportTreeAge !== "Not Provided") {
+        tree.treeAge = report.reportTreeAge;
+      }
+
+      if (report.reportTreeDescription !== "Not Provided") {
+        tree.treeDescription = report.reportTreeDescription;
+      }
+
+      if (report.reportTreeSurroundings !== "Not Provided") {
+        tree.treeSurroundings = report.reportTreeSurroundings;
+      }
+
+      if (report.reportTreeVigour !== "Not Provided") {
+        tree.treeVigour = report.reportTreeVigour;
+      }
+
+      if (report.reportTreeCondition !== "Not Provided") {
+        tree.treeCondition = report.reportTreeCondition;
+      }
+
+      if (report.reportTreeDiameterCentimetres !== null) {
+        tree.treeDiameterCentimetres = report.reportTreeDiameterCentimetres;
+      }
+
+      if (report.reportTreeSpreadRadiusMetres !== null) {
+        tree.treeSpreadRadiusMetres = report.reportTreeSpreadRadiusMetres;
+      }
+
+      if (report.reportTreeHeightMetres !== null) {
+        tree.treeHeightMetres = report.reportTreeHeightMetres;
+      }
+
+      await tree.save();
+
+      // flagged as true, response can be sent to indicate an update
+      treeUpdated = true;
     }
 
     //Save the changes made
