@@ -163,7 +163,8 @@ const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
     //path to ProcessedData file
     const processedDataFilePath = path.join(
       __dirname,
-      "..",
+      "../..",
+      "data",
       "csv",
       "ProcessedData_20230816T172046974Z.csv"
     );
