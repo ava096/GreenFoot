@@ -1,8 +1,10 @@
 const asyncHandler = require("express-async-handler");
 const csvtojson = require("csvtojson");
+const { Parser } = require("json2csv");
 const Tree = require("../models/treeModel");
 const expressAsyncHandler = require("express-async-handler");
 const path = require("path");
+const fs = require("fs");
 
 // @desc    Get all trees and return in alphabetical order
 // @route   GET /api/trees
@@ -203,6 +205,55 @@ const setTreeFromCsv = expressAsyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Generate CSV of tree records in database
+// @route   GET /api/trees/export
+// @access  Private
+const generateTreeCsv = asyncHandler(async (req, res) => {
+  try {
+    //Get all trees
+    const trees = await Tree.find();
+
+    //Map data back into CSV structure
+    const csvData = trees.map((tree) => ({
+      TYPEOFTREE: tree.treeLocationType,
+      SPECIESTYPE: tree.treeType,
+      SPECIES: tree.treeScientificName,
+      AGE: tree.treeAge,
+      DESCRIPTION: tree.treeDescription,
+      TREESURROUND: tree.treeSurroundings,
+      VIGOUR: tree.treeVigour,
+      CONDITION: tree.treeCondition,
+      DIAMETERinCENTIMETRES: tree.treeDiameterCentimetres,
+      SPREADRADIUSinMETRES: tree.treeSpreadRadiusMetres,
+      TREEHEIGHTinMETRES: tree.treeHeightMetres,
+      LONGITUDE: tree.location.coordinates[0],
+      LATITUDE: tree.location.coordinates[1],
+      LEVELOFCONCERN: tree.levelOfConcern,
+    }));
+
+    //Convert data to CSV
+    const parser = new Parser();
+    const csvContent = parser.parse(csvData);
+
+    //write to file
+    const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
+    const filePath = path.join(
+      __dirname,
+      "../..",
+      "data",
+      "csv",
+      `ExportedData_${timestamp}.csv`
+    );
+    fs.writeFileSync(filePath, csvContent);
+
+    res
+      .status(200)
+      .json({ message: "Data exported successfully", path: filePath });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc    Update entry
 // @route   PUT /api/trees
 // @access  Private
@@ -285,6 +336,7 @@ module.exports = {
   getClosestTrees,
   setTree,
   setTreeFromCsv,
+  generateTreeCsv,
   updateTree,
   deleteTree,
   deleteAllTrees,

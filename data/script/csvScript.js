@@ -81,11 +81,17 @@ function determineLevelOfConcern(record) {
   ) {
     return "Red";
   } else if (
-    countDataNotProvided >= 1 ||
-    record.SPECIES === "Mixed" ||
-    record.SPECIES === "Mixed broadleaf" ||
-    record.SPECIESTYPE === "Mixed" ||
-    record.SPECIESTYPE === "Mixed broadleaf"
+    countDataNotProvided <= 2 ||
+    record.SPECIES.includes("Mixed") ||
+    record.SPECIESTYPE.includes("Mixed")
+  ) {
+    return "Amber";
+  } else if (
+    countDataNotProvided === 1 ||
+    record.TREEHEIGHTinMETRES === 0 ||
+    record.TREESPREADRADIUSinMETRES === 0 ||
+    record.TREEDIAMETERinCENTIMETRES === 0 ||
+    record.SPECIES.includes("(Specific Type Unknown)")
   ) {
     return "Yellow";
   } else {

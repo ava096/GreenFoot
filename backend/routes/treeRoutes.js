@@ -7,6 +7,7 @@ const {
   getClosestTrees,
   setTree,
   setTreeFromCsv,
+  generateTreeCsv,
   updateTree,
   deleteTree,
   deleteAllTrees,
@@ -28,9 +29,13 @@ router
 router.route("/all").delete(protect, deleteAllTrees);
 router.route("/nearby").get(protect, getClosestTrees);
 
+//Export tree records into csv
+router.route("/export").get(generateTreeCsv);
+
 // GET tree by ID, PUT update tree, DELETE tree
 router.route("/:id").get(getTree).put(updateTree).delete(deleteTree);
 
+// Import trees from CSV file
 router.route("/import").post(setTreeFromCsv);
 
 module.exports = router;
