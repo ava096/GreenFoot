@@ -27,6 +27,7 @@ import ViewConcernChart from "./pages/ViewConcernChart";
 import ViewConditionChart from "./pages/ViewConditionChart";
 import ViewAgeChart from "./pages/ViewAgeChart";
 import ViewAllReports from "./pages/ViewAllReports";
+import Footer from "./components/Footer";
 
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -85,6 +86,7 @@ function App() {
             <Route path="/viewAgeChart" element={<ViewAgeChart />}></Route>
             <Route path="/viewAllReports" element={<ViewAllReports />}></Route>
           </Routes>
+          <Footer />
         </Router>
         <ToastContainer />
       </QueryClientProvider>
