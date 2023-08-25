@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Col } from "react-bootstrap";
 import TreeCard from "./TreeCard";
 
 function GraphAccordion({ trees, categories, filterKey }) {
@@ -13,7 +13,9 @@ function GraphAccordion({ trees, categories, filterKey }) {
               {trees
                 .filter((tree) => tree[filterKey] === category)
                 .map((tree) => (
-                  <TreeCard key={tree._id} tree={tree} />
+                  <Col sm={12} md={6} lg={3} className="cardCol" key={tree._id}>
+                    <TreeCard tree={tree} />
+                  </Col>
                 ))}
             </Accordion.Body>
           </Accordion.Item>
