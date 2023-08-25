@@ -14,6 +14,16 @@ html, body {
     font-family: var(--bs-body-font-family);
 }
 
+.appContent {
+    flex: 1;
+}
+
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 /**
 *   Navbar styling
 */
@@ -45,6 +55,7 @@ html, body {
     background-color: #0a1811;
     width: 100%;
     padding: 100px 0 50px 0;
+    flex-shrink: 0;
 }
 
 /**
@@ -158,6 +169,12 @@ html, body {
     overflow-x: auto; 
     -webkit-overflow-scrolling: touch; 
     margin-top: 1rem; 
+}
+
+.spinnerContainer {
+    margin: 100px 0 400px 0;
+    display: flex;
+    justify-content: center;
 }
 
 /**

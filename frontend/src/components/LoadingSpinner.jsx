@@ -1,8 +1,14 @@
 import React from "react";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Container } from "react-bootstrap";
 
 function LoadingSpinner() {
-  return <Spinner animation="border" />;
+  return (
+    <>
+      <Container className="spinnerContainer">
+        <Spinner animation="border" />
+      </Container>
+    </>
+  );
 }
 
 export default LoadingSpinner;

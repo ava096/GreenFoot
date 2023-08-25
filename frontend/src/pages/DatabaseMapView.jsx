@@ -3,7 +3,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import TreeDataMap from "../components/TreeDataMap";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 function DatabaseMapView() {
   //API call to get trees from database
@@ -24,6 +24,25 @@ function DatabaseMapView() {
   return (
     <>
       <Container className="displayContainer">
+        <Row>
+          <Col className="textDisplay">
+            <div>
+              <h1>Map View</h1>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="textDisplay">
+            <div>
+              <p>
+                This map provides a cartographic representation of the trees
+                within our database. Explore the distribution of trees in the
+                Belfast area with the heatmap view, or toggle the markers to
+                allow you to view specific trees and their details.
+              </p>
+            </div>
+          </Col>
+        </Row>
         <TreeDataMap trees={data} />
       </Container>
     </>

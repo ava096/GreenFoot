@@ -41,52 +41,60 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Router>
           <NavgBar />
-          <Routes>
-            <Route path="/" element={<Landing />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/dbtable" element={<DatabaseTableView />}></Route>
-            <Route path="/dbmap" element={<DatabaseMapView />}></Route>
-            <Route
-              path="/submitLocation"
-              element={<SubmitReportLocation />}
-            ></Route>
-            <Route path="/selectTree" element={<SelectTreeForReport />}></Route>
-            <Route
-              path="/submitForm/:treeID"
-              element={<SubmitRecordForm />}
-            ></Route>
-            <Route path="/dash" element={<UserDash />}></Route>
-            <Route path="/adminDash" element={<AdminDash />}></Route>
-            <Route path="/viewAllTrees" element={<ViewAllTrees />}></Route>
-            <Route path="/viewTree/:id" element={<ViewTree />}></Route>
-            <Route
-              path="/suggestTree"
-              element={<SuggestTreeForReport />}
-            ></Route>
-            <Route path="/viewReport/:id" element={<ViewReport />}></Route>
-            <Route
-              path="/updateReport/:reportID"
-              element={<UpdateReportForm />}
-            ></Route>
-            <Route path="/flagReport/:id" element={<FlagReport />}></Route>
-            <Route path="/updateStatus/:id" element={<UpdateFlag />}></Route>
-            <Route
-              path="/viewSpeciesChart"
-              element={<ViewSpeciesChart />}
-            ></Route>
-            <Route
-              path="/viewConcernChart"
-              element={<ViewConcernChart />}
-            ></Route>
-            <Route
-              path="/viewConditionChart"
-              element={<ViewConditionChart />}
-            ></Route>
-            <Route path="/viewAgeChart" element={<ViewAgeChart />}></Route>
-            <Route path="/viewAllReports" element={<ViewAllReports />}></Route>
-          </Routes>
-          <Footer />
+          <div className="appContent">
+            <Routes>
+              <Route path="/" element={<Landing />}></Route>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route path="/dbtable" element={<DatabaseTableView />}></Route>
+              <Route path="/dbmap" element={<DatabaseMapView />}></Route>
+              <Route
+                path="/submitLocation"
+                element={<SubmitReportLocation />}
+              ></Route>
+              <Route
+                path="/selectTree"
+                element={<SelectTreeForReport />}
+              ></Route>
+              <Route
+                path="/submitForm/:treeID"
+                element={<SubmitRecordForm />}
+              ></Route>
+              <Route path="/dash" element={<UserDash />}></Route>
+              <Route path="/adminDash" element={<AdminDash />}></Route>
+              <Route path="/viewAllTrees" element={<ViewAllTrees />}></Route>
+              <Route path="/viewTree/:id" element={<ViewTree />}></Route>
+              <Route
+                path="/suggestTree"
+                element={<SuggestTreeForReport />}
+              ></Route>
+              <Route path="/viewReport/:id" element={<ViewReport />}></Route>
+              <Route
+                path="/updateReport/:reportID"
+                element={<UpdateReportForm />}
+              ></Route>
+              <Route path="/flagReport/:id" element={<FlagReport />}></Route>
+              <Route path="/updateStatus/:id" element={<UpdateFlag />}></Route>
+              <Route
+                path="/viewSpeciesChart"
+                element={<ViewSpeciesChart />}
+              ></Route>
+              <Route
+                path="/viewConcernChart"
+                element={<ViewConcernChart />}
+              ></Route>
+              <Route
+                path="/viewConditionChart"
+                element={<ViewConditionChart />}
+              ></Route>
+              <Route path="/viewAgeChart" element={<ViewAgeChart />}></Route>
+              <Route
+                path="/viewAllReports"
+                element={<ViewAllReports />}
+              ></Route>
+            </Routes>
+            <Footer />
+          </div>
         </Router>
         <ToastContainer />
       </QueryClientProvider>
