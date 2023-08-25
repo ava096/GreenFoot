@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+:root {
+    --primary-color: #0a1811;
+    --primary-color-highlight: #235438;
+    --bs-body-bg: #eef7d7;
+    --bs-body-font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: var(--bs-body-bg);
+    font-family: var(--bs-body-font-family);
+}
+
 /**
 *   Navbar styling
 */
