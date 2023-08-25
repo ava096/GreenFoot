@@ -133,7 +133,7 @@ function ViewReport() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <h2>{treeData.treeType}</h2>

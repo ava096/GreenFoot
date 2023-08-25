@@ -58,7 +58,7 @@ function ViewTree() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <h2>{data.treeType}</h2>

@@ -13,7 +13,7 @@ function UpdateReportForm() {
   const isEditMode = true;
 
   return (
-    <Container>
+    <Container className="displayContainer">
       <Row>
         <Col>
           <div className="pageTitle">

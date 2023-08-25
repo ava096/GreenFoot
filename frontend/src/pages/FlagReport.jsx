@@ -9,7 +9,7 @@ function FlagReport() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <h1>Flagging a Report</h1>

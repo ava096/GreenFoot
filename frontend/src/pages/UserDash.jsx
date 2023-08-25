@@ -44,7 +44,7 @@ function UserDash() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <h1>Welcome back, {user && user.userName}</h1>

@@ -11,7 +11,7 @@ function SubmitRecordForm() {
   const isEditMode = false;
 
   return (
-    <Container>
+    <Container className="displayContainer">
       <Row>
         <Col>
           <div className="pageTitle">

@@ -21,7 +21,7 @@ function ViewAllTrees() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <h1>All Trees</h1>

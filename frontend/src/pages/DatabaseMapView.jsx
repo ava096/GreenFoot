@@ -3,6 +3,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import TreeDataMap from "../components/TreeDataMap";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { Container } from "react-bootstrap";
 
 function DatabaseMapView() {
   //API call to get trees from database
@@ -22,9 +23,9 @@ function DatabaseMapView() {
 
   return (
     <>
-      <div className="container">
+      <Container className="displayContainer">
         <TreeDataMap trees={data} />
-      </div>
+      </Container>
     </>
   );
 }

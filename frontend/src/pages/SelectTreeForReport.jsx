@@ -46,7 +46,7 @@ function SelectTreeForReport() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <h2>Is This the Tree You're Looking For?</h2>

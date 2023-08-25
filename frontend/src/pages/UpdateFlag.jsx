@@ -9,7 +9,7 @@ function UpdateFlag() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <h1>Updating a Flag's Status</h1>

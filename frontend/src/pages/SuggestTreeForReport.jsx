@@ -78,7 +78,7 @@ function SuggestTreeForReport() {
   return (
     <>
       <>
-        <Container>
+        <Container className="displayContainer">
           <Row className="titleRow">
             <Col className="textDisplay">
               <h1>Is It Tree You're Looking For?</h1>

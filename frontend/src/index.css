@@ -3,7 +3,7 @@
 :root {
     --primary-color: #0a1811;
     --primary-color-highlight: #235438;
-    --bs-body-bg: #edf3de;
+    --bs-body-bg: #d0dab8;
     --bs-body-font-family: 'Montserrat', sans-serif;
 }
 
@@ -143,6 +143,21 @@ html, body {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+}
+
+.displayContainer {
+    background-color: #f7f9f3;
+    border-radius: 20px;
+    width: 95%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-top: 1px;
+}
+
+.scrollableContainer {
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    margin-top: 1rem; 
 }
 
 /**

@@ -3,7 +3,7 @@ import TreeDataTable from "../components/TreeDataTable";
 import TreeDataSelector from "../components/TreeDataSelector";
 import { Link } from "react-router-dom";
 import { FaSeedling } from "react-icons/fa";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Container } from "react-bootstrap";
 
 function DatabaseTableView() {
   const [filters, setFilters] = useState({});
@@ -14,7 +14,7 @@ function DatabaseTableView() {
 
   return (
     <>
-      <div className="container">
+      <Container className="displayContainer">
         <div className="pageTitle">
           <h1>Our Database</h1>
         </div>
@@ -40,10 +40,10 @@ function DatabaseTableView() {
             </Accordion.Item>
           </Accordion>
         </div>
-        <div>
+        <div className="scrollableContainer">
           <TreeDataTable filters={filters} />
         </div>
-      </div>
+      </Container>
     </>
   );
 }

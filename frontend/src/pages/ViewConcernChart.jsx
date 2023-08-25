@@ -131,7 +131,7 @@ function ViewConcernChart() {
 
   return (
     <>
-      <Container>
+      <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
             <div>
