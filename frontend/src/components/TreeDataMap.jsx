@@ -7,7 +7,7 @@ import {
   HeatmapLayerF,
 } from "@react-google-maps/api";
 import LoadingSpinner from "./LoadingSpinner";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 //to access heatmap
 const GOOGLE_MAPS_LIBRARIES = ["visualization"];
@@ -78,9 +78,11 @@ function TreeDataMap({ trees }) {
 
   return (
     <>
-      <Button variant="success" onClick={toggleHeatmap}>
-        {showHeatmap ? "Hide Heatmap" : "Show Heatmap"}
-      </Button>
+      <Container className="buttonCentral">
+        <Button variant="success" onClick={toggleHeatmap}>
+          {showHeatmap ? "Hide Heatmap" : "Show Heatmap"}
+        </Button>
+      </Container>
       <GoogleMap
         zoom={12}
         center={center}
@@ -118,14 +120,7 @@ function TreeDataMap({ trees }) {
         )}
 
         {showHeatmap && (
-          <HeatmapLayerF
-            data={heatmapData}
-            options={
-              {
-                // Optional heatmap options
-              }
-            }
-          />
+          <HeatmapLayerF data={heatmapData} visible={showHeatmap} />
         )}
       </GoogleMap>
     </>

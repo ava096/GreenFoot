@@ -479,6 +479,14 @@ html, body {
     height: 100vh;
 }
 
+.buttonCentral {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+}
+
 @media only screen and (max-width: 769px) {
     /**
     *   Login styling mobile view

@@ -24,7 +24,7 @@ function DatabaseMapView() {
   return (
     <>
       <Container className="displayContainer">
-        <Row>
+        <Row className="titleRow">
           <Col className="textDisplay">
             <div>
               <h1>Map View</h1>
