@@ -18,7 +18,7 @@ function FlaggedReportCard({ flag }) {
 
   return (
     <>
-      <Card>
+      <Card className="cardDisplay">
         <Card.Body>
           <Card.Title>Flagged by {flag.userName}</Card.Title>
           <Card.Text>

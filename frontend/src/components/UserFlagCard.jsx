@@ -11,7 +11,7 @@ function UserFlagCard({ flag }) {
 
   return (
     <>
-      <Card>
+      <Card className="cardDisplay">
         <Card.Body>
           <Card.Title>Status: {flag.flagStatus}</Card.Title>
           <Card.Text>

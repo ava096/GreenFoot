@@ -20,7 +20,7 @@ function UserReportCard({ report }) {
 
   return (
     <>
-      <Card>
+      <Card className="cardDisplay">
         <Card.Body>
           <Card.Title>{report.reportTreeType}</Card.Title>
           <Card.Text>

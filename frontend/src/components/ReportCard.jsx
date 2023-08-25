@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 function ReportCard({ report }) {
   return (
     <>
-      <Card>
+      <Card className="cardDisplay">
         <Card.Body>
           <Card.Title>
             {new Date(report.createdAt).toLocaleString("en-US")}

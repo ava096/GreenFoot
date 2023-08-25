@@ -11,7 +11,7 @@ function SelectTreeCard({ tree }) {
 
   return (
     <>
-      <Card>
+      <Card className="cardDisplay">
         <Card.Body>
           <Card.Title>{tree.treeType}</Card.Title>
           <Card.Text>{tree.treeDescription}</Card.Text>
