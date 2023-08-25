@@ -49,9 +49,9 @@ function ViewAllReports() {
         <Row>
           <Col>
             {report.map((report) => (
-              <div key={report._id}>
-                <UserReportCard key={report._id} report={report} />
-              </div>
+              <Col sm={12} md={6} lg={3} className="cardCol" key={report._id}>
+                <UserReportCard report={report} />
+              </Col>
             ))}
           </Col>
         </Row>

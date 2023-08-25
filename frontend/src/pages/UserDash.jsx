@@ -61,7 +61,15 @@ function UserDash() {
             {report.length > 0 ? (
               <div className="cardDiv">
                 {report.map((report) => (
-                  <UserReportCard key={report._id} report={report} />
+                  <Col
+                    sm={12}
+                    md={6}
+                    lg={3}
+                    className="cardCol"
+                    key={report._id}
+                  >
+                    <UserReportCard report={report} />
+                  </Col>
                 ))}
               </div>
             ) : (
@@ -86,7 +94,9 @@ function UserDash() {
             {flag.length > 0 ? (
               <div className="cardDiv">
                 {flag.map((flag) => (
-                  <UserFlagCard key={flag._id} flag={flag} />
+                  <Col sm={12} md={6} lg={3} className="cardCol" key={flag._id}>
+                    <UserFlagCard flag={flag} />
+                  </Col>
                 ))}
               </div>
             ) : (

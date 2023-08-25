@@ -92,7 +92,9 @@ function SuggestTreeForReport() {
             {nearbyTrees.length > 0 ? (
               <div>
                 {nearbyTrees.map((tree) => (
-                  <SelectTreeCard key={tree._id} tree={tree} />
+                  <Col sm={12} md={6} lg={3} className="cardCol" key={tree._id}>
+                    <SelectTreeCard tree={tree} />
+                  </Col>
                 ))}
               </div>
             ) : (
