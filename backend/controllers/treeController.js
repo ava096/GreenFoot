@@ -29,7 +29,13 @@ const getTree = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const tree = await Tree.findById(id);
-    res.status(200).json(tree);
+
+    // Check if the tree exists
+    if (!tree) {
+      return res.status(404).json({ message: "Tree not found." });
+    } else {
+      res.status(200).json(tree);
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -258,6 +264,11 @@ const generateTreeCsv = asyncHandler(async (req, res) => {
 // @route   PUT /api/trees
 // @access  Private
 const updateTree = asyncHandler(async (req, res) => {
+  //admin only access
+  if (!req.user || req.user.role !== "admin") {
+    return res.status(403).json({ message: "Access denied" });
+  }
+
   try {
     const { id } = req.params;
     const updatedTree = await Tree.findByIdAndUpdate(id, req.body, {
@@ -279,27 +290,30 @@ const updateTree = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete entry
-// @route   DELETE /api/trees
-// @access  Private
+// @route   DELETE /api/trees/:id
+// @access  Private (Admin only)
 const deleteTree = asyncHandler(async (req, res) => {
+  // Check for user
+  if (!req.user) {
+    return res.status(401).json({ message: "User not found" });
+  }
+
+  // Admin only access
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ message: "Access denied" });
+  }
+
   try {
     const tree = await Tree.findById(req.params.id);
 
-    //if record does not exist
+    // If record does not exist
     if (!tree) {
-      res.status(400);
-      throw new Error("Tree not found");
-    }
-
-    //check for user
-    if (!req.user) {
-      res.status(401);
-      throw new Error("User not found");
+      return res.status(404).json({ message: "Tree not found" });
     }
 
     await tree.deleteOne();
 
-    //if sucessfully deleted
+    // If successfully deleted
     res.status(200).json(tree);
   } catch (error) {
     res.status(500).json({ message: error.message });

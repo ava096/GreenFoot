@@ -20,9 +20,17 @@ const getAllReports = asyncHandler(async (req, res) => {
 const getUserReports = asyncHandler(async (req, res) => {
   try {
     const userReports = await Report.find({ user: req.user.id });
-    res.status(201).json(userReports);
+
+    // Check if there are no reports
+    if (userReports.length === 0) {
+      return res
+        .status(200)
+        .json({ message: "No reports found for this user." });
+    } else {
+      res.status(200).json(userReports);
+    }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -68,6 +76,12 @@ const getReportById = asyncHandler(async (req, res) => {
 // @access  Private
 const newReport = asyncHandler(async (req, res) => {
   try {
+    // Check if tree exists
+    const tree = await Tree.findById(req.params.id);
+    if (!tree) {
+      return res.status(404).json({ message: "Tree not found." });
+    }
+
     const reportData = {
       ...req.body,
       user: req.user.id,
