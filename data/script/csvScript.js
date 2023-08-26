@@ -81,7 +81,7 @@ function determineLevelOfConcern(record) {
   ) {
     return "Red";
   } else if (
-    countDataNotProvided <= 2 ||
+    countDataNotProvided === 2 ||
     record.SPECIES.includes("Mixed") ||
     record.SPECIESTYPE.includes("Mixed")
   ) {
