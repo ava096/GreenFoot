@@ -46,6 +46,7 @@ function ViewConcernChart() {
     Red: "rgba(255, 99, 132, 0.2)",
     Yellow: "rgba(255, 205, 86, 0.2)",
     Green: "rgba(75, 192, 192, 0.2)",
+    Amber: "rgba(255, 159, 64, 0.2)",
   };
 
   // Get trees from redux functions
