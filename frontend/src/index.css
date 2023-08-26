@@ -163,6 +163,7 @@ html, body {
     margin-top: 20px;
     margin-bottom: 30px;
     padding-top: 1px;
+    padding-bottom: 30px;
 }
 
 .scrollableContainer {
@@ -296,6 +297,28 @@ html, body {
     color: #40414a;
 }
 
+.reportAccordion .accordion-button {
+    background-color: #f7f9f3;
+}
+
+/* When accordion button is focused */
+.reportAccordion .accordion-button:focus {
+    background-color: #f7f9f3;
+    box-shadow: none;  /* Removes the default focus shadow */
+}
+
+/* When accordion button is not collapsed */
+.reportAccordion .accordion-button:not(.collapsed) {
+    background-color: #f7f9f3;
+}
+
+.reportSubmissionControl:focus {
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
 /**
 *   Login styling
 */
@@ -374,6 +397,13 @@ html, body {
     outline: none;
     margin-bottom: 20px;
     color: #40414a;
+}
+
+.input:focus {
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    outline: none;
 }
 
 .centreButton {
