@@ -141,8 +141,6 @@ const getClosestTrees = asyncHandler(async (req, res) => {
       },
     }).limit(10);
 
-    console.log(`${trees.length} trees found`);
-
     res.status(200).json(trees);
   } catch (error) {
     console.error(`Error getting closest trees: ${error}`);
