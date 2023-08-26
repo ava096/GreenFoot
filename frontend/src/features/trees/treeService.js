@@ -2,6 +2,18 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8000/api/trees";
 
+// Add a new tree to the dataset
+const addNewTree = async (treeData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.post(API_URL + "/", treeData, config);
+  return response.data;
+};
+
 // Find tree based on longitude latitude
 const findTreeLongLat = async (token, longitude, latitude) => {
   const config = {
@@ -25,6 +37,7 @@ const getAllTrees = async () => {
 };
 
 const treeService = {
+  addNewTree,
   findTreeLongLat,
   getAllTrees,
 };

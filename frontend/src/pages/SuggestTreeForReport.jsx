@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Col, Row, Container } from "react-bootstrap";
 import { FaSeedling } from "react-icons/fa6";
 import SelectTreeCard from "../components/SelectTreeCard";
@@ -81,8 +81,15 @@ function SuggestTreeForReport() {
         <Container className="displayContainer">
           <Row className="titleRow">
             <Col className="textDisplay">
-              <h1>Is It Tree You're Looking For?</h1>
-              <p>Here are the ten closest trees based on your location.</p>
+              <div>
+                <h1>Is It Tree You're Looking For?</h1>
+              </div>
+              <div>
+                <p>Here are the ten closest trees based on your location.</p>
+              </div>
+              <div>
+                <Link to="/newTree">Can't find it?</Link>
+              </div>
               <div className="pageDivider">
                 <FaSeedling /> <FaSeedling /> <FaSeedling />
               </div>
