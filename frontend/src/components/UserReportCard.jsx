@@ -21,6 +21,7 @@ function UserReportCard({ report }) {
   return (
     <>
       <Card className="cardDisplay">
+        <Card.Img variant="top" src={report.reportImage.url} />
         <Card.Body>
           <Card.Title>{report.reportTreeType}</Card.Title>
           <Card.Text>

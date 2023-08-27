@@ -12,9 +12,14 @@ function TreeCard({ tree }) {
   return (
     <>
       <Card className="cardDisplay">
+        <Card.Img variant="top" src={tree.imageURI} />
         <Card.Body>
           <Card.Title>{tree.treeType}</Card.Title>
-          <Card.Text>{tree.treeScientificName}</Card.Text>
+          <Card.Text>
+            {tree.treeScientificName}
+            <br />
+            {tree.treeDescription}
+          </Card.Text>
           <Button variant="success" onClick={onClick}>
             View Tree
           </Button>

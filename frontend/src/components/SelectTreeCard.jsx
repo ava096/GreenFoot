@@ -12,6 +12,7 @@ function SelectTreeCard({ tree }) {
   return (
     <>
       <Card className="cardDisplay">
+        <Card.Img variant="top" src={tree.imageURI} />
         <Card.Body>
           <Card.Title>{tree.treeType}</Card.Title>
           <Card.Text>{tree.treeDescription}</Card.Text>

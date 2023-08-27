@@ -271,6 +271,14 @@ html, body {
     margin-bottom: 30px;
 }
 
+/**
+*   Report page styling
+*/
+
+.alertDiv {
+    margin: 10px 0 10px 0;
+}
+
 
 /**
 *   New record form styling

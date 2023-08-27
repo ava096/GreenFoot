@@ -8,7 +8,8 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ConfirmModal from "../components/ConfirmModal";
 import UpvoteButton from "../components/UpvoteButton";
-import { FaTriangleExclamation, FaCheck } from "react-icons/fa6";
+import AlertMessage from "../components/AlertMessage";
+import { FaTriangleExclamation, FaCheck, FaSeedling } from "react-icons/fa6";
 
 function ViewReport() {
   const navigate = useNavigate();
@@ -152,17 +153,25 @@ function ViewReport() {
         </Row>
         <Row>
           <Col className="textDisplay">
+            <div className="alertDiv">
+              <AlertMessage
+                show={true}
+                variant={reportData.isModerated ? "success" : "danger"}
+                message={
+                  reportData.isModerated ? (
+                    <>
+                      <FaCheck /> This report has been approved by an admin
+                    </>
+                  ) : (
+                    <>
+                      <FaTriangleExclamation /> Please note that this report is
+                      unmoderated and therefore information may be inaccurate.
+                    </>
+                  )
+                }
+              />
+            </div>
             <div>
-              {reportData.isModerated === false ? (
-                <p>
-                  <FaTriangleExclamation /> Please note that this report is
-                  unmoderated and therefore information may be inaccurate.
-                </p>
-              ) : (
-                <p>
-                  <FaCheck /> This report has been approved by an admin
-                </p>
-              )}
               <p>
                 <strong>Description</strong>
               </p>
@@ -202,14 +211,18 @@ function ViewReport() {
           </Col>
         </Row>
         {user && (user.userRole === "admin" || user.id === reportData.user) ? (
-          <Row>
-            <Col>
+          <Row className="justify-content-center">
+            <Col className="text-center">
               {reportData.isModerated === false ? (
-                <Button variant="success" onClick={onClick}>
+                <Button variant="success" onClick={onClick} className="mr-2">
                   Approve Report
                 </Button>
               ) : null}
-              <Button variant="success" onClick={onDeleteClick}>
+              <Button
+                variant="success"
+                onClick={onDeleteClick}
+                className="mr-2"
+              >
                 Delete Report
               </Button>
               {user &&
@@ -228,40 +241,40 @@ function ViewReport() {
           onConfirm={handleDelete}
           onCancel={() => setShowModal(false)}
         />
+        <Row className="titleRow">
+          <Col className="textDisplay">
+            <h5>Like This Report?</h5>
+            <p>
+              We use reports as a way to guide us in keeping our information as
+              accurate and up-to-date as possible. If you think this report
+              contains valuable information, let us know with an upvote.
+            </p>
+          </Col>
+          <Col>
+            <UpvoteButton
+              reportId={id}
+              checkIfUserLoggedIn={checkIfUserLoggedIn}
+            />
+          </Col>
+          <Col>
+            <p>{reportData.upvoteCount || 0} Upvotes</p>
+          </Col>
+        </Row>
+        <Row className="titleRow">
+          <Col className="textDisplay">
+            <h5>See a Problem?</h5>
+            <p>
+              If there is a problem with this report, such as any inaccuracies
+              or junk data, please let us know.
+            </p>
+          </Col>
+          <Col>
+            <Button variant="success" onClick={onFlagClick}>
+              Flag Report
+            </Button>
+          </Col>
+        </Row>
       </Container>
-      <Row className="titleRow">
-        <Col className="textDisplay">
-          <h5>Like This Report?</h5>
-          <p>
-            We use reports as a way to guide us in keeping our information as
-            accurate and up-to-date as possible. If you think this report
-            contains valuable information, let us know with an upvote.
-          </p>
-        </Col>
-        <Col>
-          <UpvoteButton
-            reportId={id}
-            checkIfUserLoggedIn={checkIfUserLoggedIn}
-          />
-        </Col>
-        <Col>
-          <p>{reportData.upvoteCount || 0} Upvotes</p>
-        </Col>
-      </Row>
-      <Row className="titleRow">
-        <Col className="textDisplay">
-          <h5>See a Problem?</h5>
-          <p>
-            If there is a problem with this report, such as any inaccuracies or
-            junk data, please let us know.
-          </p>
-        </Col>
-        <Col>
-          <Button variant="success" onClick={onFlagClick}>
-            Flag Report
-          </Button>
-        </Col>
-      </Row>
     </>
   );
 }
