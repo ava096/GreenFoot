@@ -31,6 +31,9 @@ function NewRecordForm({ id, isEditMode }) {
   //state setters for image upload status to prevent form from being submitted with incomplete form data
   const [uploadingImage, setUploadingImage] = useState(false);
 
+  // errors for form data validation
+  const [errors, setErrors] = useState({});
+
   //Grab user info
   const { user } = useSelector((state) => state.auth);
 
@@ -76,6 +79,11 @@ function NewRecordForm({ id, isEditMode }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    //run validation
+    if (!validate()) {
+      return;
+    }
 
     // Make sure the right ID is included with form data along with image URI
     let completeFormData = {
@@ -170,6 +178,59 @@ function NewRecordForm({ id, isEditMode }) {
       .catch(console.log);
   };
 
+  // function for error checking each field
+  const validate = () => {
+    const newErrors = {};
+
+    if (!reportTreeLocationType) {
+      newErrors.reportTreeLocationType = "Please provide information!";
+    }
+
+    if (!reportTreeType) {
+      newErrors.reportTreeType = "Please provide information!";
+    }
+
+    if (!reportTreeScientificName) {
+      newErrors.reportTreeScientificName = "Please provide information!";
+    }
+
+    if (!reportTreeAge) {
+      newErrors.reportTreeAge = "Please provide information!";
+    }
+
+    if (!reportTreeDescription) {
+      newErrors.reportTreeDescription = "Please provide information!";
+    }
+
+    if (!reportTreeSurroundings) {
+      newErrors.reportTreeSurroundings = "Please provide information!";
+    }
+
+    if (!reportTreeVigour) {
+      newErrors.reportTreeVigour = "Please provide information!";
+    }
+
+    if (!reportTreeCondition) {
+      newErrors.reportTreeCondition = "Please provide information!";
+    }
+
+    if (isNaN(reportTreeDiameterCentimetres)) {
+      newErrors.reportTreeDiameterCentimetres = "Please enter a number!";
+    }
+
+    if (isNaN(reportTreeSpreadRadiusMetres)) {
+      newErrors.reportTreeSpreadRadiusMetres = "Please enter a number!";
+    }
+
+    if (isNaN(reportTreeHeightMetres)) {
+      newErrors.reportTreeHeightMetres = "Please enter a number!";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   return (
     <>
       <section className="form">
@@ -177,7 +238,7 @@ function NewRecordForm({ id, isEditMode }) {
           <Row className="reportSubmissionRow">
             <Col className="reportSubmissionCol">
               <Form.Group
-                controlId="formTreeType"
+                controlId="formTreeLocationType"
                 className="reportSubmissionGroup"
               >
                 <Accordion className="reportAccordion">
@@ -192,6 +253,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeLocationType}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeLocationType"
@@ -199,11 +261,14 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="Garden tree"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeLocationType}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col className="reportSubmissionCol">
               <Form.Group
-                controlId="formSpeciesType"
+                controlId="formTreeType"
                 className="reportSubmissionGroup"
               >
                 <Accordion className="reportAccordion">
@@ -219,6 +284,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeType}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeType"
@@ -226,13 +292,16 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="English Oak"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeType}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
           <Row className="reportSubmissionRow">
             <Col className="reportSubmissionCol">
               <Form.Group
-                controlId="formSpecies"
+                controlId="formScientificName"
                 className="reportSubmissionGroup"
               >
                 <Accordion className="reportAccordion">
@@ -249,6 +318,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeScientificName}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeScientificName"
@@ -256,10 +326,16 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="Populus tremula"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeScientificName}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col className="reportSubmissionCol">
-              <Form.Group controlId="formAge" className="reportSubmissionGroup">
+              <Form.Group
+                controlId="formTreeAge"
+                className="reportSubmissionGroup"
+              >
                 <Accordion className="reportAccordion">
                   <Accordion.Item eventKey="0">
                     <Accordion.Header className="reportAccordionHeader">
@@ -276,6 +352,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeAge}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeAge"
@@ -283,13 +360,16 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="Mature"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeAge}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
           <Row className="reportSubmissionRow">
             <Col className="reportSubmissionCol">
               <Form.Group
-                controlId="formDescription"
+                controlId="formTreeDescription"
                 className="reportSubmissionGroup"
               >
                 <Accordion className="reportAccordion">
@@ -307,6 +387,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeDescription}
                   className="reportSubmissionControl"
                   as="textarea"
                   style={{ height: "100px" }}
@@ -315,13 +396,16 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="Is there any fruit? Any broken branches?"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeDescription}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
           <Row className="reportSubmissionRow">
             <Col className="reportSubmissionCol">
               <Form.Group
-                controlId="formSurrounding"
+                controlId="formTreeSurroundings"
                 className="reportSubmissionGroup"
               >
                 <Accordion className="reportAccordion">
@@ -338,6 +422,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeSurroundings}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeSurroundings"
@@ -345,11 +430,14 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="Bare ground"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeSurroundings}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col className="reportSubmissionCol">
               <Form.Group
-                controlId="formVigour"
+                controlId="formTreeVigour"
                 className="reportSubmissionGroup"
               >
                 <Accordion className="reportAccordion">
@@ -366,6 +454,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeVigour}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeVigour"
@@ -373,6 +462,9 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="High, fair, low"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeVigour}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
@@ -394,6 +486,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeCondition}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeCondition"
@@ -401,6 +494,9 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="Good, poor"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeCondition}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col className="reportSubmissionCol">
@@ -422,6 +518,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeDiameterCentimetres}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeDiameterCentimetres"
@@ -429,6 +526,9 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="80"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeDiameterCentimetres}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
@@ -454,6 +554,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeSpreadRadiusMetres}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeSpreadRadiusMetres"
@@ -461,6 +562,9 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="4"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeSpreadRadiusMetres}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
             <Col className="reportSubmissionCol">
@@ -481,6 +585,7 @@ function NewRecordForm({ id, isEditMode }) {
                   </Accordion.Item>
                 </Accordion>
                 <Form.Control
+                  isInvalid={errors.reportTreeHeightMetres}
                   className="reportSubmissionControl"
                   type="text"
                   name="reportTreeHeightMetres"
@@ -488,6 +593,9 @@ function NewRecordForm({ id, isEditMode }) {
                   placeholder="1.5"
                   onChange={onChange}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.reportTreeHeightMetres}
+                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
