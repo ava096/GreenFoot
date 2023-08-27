@@ -11,6 +11,7 @@ const opts = {
   overwrite: true,
   invalidate: true,
   resource_type: "auto",
+  folder: "GreenFoot",
 };
 
 //image is in base64 format
