@@ -29,6 +29,7 @@ import ViewAgeChart from "./pages/ViewAgeChart";
 import ViewAllReports from "./pages/ViewAllReports";
 import Footer from "./components/Footer";
 import NewTree from "./pages/NewTree";
+import AboutGreenFoot from "./pages/AboutGreenFoot";
 
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -94,6 +95,10 @@ function App() {
                 element={<ViewAllReports />}
               ></Route>
               <Route path="/newTree" element={<NewTree />}></Route>
+              <Route
+                path="/aboutGreenFoot"
+                element={<AboutGreenFoot />}
+              ></Route>
             </Routes>
             <Footer />
           </div>
