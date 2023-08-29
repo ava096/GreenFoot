@@ -31,7 +31,7 @@ function DatabaseTableView() {
           <FaSeedling /> <FaSeedling /> <FaSeedling />
         </div>
         <div className="selectFilter">
-          <Accordion>
+          <Accordion className="graphAccordion">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Filter results by...</Accordion.Header>
               <Accordion.Body>

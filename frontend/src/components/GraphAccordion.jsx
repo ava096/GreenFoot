@@ -5,7 +5,7 @@ import TreeCard from "./TreeCard";
 function GraphAccordion({ trees, categories, filterKey }) {
   return (
     <>
-      <Accordion>
+      <Accordion className="graphAccordion">
         {categories.map((category, index) => (
           <Accordion.Item eventKey={index.toString()} key={index}>
             <Accordion.Header>{category}</Accordion.Header>

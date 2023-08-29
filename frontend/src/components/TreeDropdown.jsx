@@ -21,7 +21,11 @@ function TreeDropdown({ label, dataKey, onSelect }) {
   };
 
   return (
-    <Form.Select aria-label="Tree Selector" onChange={handleSelect}>
+    <Form.Select
+      className="tableDropdown"
+      aria-label="Tree Selector"
+      onChange={handleSelect}
+    >
       <option>Select {label}</option>
       {uniqueOptions.map((option, index) => (
         <option value={option} key={index}>

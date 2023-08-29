@@ -25,6 +25,13 @@ function Landing() {
       <Container className="displayContainer">
         <Row>
           <Col>
+            <div className="headerDisplay">
+              <h2>A database built for you, by you.</h2>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <div className="landingDiv">
               <h5>View Our Map</h5>
               <h1 className="mapIcon">

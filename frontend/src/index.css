@@ -128,6 +128,14 @@ html, body {
     margin: 10px 0 0 0;
 }
 
+.headerDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0 10px 0;
+}
+
 /**
 *   About styling
 */
@@ -325,6 +333,10 @@ html, body {
     text-align: center;
 }
 
+.tableDropdown {
+    background-color: #f7f9f3;
+}
+
 /**
 * Pie chart styling
 */
@@ -340,6 +352,22 @@ html, body {
     height: 420px; 
     overflow: auto; 
     margin-bottom: 30px;
+}
+
+.graphButton {
+    margin: 10px 0 10px 0;
+}
+
+.graphAccordion .accordion-item,
+.graphAccordion .accordion-header,
+.graphAccordion .accordion-button {
+  background-color: #f7f9f3 !important;
+}
+
+.graphAccordion .accordion-button:focus,
+.graphAccordion .accordion-button:active,
+.graphAccordion .accordion-button:not(.collapsed) {
+  background-color: #f7f9f3 !important;
 }
 
 /**

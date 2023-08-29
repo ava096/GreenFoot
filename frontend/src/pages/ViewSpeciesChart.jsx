@@ -151,22 +151,22 @@ function ViewSpeciesChart() {
               </p>
             </div>
             <div>
-              <div>
+              <div className="graphButton">
                 <Button variant="success" onClick={onConcernClick}>
                   Quality Concern
                 </Button>
               </div>
-              <div>
+              <div className="graphButton">
                 <Button variant="success" onClick={onSpeciesClick}>
                   Species Breakdown
                 </Button>
               </div>
-              <div>
+              <div className="graphButton">
                 <Button variant="success" onClick={onConditionClick}>
                   Condition Breakdown
                 </Button>
               </div>
-              <div>
+              <div className="graphButton">
                 <Button variant="success" onClick={onAgeClick}>
                   Age Breakdown
                 </Button>
