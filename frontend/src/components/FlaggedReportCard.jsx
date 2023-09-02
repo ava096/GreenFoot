@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 
 function FlaggedReportCard({ flag }) {
   const navigate = useNavigate();
@@ -28,12 +28,18 @@ function FlaggedReportCard({ flag }) {
             <br />
             User comments: {flag.additionalInfo}
           </Card.Text>
-          <Button variant="success" onClick={onViewClick}>
-            View Report
-          </Button>
-          <Button variant="success" onClick={onUpdateClick}>
-            Update Status
-          </Button>
+          <Row>
+            <Col>
+              <Button variant="success" onClick={onViewClick}>
+                View Report
+              </Button>
+            </Col>
+            <Col>
+              <Button variant="success" onClick={onUpdateClick}>
+                Update Status
+              </Button>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </>

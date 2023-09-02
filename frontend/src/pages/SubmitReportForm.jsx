@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import NewRecordForm from "../components/NewRecordForm";
 
-function SubmitRecordForm() {
+function SubmitReportForm() {
   //get id for tree associated with report
   const { treeID } = useParams();
 
@@ -32,4 +32,4 @@ function SubmitRecordForm() {
   );
 }
 
-export default SubmitRecordForm;
+export default SubmitReportForm;

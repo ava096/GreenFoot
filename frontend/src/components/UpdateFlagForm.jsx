@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateFlagStatus, reset } from "../features/flags/flagSlice";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import LoadingSpinner from "./LoadingSpinner";
 import AlertMessage from "./AlertMessage";
 
@@ -94,6 +94,7 @@ function UpdateFlagForm({ flagID }) {
       <Form onSubmit={handleSubmit}>
         <Form.Select
           aria-label="flagDropdown"
+          className="reportSubmissionControl"
           onChange={handleFormChange}
           value={formData.flagStatus}
           name="flagStatus"
@@ -104,6 +105,7 @@ function UpdateFlagForm({ flagID }) {
         </Form.Select>
 
         <Form.Check
+          className="reportSubmissionControl"
           type="switch"
           label="Do you want to hide this report?"
           checked={formData.isHidden}
@@ -114,6 +116,7 @@ function UpdateFlagForm({ flagID }) {
         <Form.Group className="mb-3" controlId="flagTextArea">
           <Form.Label>Admin's Comments</Form.Label>
           <Form.Control
+            className="reportSubmissionControl"
             as="textarea"
             rows={3}
             name="adminComments"
@@ -130,9 +133,11 @@ function UpdateFlagForm({ flagID }) {
           onClose={onClose}
         />
 
-        <Button type="submit" variant="success">
-          Submit Flag
-        </Button>
+        <Col className="buttonCol">
+          <Button type="submit" variant="success">
+            Submit Flag
+          </Button>
+        </Col>
       </Form>
     </>
   );

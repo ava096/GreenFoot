@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 function TreeDataTableDisplay({ tree }) {
   return (
     <>
-      <Table striped bordered hover>
+      <Table className="treeTable">
         <thead>
           <tr>
             <th>Location</th>

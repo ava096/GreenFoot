@@ -23,7 +23,6 @@ function SuggestTreeForReport() {
   //Get user's location
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
       const { latitude, longitude } = position.coords;
       setCurrentLocation({ latitude, longitude });
     });

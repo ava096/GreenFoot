@@ -1,12 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 
 function SelectTreeCard({ tree }) {
   const navigate = useNavigate();
 
-  const onClick = () => {
+  const onCreateClick = () => {
     navigate(`/submitForm/${tree._id}`);
+  };
+
+  const onViewClick = () => {
+    navigate(`/viewTree/${tree._id}`);
   };
 
   return (
@@ -16,9 +20,30 @@ function SelectTreeCard({ tree }) {
         <Card.Body>
           <Card.Title>{tree.treeType}</Card.Title>
           <Card.Text>{tree.treeDescription}</Card.Text>
-          <Button variant="success" onClick={onClick}>
-            Create Report
-          </Button>
+          <Row>
+            <Col>
+              <div>
+                <Button
+                  className="selectButton"
+                  variant="success"
+                  onClick={onViewClick}
+                >
+                  View Tree
+                </Button>
+              </div>
+            </Col>
+            <Col>
+              <div>
+                <Button
+                  className="selectButton"
+                  variant="success"
+                  onClick={onCreateClick}
+                >
+                  Create Report
+                </Button>
+              </div>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </>

@@ -252,15 +252,20 @@ function NewRecordForm({ id, isEditMode }) {
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
-                <Form.Control
+                <Form.Select
+                  aria-label="Default select example"
                   isInvalid={errors.reportTreeLocationType}
                   className="reportSubmissionControl"
-                  type="text"
                   name="reportTreeLocationType"
                   value={reportTreeLocationType}
-                  placeholder="Garden tree"
                   onChange={onChange}
-                />
+                >
+                  <option value="" disabled>
+                    Select location type
+                  </option>
+                  <option value="Park Tree">Park Tree</option>
+                  <option value="Street Tree">Street Tree</option>
+                </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.reportTreeLocationType}
                 </Form.Control.Feedback>
@@ -351,15 +356,24 @@ function NewRecordForm({ id, isEditMode }) {
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
-                <Form.Control
+                <Form.Select
+                  aria-label="Default select example"
                   isInvalid={errors.reportTreeAge}
                   className="reportSubmissionControl"
-                  type="text"
                   name="reportTreeAge"
                   value={reportTreeAge}
-                  placeholder="Mature"
                   onChange={onChange}
-                />
+                >
+                  <option value="" disabled>
+                    Select Tree Age
+                  </option>
+                  <option value="Juvenile">Juvenile</option>
+                  <option value="Young">Young</option>
+                  <option value="Young Mature">Young Mature</option>
+                  <option value="Semi-Mature">Semi-Mature</option>
+                  <option value="Mature">Mature</option>
+                  <option value="Fully Mature">Fully Mature</option>
+                </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.reportTreeAge}
                 </Form.Control.Feedback>
@@ -448,20 +462,25 @@ function NewRecordForm({ id, isEditMode }) {
                     <Accordion.Body>
                       In scientific terms, this is a measure of health or
                       hardiness. In a botanical context like this, we mean a
-                      measure of the increase in plant groweth or foliage volume
+                      measure of the increase in plant growth or foliage volume
                       through time after planting.
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
-                <Form.Control
+                <Form.Select
+                  aria-label="Default select example"
                   isInvalid={errors.reportTreeVigour}
                   className="reportSubmissionControl"
-                  type="text"
                   name="reportTreeVigour"
                   value={reportTreeVigour}
-                  placeholder="High, fair, low"
                   onChange={onChange}
-                />
+                >
+                  <option value="" disabled>
+                    Select Vigour
+                  </option>
+                  <option value="Low">Low</option>
+                  <option value="Normal">Normal</option>
+                </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.reportTreeVigour}
                 </Form.Control.Feedback>
@@ -485,15 +504,24 @@ function NewRecordForm({ id, isEditMode }) {
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
-                <Form.Control
+                <Form.Select
+                  aria-label="Default select example"
                   isInvalid={errors.reportTreeCondition}
                   className="reportSubmissionControl"
-                  type="text"
                   name="reportTreeCondition"
                   value={reportTreeCondition}
-                  placeholder="Good, poor"
                   onChange={onChange}
-                />
+                >
+                  <option value="" disabled>
+                    Select Tree Condition
+                  </option>
+                  <option value="Good">Good</option>
+                  <option value="Fair">Fair</option>
+                  <option value="Poor">Poor</option>
+                  <option value="Very Poor">Very Poor</option>
+                  <option value="Dying">Dying</option>
+                  <option value="Dead">Dead</option>
+                </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   {errors.reportTreeCondition}
                 </Form.Control.Feedback>

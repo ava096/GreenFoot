@@ -230,10 +230,18 @@ html, body {
 }
 
 .cardDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+}
+
+.selectButton {
+    height: 60px;
 }
 
 .displayContainer {
@@ -335,6 +343,20 @@ html, body {
 
 .tableDropdown {
     background-color: #f7f9f3;
+}
+
+/**
+*   Flag form styling
+*/
+
+.flagForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonCol {
+    display: flex;
+    justify-content: center;
 }
 
 /**

@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DatabaseTableView from "./pages/DatabaseTableView";
 import SelectTreeForReport from "./pages/SelectTreeForReport";
-import SubmitRecordForm from "./pages/SubmitRecordForm";
+import SubmitReportForm from "./pages/SubmitReportForm";
 import SubmitReportLocation from "./pages/SubmitReportLocation";
 import DatabaseMapView from "./pages/DatabaseMapView";
 import UserDash from "./pages/UserDash";
@@ -60,7 +60,7 @@ function App() {
               ></Route>
               <Route
                 path="/submitForm/:treeID"
-                element={<SubmitRecordForm />}
+                element={<SubmitReportForm />}
               ></Route>
               <Route path="/dash" element={<UserDash />}></Route>
               <Route path="/adminDash" element={<AdminDash />}></Route>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createFlag, reset } from "../features/flags/flagSlice";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import LoadingSpinner from "./LoadingSpinner";
 
 function FlagForm({ reportID }) {
@@ -68,11 +68,12 @@ function FlagForm({ reportID }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="flagForm">
       <Form.Select
         aria-label="flagDropdown"
         onChange={handleDropdownChange}
         value={formData.reasonForFlagging}
+        className="reportSubmissionControl"
         name="reasonForFlagging"
       >
         <option>Please select a reason</option>
@@ -84,6 +85,7 @@ function FlagForm({ reportID }) {
       <Form.Group className="mb-3" controlId="flagTextArea">
         <Form.Label>Additional Information</Form.Label>
         <Form.Control
+          className="reportSubmissionControl"
           as="textarea"
           rows={3}
           name="additionalInfo"
@@ -92,9 +94,11 @@ function FlagForm({ reportID }) {
           onChange={handleDropdownChange}
         />
       </Form.Group>
-      <Button type="submit" variant="success">
-        Submit Flag
-      </Button>
+      <Col className="buttonCol">
+        <Button type="submit" variant="success">
+          Submit Flag
+        </Button>
+      </Col>
     </Form>
   );
 }

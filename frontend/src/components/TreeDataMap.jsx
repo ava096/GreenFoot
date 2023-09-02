@@ -87,7 +87,7 @@ function TreeDataMap({ trees }) {
         zoom={12}
         center={center}
         mapContainerClassName="map-container"
-        gestureHandling="greedy"
+        options={{ gestureHandling: "greedy", draggable: true }}
       >
         {!showHeatmap &&
           trees.map((tree) => (

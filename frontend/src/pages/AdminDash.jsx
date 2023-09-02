@@ -22,6 +22,9 @@ function AdminDash() {
   );
   const { flag } = useSelector((state) => state.flag);
 
+  //to filter reports that have specifially been made by the user
+  const userFlags = flag.filter((f) => f.userFlagging === user.id);
+
   useEffect(() => {
     if (!user) {
       navigate("/login");
@@ -114,7 +117,7 @@ function AdminDash() {
             <div>
               <h2>My Flags</h2>
             </div>
-            {flag.length > 0 ? (
+            {userFlags.length > 0 ? (
               <div className="cardDiv">
                 {flag.map((flag) => (
                   <Col sm={12} md={6} lg={3} className="cardCol" key={flag._id}>

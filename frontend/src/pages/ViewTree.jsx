@@ -70,7 +70,9 @@ function ViewTree() {
           </Col>
         </Row>
         <Row>
-          <TreeDataTableDisplay key={data._id} tree={data} />
+          <div className="scrollableContainer">
+            <TreeDataTableDisplay key={data._id} tree={data} />
+          </div>
         </Row>
         <Row>
           <Col>

@@ -6,7 +6,7 @@ function UserFlagCard({ flag }) {
   const navigate = useNavigate();
 
   const onViewClick = () => {
-    navigate(`/viewReport/${flag.reportFlagged._id}`);
+    navigate(`/viewReport/${flag.reportFlagged}`);
   };
 
   return (
