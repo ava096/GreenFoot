@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { createReport, updateReport } from "../features/reports/reportSlice";
 import { Form, Button, Row, Col, Accordion } from "react-bootstrap";
 
-function NewRecordForm({ id, isEditMode }) {
+function NewReportForm({ id, isEditMode }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -658,4 +658,4 @@ function NewRecordForm({ id, isEditMode }) {
   );
 }
 
-export default NewRecordForm;
+export default NewReportForm;

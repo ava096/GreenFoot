@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import NewRecordForm from "../components/NewRecordForm";
+import NewReportForm from "../components/NewReportForm";
 
 function UpdateReportForm() {
   //get id of report that is being updated
@@ -26,7 +26,7 @@ function UpdateReportForm() {
               through this form!
             </p>
           </div>
-          <NewRecordForm id={reportID} isEditMode={isEditMode} />
+          <NewReportForm id={reportID} isEditMode={isEditMode} />
         </Col>
       </Row>
     </Container>

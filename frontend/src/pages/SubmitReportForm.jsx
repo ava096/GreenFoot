@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import NewRecordForm from "../components/NewRecordForm";
+import NewReportForm from "../components/NewReportForm";
 
 function SubmitReportForm() {
   //get id for tree associated with report
@@ -25,7 +25,7 @@ function SubmitReportForm() {
               for contributing to this project!
             </p>
           </div>
-          <NewRecordForm id={treeID} isEditMode={isEditMode} />
+          <NewReportForm id={treeID} isEditMode={isEditMode} />
         </Col>
       </Row>
     </Container>
