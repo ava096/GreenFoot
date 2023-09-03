@@ -75,8 +75,6 @@ const upvoteReport = async (id, token) => {
     },
   };
 
-  console.log(config);
-
   const response = await axios.put(API_URL + `upvoteReport/${id}`, {}, config);
 
   return response.data;
