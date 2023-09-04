@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { upvoteReport } from "../features/reports/reportSlice";
 import { Button } from "react-bootstrap";
 import AlertMessage from "./AlertMessage";
 
-function UpvoteButton({ reportId, checkIfUserLoggedIn }) {
+function UpvoteButton({ reportId, checkIfUserLoggedIn, onSuccessfulUpvote }) {
   //bring in dispatch for use
   const dispatch = useDispatch();
 
@@ -13,17 +13,16 @@ function UpvoteButton({ reportId, checkIfUserLoggedIn }) {
   const [alertMessage, setAlertMessage] = useState("");
 
   //event handler for upvoting
-  const handleUpvote = () => {
+  const handleUpvote = async () => {
     if (checkIfUserLoggedIn()) {
-      dispatch(upvoteReport(reportId))
-        // if user has already upvoted
-        .catch((rejectedAction) => {
-          if (rejectedAction.payload) {
-            setAlertMessage(rejectedAction.payload);
-            //show alert
-            setShowAlert(true);
-          }
-        });
+      const action = await dispatch(upvoteReport(reportId));
+
+      if (upvoteReport.rejected.match(action)) {
+        setAlertMessage(action.payload);
+        setShowAlert(true);
+      } else if (onSuccessfulUpvote) {
+        onSuccessfulUpvote();
+      }
     }
   };
 

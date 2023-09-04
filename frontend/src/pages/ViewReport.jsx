@@ -132,6 +132,16 @@ function ViewReport() {
     navigate(`/viewTree/${reportData.tree}`);
   };
 
+  //rerender when user upvotes report
+  const onSuccessfulUpvote = () => {
+    setUpdateKey((prevKey) => prevKey + 1);
+  };
+
+  //total upvotes to be displayed to user
+  const upvoteCount = Object.values(reportData.reportUpvotes).filter(
+    Boolean
+  ).length;
+
   return (
     <>
       <Container className="displayContainer">
@@ -254,10 +264,11 @@ function ViewReport() {
             <UpvoteButton
               reportId={id}
               checkIfUserLoggedIn={checkIfUserLoggedIn}
+              onSuccessfulUpvote={onSuccessfulUpvote}
             />
           </Col>
           <Col>
-            <p>{reportData.upvoteCount || 0} Upvotes</p>
+            <p>{upvoteCount || 0} Upvotes</p>
           </Col>
         </Row>
         <Row className="titleRow">
