@@ -53,6 +53,22 @@ const getFlaggedReports = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get flag by ID
+// @route   GET api/getFlag/:id
+// @access  Private/Admin only
+const getFlagById = asyncHandler(async (req, res) => {
+  try {
+    //get ID from request params
+    const { id } = req.params;
+    //find flag
+    const flag = await Flag.findById(id);
+
+    res.status(200).json(flag);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc    Get flags that a user has raised
 // @route   GET api/userFlagged/:id
 // @access  Private
