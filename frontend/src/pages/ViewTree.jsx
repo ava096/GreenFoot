@@ -91,9 +91,12 @@ function ViewTree() {
           <Col>
             {reportsData.length > 0 ? (
               <div className="cardDiv">
-                {reportsData.map((reportsData) => (
-                  <ReportCard key={reportsData._id} report={reportsData} />
-                ))}
+                {reportsData.map(
+                  (reportsData) =>
+                    !reportsData.isHidden && (
+                      <ReportCard key={reportsData._id} report={reportsData} />
+                    )
+                )}
               </div>
             ) : (
               <h3>There are no reports for this tree yet!</h3>

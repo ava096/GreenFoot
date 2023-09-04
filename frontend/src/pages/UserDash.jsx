@@ -60,17 +60,20 @@ function UserDash() {
             </div>
             {report.length > 0 ? (
               <div className="cardDiv">
-                {report.map((report) => (
-                  <Col
-                    sm={12}
-                    md={6}
-                    lg={3}
-                    className="cardCol"
-                    key={report._id}
-                  >
-                    <UserReportCard report={report} />
-                  </Col>
-                ))}
+                {report.map(
+                  (report) =>
+                    !report.isHidden && (
+                      <Col
+                        sm={12}
+                        md={6}
+                        lg={3}
+                        className="cardCol"
+                        key={report._id}
+                      >
+                        <UserReportCard report={report} />
+                      </Col>
+                    )
+                )}
               </div>
             ) : (
               <>

@@ -48,7 +48,7 @@ export const getFlaggedReports = createAsyncThunk(
 );
 
 export const getFlagById = createAsyncThunk(
-  "flag/get",
+  "flag/getID",
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
