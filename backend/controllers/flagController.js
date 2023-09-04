@@ -125,6 +125,7 @@ const updateFlagStatus = asyncHandler(async (req, res) => {
 module.exports = {
   flagReport,
   getFlaggedReports,
+  getFlagById,
   getUsersFlags,
   updateFlagStatus,
 };
