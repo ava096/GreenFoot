@@ -118,10 +118,9 @@ function ViewReport() {
   //redirects user to flagging page
   const onFlagClick = (e) => {
     e.preventDefault();
-    //not standard practice in React and can cause problems in long run,
-    //but will work as a placeholder until problem with useNavigate is fixed
+
     if (checkIfUserLoggedIn()) {
-      window.location.href = `/flagReport/${reportData._id}`;
+      navigate(`/flagReport/${reportData._id}`);
     }
   };
 

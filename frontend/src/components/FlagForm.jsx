@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { createFlag, reset } from "../features/flags/flagSlice";
 import { Form, Button, Col } from "react-bootstrap";
 import LoadingSpinner from "./LoadingSpinner";
+import AlertMessage from "./AlertMessage";
 
 function FlagForm({ reportID }) {
   const dispatch = useDispatch();
@@ -15,8 +16,15 @@ function FlagForm({ reportID }) {
     additionalInfo: "",
   });
 
+  //set state for alert
+  const [showAlert, setShowAlert] = useState("");
+  //set state for alert message
+  const [alertMessage, setAlertMessage] = useState("");
+
   //imports from flagSlice
-  const { isLoading, isError, isSuccess } = useSelector((state) => state.flag);
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.flag
+  );
 
   //get user info
   const { user } = useSelector((state) => state.auth);
@@ -24,6 +32,11 @@ function FlagForm({ reportID }) {
   useEffect(() => {
     //reset form if there's an error
     if (isError) {
+      if (message) {
+        setAlertMessage(message);
+        setShowAlert(true);
+      }
+
       dispatch(reset());
     }
 
@@ -47,7 +60,8 @@ function FlagForm({ reportID }) {
 
     //alert user if they are sending an empty submission
     if (!formData.reasonForFlagging || formData.reasonForFlagging === "") {
-      alert("Please select a reason for flagging!");
+      setAlertMessage("Please provide information for all fields!");
+      setShowAlert(true);
       return;
     }
 
@@ -94,6 +108,16 @@ function FlagForm({ reportID }) {
           onChange={handleDropdownChange}
         />
       </Form.Group>
+      <Col>
+        <div>
+          <AlertMessage
+            show={showAlert}
+            variant="warning"
+            message={alertMessage}
+            onClose={() => setShowAlert(false)}
+          />
+        </div>
+      </Col>
       <Col className="buttonCol">
         <Button type="submit" variant="success">
           Submit Flag
