@@ -32,6 +32,19 @@ const getFlaggedReports = async (token) => {
   return response.data;
 };
 
+// Get flag by ID
+const getFlaggedID = async (token, id) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL + `getFlagged/${id}`);
+
+  return response.data;
+};
+
 // Get user's flags
 const userFlagged = async (token) => {
   const config = {
@@ -65,6 +78,7 @@ const updateFlagStatus = async (id, flagData, token) => {
 const flagService = {
   createFlag,
   getFlaggedReports,
+  getFlaggedID,
   userFlagged,
   updateFlagStatus,
 };
