@@ -258,12 +258,19 @@ html, body {
     overflow-x: auto; 
     -webkit-overflow-scrolling: touch; 
     margin-top: 1rem; 
+    width: 360px;
 }
 
 .spinnerContainer {
     margin: 100px 0 400px 0;
     display: flex;
     justify-content: center;
+}
+
+.alert-custom-amber {
+    background-color:rgb(247, 185, 109);
+    color: rgb(183, 114, 30);
+    border: thin rgb(183, 114, 30);
 }
 
 /**
