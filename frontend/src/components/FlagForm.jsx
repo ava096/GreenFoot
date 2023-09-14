@@ -70,7 +70,7 @@ function FlagForm({ reportID }) {
       additionalInfo: formData.additionalInfo,
     };
 
-    dispatch(createFlag(reportID, flagData));
+    dispatch(createFlag({ id: reportID, flagData: flagData }));
   };
 
   if (isLoading) {

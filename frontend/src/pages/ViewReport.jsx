@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updateReport, deleteReport } from "../features/reports/reportSlice";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Table } from "react-bootstrap";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ConfirmModal from "../components/ConfirmModal";
 import UpvoteButton from "../components/UpvoteButton";
@@ -190,32 +190,33 @@ function ViewReport() {
         </Row>
         <Row>
           <Col>
-            <div>
-              <p>
-                <strong>Age:</strong> {reportData.reportTreeAge}
-              </p>
-              <p>
-                <strong>Surroundings:</strong>{" "}
-                {reportData.reportTreeSurroundings}
-              </p>
-              <p>
-                <strong>Condition:</strong> {reportData.reportTreeCondition}
-              </p>
-            </div>
-          </Col>
-          <Col>
-            <div>
-              <p>
-                <strong>Diameter:</strong>{" "}
-                {reportData.reportTreeDiameterCentimetres}cm
-              </p>
-              <p>
-                <strong>Spread Radius:</strong>{" "}
-                {reportData.reportTreeSpreadRadiusMetres}m
-              </p>
-              <p>
-                <strong>Height:</strong> {reportData.reportTreeHeightMetres}m
-              </p>
+            <div className="scrollableContainer">
+              <Table className="treeTable">
+                <thead>
+                  <tr>
+                    <th>Location Type</th>
+                    <th>Age</th>
+                    <th>Surroundings</th>
+                    <th>Vigour</th>
+                    <th>Condition</th>
+                    <th>Diameter (cm)</th>
+                    <th>Spread Radius (m)</th>
+                    <th>Height (m)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{reportData.reportTreeLocationType}</td>
+                    <td>{reportData.reportTreeAge}</td>
+                    <td>{reportData.reportTreeSurroundings}</td>
+                    <td>{reportData.reportTreeVigour}</td>
+                    <td>{reportData.reportTreeCondition}</td>
+                    <td>{reportData.reportTreeDiameterCentimetres}</td>
+                    <td>{reportData.reportTreeSpreadRadiusMetres}</td>
+                    <td>{reportData.reportTreeHeightMetres}</td>
+                  </tr>
+                </tbody>
+              </Table>
             </div>
           </Col>
         </Row>

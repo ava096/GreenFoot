@@ -169,7 +169,11 @@ html, body {
     margin-top: 25px;
 }
 
-
+.cardImg {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
 /**
 *   Page title and text styling
 */
@@ -614,6 +618,13 @@ html, body {
     outline: none;
     margin-bottom: 12px;
     color: #40414a;
+}
+
+.registerInput:focus {
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    outline: none;
 }
 
 .labelText {

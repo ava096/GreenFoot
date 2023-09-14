@@ -110,8 +110,13 @@ function TreeDataMap({ trees }) {
             onCloseClick={onCloseClick}
           >
             <div>
+              <img className="cardImg" src={selectedTree.imageURI} />
               <h5>{selectedTree.treeType}</h5>
-              <p>{selectedTree.treeDescription}</p>
+              <p>
+                {selectedTree.treeDescription}
+                <br />
+                Level of Concern: {selectedTree.levelOfConcern}
+              </p>
               <Button variant="success" onClick={onButtonClick}>
                 View Tree
               </Button>

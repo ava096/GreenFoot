@@ -118,6 +118,7 @@ function TreeLocationSelector() {
           onCloseClick={onCloseClick}
         >
           <div>
+            <img className="cardImg" src={selectedTree.imageURI} />
             <h5>{selectedTree.treeType}</h5>
             <p>{selectedTree.treeDescription}</p>
             <Button variant="success" onClick={onButtonClick}>
