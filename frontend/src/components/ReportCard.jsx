@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 
 function ReportCard({ report }) {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate(`/viewReport/${report._id}`);
+  };
+
   return (
     <>
       <Card className="cardDisplay">
@@ -15,7 +22,9 @@ function ReportCard({ report }) {
             {new Date(report.createdAt).toLocaleString("en-US")}
           </Card.Title>
           <Card.Text>{report.reportTreeDescription}</Card.Text>
-          <Button variant="success">View Report</Button>
+          <Button variant="success" onClick={onClick}>
+            View Report
+          </Button>
         </Card.Body>
       </Card>
     </>
