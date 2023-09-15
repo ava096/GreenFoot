@@ -14,6 +14,18 @@ const addNewTree = async (treeData, token) => {
   return response.data;
 };
 
+//Update a tree's record
+const updateTree = async (id, treeData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL + `/${id}`, treeData, config);
+  return response.data;
+};
+
 // Find tree based on longitude latitude
 const findTreeLongLat = async (token, longitude, latitude) => {
   const config = {
@@ -38,6 +50,7 @@ const getAllTrees = async () => {
 
 const treeService = {
   addNewTree,
+  updateTree,
   findTreeLongLat,
   getAllTrees,
 };

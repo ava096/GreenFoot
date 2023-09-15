@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import LoadingSpinner from "../components/LoadingSpinner";
 import TreeDataTableDisplay from "../components/TreeDataTableDisplay";
 import ReportCard from "../components/ReportCard";
@@ -10,12 +11,17 @@ import ViewTreeMap from "../components/ViewTreeMap";
 import AlertMessage from "../components/AlertMessage";
 
 function ViewTree() {
+  const navigate = useNavigate();
+
   //tree id
   const { id } = useParams();
   //for showing level of concern
   const [alertMessage, setAlertMessage] = useState("");
   //for setting colour variant
   const [variant, setVariant] = useState("primary");
+
+  //Get logged in user info
+  const { user } = useSelector((state) => state.auth);
 
   //Request to get info associated with selected tree
   const getTree = async () => {
@@ -85,6 +91,10 @@ function ViewTree() {
     }
   }, [data]);
 
+  const onClick = () => {
+    navigate(`/updateTree/${data._id}`);
+  };
+
   if (isLoading || reportsLoading) {
     return <LoadingSpinner />;
   }
@@ -136,6 +146,17 @@ function ViewTree() {
             </p>
           </Col>
         </Row>
+        {user && user.userRole === "admin" ? (
+          <Row className="titleRow">
+            <Col className="textDisplay">
+              <div>
+                <Button variant="success" onClick={onClick}>
+                  Edit Record
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        ) : null}
         <Row className="titleRow">
           <Col className="textDisplay">
             <div>

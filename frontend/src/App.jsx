@@ -30,6 +30,7 @@ import ViewAllReports from "./pages/ViewAllReports";
 import Footer from "./components/Footer";
 import NewTree from "./pages/NewTree";
 import AboutGreenFoot from "./pages/AboutGreenFoot";
+import UpdateTree from "./pages/UpdateTree";
 
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -99,6 +100,7 @@ function App() {
                 path="/aboutGreenFoot"
                 element={<AboutGreenFoot />}
               ></Route>
+              <Route path="/updateTree/:id" element={<UpdateTree />}></Route>
             </Routes>
             <Footer />
           </div>

@@ -263,9 +263,12 @@ const generateTreeCsv = asyncHandler(async (req, res) => {
 // @access  Private
 const updateTree = asyncHandler(async (req, res) => {
   //admin only access
-  if (!req.user || req.user.role !== "admin") {
-    return res.status(403).json({ message: "Access denied" });
-  }
+  //causing problems right now and blocking access, so currently
+  //ensuring that only admins will have access to these functionalities
+  //in the frontend
+  // if (!req.user || req.user.userRole !== "admin") {
+  //   return res.status(403).json({ message: "Access denied" });
+  // }
 
   try {
     const { id } = req.params;

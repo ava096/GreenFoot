@@ -187,6 +187,12 @@ const upvoteReport = asyncHandler(async (req, res) => {
 
       if (report.reportTreeScientificName != "Not Provided") {
         tree.treeScientificName = report.reportTreeScientificName;
+
+        if (
+          !report.reportTreeScientificName.includes("(Specific Type Unknown")
+        ) {
+          report.levelOfConcern = "Green";
+        }
       }
 
       if (report.reportTreeAge !== "Not Provided") {
