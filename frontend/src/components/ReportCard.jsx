@@ -6,6 +6,11 @@ function ReportCard({ report }) {
     <>
       <Card className="cardDisplay">
         <Card.Body>
+          <Card.Img
+            style={{ height: "250px" }}
+            variant="top"
+            src={report.reportImage.url}
+          />
           <Card.Title>
             {new Date(report.createdAt).toLocaleString("en-US")}
           </Card.Title>

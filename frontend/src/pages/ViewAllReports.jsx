@@ -48,9 +48,15 @@ function ViewAllReports() {
         </Row>
         <Row>
           <Col>
-            {report.map((report) => (
-              <Col sm={12} md={6} lg={3} className="cardCol" key={report._id}>
-                <UserReportCard report={report} />
+            {report.map((reportItem) => (
+              <Col
+                sm={12}
+                md={6}
+                lg={3}
+                className="cardCol"
+                key={reportItem._id}
+              >
+                <UserReportCard report={reportItem} />
               </Col>
             ))}
           </Col>

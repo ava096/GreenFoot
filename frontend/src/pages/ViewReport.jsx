@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updateReport, deleteReport } from "../features/reports/reportSlice";
-import { Container, Row, Col, Button, Table } from "react-bootstrap";
+import { Container, Row, Col, Button, Table, Dropdown } from "react-bootstrap";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ConfirmModal from "../components/ConfirmModal";
 import UpvoteButton from "../components/UpvoteButton";
@@ -124,11 +124,21 @@ function ViewReport() {
     }
   };
 
+  //go to parent tree
+  const onParentClick = (e) => {
+    navigate(`/viewTree/${reportData.tree}`);
+  };
+
   //triggered when user confirms deletion through modal
   const handleDelete = () => {
     setShowModal(false);
     dispatch(deleteReport(reportData._id));
-    navigate(`/viewTree/${reportData.tree}`);
+
+    if (user.userRole === "admin") {
+      navigate("/adminDash");
+    } else {
+      navigate(`/dash`);
+    }
   };
 
   //rerender when user upvotes report
@@ -146,11 +156,11 @@ function ViewReport() {
       <Container className="displayContainer">
         <Row className="titleRow">
           <Col className="textDisplay">
-            <h2>{treeData.treeType}</h2>
+            <h2>{reportData.reportTreeType}</h2>
           </Col>
           <Col className="textDisplay">
             <p>
-              <em>{treeData.treeScientificName}</em>
+              <em>{reportData.reportTreeScientificName}</em>
             </p>
           </Col>
         </Row>
@@ -220,27 +230,42 @@ function ViewReport() {
             </div>
           </Col>
         </Row>
+        <Row className="titleRow">
+          <Col className="textDisplay">
+            <div>
+              <Button variant="success" onClick={onParentClick}>
+                View Tree
+              </Button>
+            </div>
+          </Col>
+        </Row>
         {user && (user.userRole === "admin" || user.id === reportData.user) ? (
           <Row className="justify-content-center">
             <Col className="text-center">
-              {reportData.isModerated === false ? (
-                <Button variant="success" onClick={onClick} className="mr-2">
-                  Approve Report
-                </Button>
-              ) : null}
-              <Button
-                variant="success"
-                onClick={onDeleteClick}
-                className="mr-2"
-              >
-                Delete Report
-              </Button>
-              {user &&
-              (user.userRole === "admin" || user.id === reportData.user) ? (
-                <Button variant="success" onClick={onUpdateClick}>
-                  Update Report
-                </Button>
-              ) : null}
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Actions
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  {reportData.isModerated === false ? (
+                    <Dropdown.Item onClick={onClick}>
+                      Approve Report
+                    </Dropdown.Item>
+                  ) : null}
+
+                  <Dropdown.Item onClick={onDeleteClick}>
+                    Delete Report
+                  </Dropdown.Item>
+
+                  {user &&
+                  (user.userRole === "admin" || user.id === reportData.user) ? (
+                    <Dropdown.Item onClick={onUpdateClick}>
+                      Update Report
+                    </Dropdown.Item>
+                  ) : null}
+                </Dropdown.Menu>
+              </Dropdown>
             </Col>
           </Row>
         ) : null}

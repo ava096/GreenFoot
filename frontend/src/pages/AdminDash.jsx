@@ -100,11 +100,20 @@ function AdminDash() {
             </div>
             {flag.length > 0 ? (
               <div className="cardDiv">
-                {flag.map((flag) => (
-                  <Col sm={12} md={6} lg={3} className="cardCol" key={flag._id}>
-                    <FlaggedReportCard flag={flag} />
-                  </Col>
-                ))}
+                {[...flag]
+                  .filter((f) => f.flagStatus === "pendingReview")
+                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                  .map((flagItem) => (
+                    <Col
+                      sm={12}
+                      md={6}
+                      lg={3}
+                      className="cardCol"
+                      key={flagItem._id}
+                    >
+                      <FlaggedReportCard flag={flagItem} />
+                    </Col>
+                  ))}
               </div>
             ) : (
               <>

@@ -99,7 +99,7 @@ function UpdateFlagForm({ flagID }) {
           value={formData.flagStatus}
           name="flagStatus"
         >
-          <option>Please select a reason</option>
+          <option>Please select an outcome</option>
           <option value="resolved">Resolved</option>
           <option value="rejected">Rejected</option>
         </Form.Select>
